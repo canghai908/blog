@@ -130,7 +130,32 @@
         
 
         
-          <p>zabbix 2.4在rhel6.4上的安装</p>
+          <p>在rhel6.4x64系统上通过源码编译方式安装zabbix 2.4.3版本。</p>
+<h1 id="1-系统安装">1.系统安装</h1><p>通过iso安装rhel6.4系统64位，一路默认即可，设置好网络。</p>
+<h2 id="注意事项：">注意事项：</h2><p>1.不使用UTC时区<br>2.选择安装基本服务器<br>3.安装好之后同步时间：<br>通过ntp同步服务器时间，这里我使用上海交通大学的ntp服务器，进行时间同步，执行一下命令同步时间</p>
+<pre><code>ntpdate ntp<span class="class">.sjtu</span><span class="class">.edu</span><span class="class">.cn</span>
+</code></pre><p>3.关闭seLinux和防火墙</p>
+<pre><code>vi <span class="regexp">/etc/</span>sysconfig<span class="regexp">/selinux</span>
+</code></pre><p>把SELINUX改成disabled，保存</p>
+<pre><code><span class="attribute">SELINUX</span>=<span class="string">disabled</span>
+</code></pre><p>关闭防火墙</p>
+<pre><code>chkconfig iptables <span class="keyword">off</span>
+chkconfig ip6tables <span class="keyword">off</span>
+/etc/init.d/iptables <span class="keyword">stop</span>
+/etc/init.d/ip6tables <span class="keyword">stop</span>
+</code></pre><p>之后重启服务器</p>
+<h2 id="配置本地yum源">配置本地yum源</h2><p>由于rhel不能直接使用yum来完成依赖包自动安装，所以需要配置本地光盘iso，需要安装iso镜像文件，我是将iso文件下载到系统里，在系统里挂载，进行yum安装，你也可以直接挂在到光驱。<br>挂在iso文件到系统的mnt目录下</p>
+<pre><code>mount -t iso9660 -o <span class="keyword">loop</span> <span class="regexp">/opt/rhel-server-6.4-x86_64-dvd.iso /mnt/</span>
+</code></pre><p>挂载之后编辑repo文件</p>
+<pre><code>vi /etc/yum<span class="class">.repos</span><span class="class">.d</span>/CentOS-Media.repo
+</code></pre><p>文件内容如下</p>
+<pre><code><span class="title">[c6-media]</span>
+<span class="setting">name=<span class="value">CentOS-$releasever - Media</span></span>
+<span class="setting">baseurl=<span class="value">file:///mnt/</span></span>
+<span class="setting">gpgcheck=<span class="value"><span class="number">1</span></span></span>
+<span class="setting">enabled=<span class="value"><span class="number">1</span></span></span>
+<span class="setting">gpgkey=<span class="value">file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release</span></span>
+</code></pre><p>配置好之后</p>
 
         
       </div>
@@ -251,7 +276,7 @@
         <div class="post-toc">
           
           
-            <p class="post-toc-empty">此文章未包含目录</p>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-系统安装"><span class="nav-number">1.</span> <span class="nav-text">1.系统安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#注意事项："><span class="nav-number">1.1.</span> <span class="nav-text">注意事项：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置本地yum源"><span class="nav-number">1.2.</span> <span class="nav-text">配置本地yum源</span></a></li></ol></li></ol></div>
           
         </div>
         <div class="post-toc-indicator-bottom post-toc-indicator"></div>
