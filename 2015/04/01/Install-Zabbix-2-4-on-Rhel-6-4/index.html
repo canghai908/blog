@@ -140,7 +140,8 @@
         
           <p>在rhel6.4x64系统上通过源码编译方式安装zabbix 2.4.3版本。</p>
 <h1 id="系统安装">系统安装</h1><p>通过iso安装rhel6.4系统64位，一路默认即可，设置好网络。</p>
-<h2 id="注意事项：">注意事项：</h2><h3 id="1-不使用UTC时区">1.不使用UTC时区</h3><h3 id="2-选择安装基本服务器">2.选择安装基本服务器</h3><h3 id="3-安装好之后同步时间：">3.安装好之后同步时间：</h3><p>通过ntp同步服务器时间，这里我使用上海交通大学的ntp服务器，进行时间同步，执行一下命令同步时间<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ntpdate ntp.sjtu.edu.cn</span><br></pre></td></tr></table></figure></p>
+<h2 id="注意事项：">注意事项：</h2><h3 id="1-不使用UTC时区">1.不使用UTC时区</h3><h3 id="2-选择安装基本服务器">2.选择安装基本服务器</h3><h3 id="3-安装好之后同步时间：">3.安装好之后同步时间：</h3><a id="more"></a>
+<p>通过ntp同步服务器时间，这里我使用上海交通大学的ntp服务器，进行时间同步，执行一下命令同步时间<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ntpdate ntp.sjtu.edu.cn</span><br></pre></td></tr></table></figure></p>
 <h3 id="4-关闭seLinux和防火墙">4.关闭seLinux和防火墙</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysconfig/selinux</span><br></pre></td></tr></table></figure>
 <p>把enforcing改成disabled，保存<br><figure class="highlight fix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">SELINUX</span>=<span class="string">disabled</span></span><br></pre></td></tr></table></figure></p>
 <p>关闭防火墙<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">chkconfig iptables off</span><br><span class="line">chkconfig ip6tables off</span><br><span class="line">/etc/init.d/iptables stop</span><br><span class="line">/etc/init.d/ip6tables stop</span><br></pre></td></tr></table></figure></p>
@@ -236,8 +237,6 @@
             </div>
 
             <div class="post-nav-next post-nav-item">
-              
-                <a href="/2015/03/31/hello-world/">Hello World</a>
               
             </div>
           </div>
