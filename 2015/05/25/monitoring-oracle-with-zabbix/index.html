@@ -18,9 +18,9 @@
 
 
 
-	<meta name="keywords" content="zabbix,微信," />
+	<meta name="keywords" content="oracle,zabbix," />
 
-  <title> zabbix通过微信告警 // canghai </title>
+  <title> monitoring oracle with zabbix // canghai </title>
 </head>
 
 <body>
@@ -101,7 +101,7 @@
           
           
             
-              zabbix通过微信告警
+              monitoring oracle with zabbix
             
           
         </h1>
@@ -110,7 +110,7 @@
       <div class="post-meta">
         <span class="post-time">
           
-            发表于 2015-04-18
+            发表于 2015-05-25
           
         </span>
 
@@ -122,8 +122,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/04/18/Configure-Zabbix-to-send-notifications-throught-weixin/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/18/Configure-Zabbix-to-send-notifications-throught-weixin/"></span>
+            <a href="/2015/05/25/monitoring-oracle-with-zabbix/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/25/monitoring-oracle-with-zabbix/"></span>
             </a>
           </span>
           
@@ -138,29 +138,21 @@
         
 
         
-          <p>zabbix可支持短信，E-mail，脚本等告警方式。之前做过一个cacti通过微信告警的感觉还不错，比邮件好点，因为微信经常开，而邮件却很少看，所以做了一个zabbix微信告警的小工具。<br>微信的告警是通过<a href="https://mp.weixin.qq.com/cgi-bin/loginpage?t=wxm2-login&amp;lang=zh_CN" target="_blank" rel="external">微信公众账号</a>发送客服消息告警的，后来发现一个问题，就是用户48小时之内不与公众账号交互，公众账号就不能向用户发送消息了。所以后来就放弃了，最近看到了<a href="https://qy.weixin.qq.com/" target="_blank" rel="external">微信企业号</a>，感觉比之前的公众账号功能更多了，而且可以分应用了。所以就用企业号做了一个简单的zabbix告警小工具</p>
-<h4 id="申明：">申明：</h4><p>1.此告警工具用是我的企业微信号告警的，所以要使用此工具的用户，必须要登记，登记之后我会在后台开通，关注之后才能使用此工具（微信企业号硬性需求，同时也是为了安全）<br>2.发送告警的信息只经过腾讯服务器，发送环节经过加密发送，在后台我也是看不到发送的告警信息的<br>3.如果用户没有自己的企业号，可以使用这个小工具发送告警信息。如果有自己的企业号，想用自己的企业号发送，可联系本人定制，具体费用请联系本人。<br>4.本工具只用来发送告警消息，切勿乱用，本人有权取消违规用户的账号！此工具为测试版本，限定测试人数100人，测试完成后，我会发布正式版本。<br>5.zabbix服务器必须可上外网，不需要有公网IP，能连接微信服务器即可。</p>
-<h4 id="工具特点：">工具特点：</h4><p>＊下载之后，在zabbix里简单配置即可用，工具本身无配置文件，无依赖<br>＊可同时发送多人，发送人在zabbix里设置<br>＊企业号发送，保证消息传递过程的安全<br>＊无发送次数限制</p>
-<h4 id="工具下载：">工具下载：</h4><p>本工具使用go语言写成，直接发布二进制文件，下载即可用，无依赖包。<br>Linux x86位版本：<a href="http://dl.cactifans.org/tools/send.x86.tar.gz" target="_blank" rel="external">http://dl.cactifans.org/tools/send.x86.tar.gz</a><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHA1 (send<span class="class">.x86</span><span class="class">.tar</span><span class="class">.gz</span>) = <span class="number">52</span>ac59cad8f93e809d1a3a67dbf38b717be3e0cd</span><br></pre></td></tr></table></figure></p>
-<p>LInux x86_64位版本：<a href="http://dl.cactifans.org/tools/send.x86_64.tar.gz" target="_blank" rel="external">http://dl.cactifans.org/tools/send.x86_64.tar.gz</a><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHA1 (send<span class="class">.x86_64</span><span class="class">.tar</span><span class="class">.gz</span>) = <span class="number">89</span>c03ebba29dee272d2bc67f932767ed24c940e7</span><br></pre></td></tr></table></figure></p>
-<h4 id="更新记录：">更新记录：</h4><blockquote>
-<p>2015年 4月20日 15时26分54秒 CST:更新发送程序小bug。</p>
-</blockquote>
-<h3 id="关注公众账号">关注公众账号</h3><p>首先要要提供用户的微信号，或者邮箱给我，我会在后台添加，只有添加后，经过验证才能关注成功，关注成功后，我会提供用户UserID。可发邮件到cactifans#gmail.com(＃换成@)申请试用，通过之后我会把你的UserID发送给你。工具使用QQ交流群：61797150     231169991<br>申请邮件格式：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">微信号：</span><br><span class="line">邮箱：</span><br><span class="line">城市：</span><br><span class="line">申请理由：</span><br></pre></td></tr></table></figure></p>
-<p>申请成功后扫描关注二维码<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/04/qrcode1.jpg" alt="qrcode1"></p>
-<h4 id="zabbix配置">zabbix配置</h4><p>zabbix_server.conf文件里配置脚本告警目录<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="constant">AlertScriptsPath</span>=<span class="regexp">/usr/local</span><span class="regexp">/zabbix/alertscripts</span></span><br></pre></td></tr></table></figure></p>
-<p>根据自己情况配置，目录不存在可手动建立<br>下载工具到告警目录(以Linux64位版本为例)<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/<span class="built_in">local</span>/zabbix/alertscripts</span><br><span class="line">wget <span class="keyword">http</span>://dl.cactifans.org/tools/<span class="built_in">send</span>.x86_64.tar.gz</span><br><span class="line">tar zxvf <span class="built_in">send</span>.x86_64.tar.gz</span><br><span class="line">chmod <span class="operator">a</span>+x <span class="built_in">send</span></span><br><span class="line">chown zabbix:zabbix <span class="built_in">send</span></span><br></pre></td></tr></table></figure></p>
-<p>至此工具安装完成，是不是很容易^_^！在zabbix界面里添加脚本告警<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/04/18.png" alt="添加告警媒介"><br>设置脚本，脚本名称为工具名称，设置好点添加按钮<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/04/21.png" alt="设置"><br>添加新的报警媒介到用户，我以Admin用户为例<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/04/31.png" alt="关联到用户"><br>添加<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/04/41.png" alt="添加"><br>选择刚才的媒介，收件人为我提供的UserID，多个用户用｜隔开<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/04/51.png" alt="用户"><br>添加后一点要点更新<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/04/61.png" alt="更新"><br>我们在这里独立设置一个Action，当然你也可以在默认的Action里添加<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/04/71.png" alt="Action1"><br>名称为weixin<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/04/81.png" alt="Action2"><br>告警消息的格式，大家可以根据自己需求具体设置，下面是我的设置</p>
-<blockquote>
-<p>默认接收人：故障{TRIGGER.STATUS},服务器:{HOSTNAME1}发生: {TRIGGER.NAME}故障!</p>
-<p>默认信息：</p>
-<p>告警主机:{HOSTNAME1}<br>告警时间:{EVENT.DATE} {EVENT.TIME}<br>告警等级:{TRIGGER.SEVERITY}<br>告警信息: {TRIGGER.NAME}<br>告警项目:{TRIGGER.KEY1}<br>问题详情:{ITEM.NAME}:{ITEM.VALUE}<br>前状态:{TRIGGER.STATUS}:{ITEM.VALUE1}<br>事件ID:{EVENT.ID}</p>
-<p>恢复主旨：恢复{TRIGGER.STATUS}, 服务器:{HOSTNAME1}: {TRIGGER.NAME}已恢复!</p>
-<p>恢复信息：</p>
-<p>告警主机:{HOSTNAME1}<br>告警时间:{EVENT.DATE} {EVENT.TIME}<br>告警等级:{TRIGGER.SEVERITY}<br>告警信息: {TRIGGER.NAME}<br>告警项目:{TRIGGER.KEY1}<br>问题详情:{ITEM.NAME}:{ITEM.VALUE}<br>当前状态:{TRIGGER.STATUS}:{ITEM.VALUE1}<br>事件ID:{EVENT.ID}</p>
-</blockquote>
-<p>切换到操作标签，添加操作<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/04/91.png" alt="Action3"><br>选择发送到Admin用户，只使用notice，选择好之后点添加<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/04/101.png" alt="Action4"><br>设置好之后如下，点添加<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/04/111.png" alt="Action5"><br>添加好之后如下，<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/04/121.png" alt="配置"><br>经过以上步骤，就完成了配置，就可以使用zabbix来告警啦，用dd命令测试下磁盘i/o告警，一会就会看到微信上发过来的告警信息<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/04/13.jpg" alt="pic1"><br>恢复信息<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/04/14.jpg" alt="pic2"></p>
-<h3 id="PS：后续计划">PS：后续计划</h3><p>1.后续可能会增加发送次数计数，方便管理用户<br>2.添加查询操作到微信，针对用户定制开发。可通过微信查询zabbix服务器里监控主机的状态，通过微信简单操作zabbix。<br>预览<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/04/15.jpg" alt="预览"></p>
+          <p>zabbix监控oracle数据库</p>
+<p>使用zabbix监控oracle数据库之前用过<a href="http://www.smartmarmot.com/product/orabbix/" target="_blank" rel="external">Orabbix</a>和<a href="https://github.com/bicofino/Pyora" target="_blank" rel="external">Pyora</a>，都不太理想，主要问题有以下几点<br>1.orabbix需要数据库安装java环境，另外SQL脚本哪里，本人是在不会配置，调整起来比较麻烦，因为不熟悉<br>2.Pyora需要在服务端指定链接的数据库用户名等信息，有点不安全，另外一个python的cx-Oracle依赖包真心难安装，头疼！<br>于是打算自己用简单的方法做一个！<br><a id="more"></a></p>
+<h2 id="整体结构">整体结构</h2><p>使用shell脚本，su到oracle 用户，使用sqlplus执行sql查询语句，把结果保存为csv文件，再通过程序处理csv文件，添加对应的key，来使zabbix实现监控oracle数据库。shell脚本使用定时任务，每一分钟执行一次，定时导出结果到CSV文件</p>
+<h3 id="优点">优点</h3><p>1.简单方便，直接使用sqlplus，无依赖组件<br>2.自定定义查询的性能sql语句，可定制程度高<br>3.直接在数据库执行，不需要添加用户，授权等操作<br>4.自动发现表空间，阈值设置。</p>
+<h3 id="缺点">缺点</h3><p>目前还没有发现^_^！</p>
+<h2 id="部署过程">部署过程</h2><h3 id="被监控端配置">被监控端配置</h3><p>数据库服务器要首先安装zabbix-agnetd客户端，部署提取性能的shell脚本到数据库机器，并且富于执行权限。<br>shell脚本：<a href="http://grafana.hi-www.com/oracle/aa.sh" target="_blank" rel="external">aa.sh</a>(脚本里的sql可能有些不专业，大牛无喷啊！^_^)<br>下载脚本到oracle数据库服务器，目录随意（我下载到ORACLE_HOME目录下）<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir －p <span class="regexp">/tmp/</span>oracle</span><br><span class="line">chmod -R <span class="number">777</span> <span class="regexp">/tmp/</span>oracle</span><br><span class="line">wget <span class="string">http:</span><span class="comment">//grafana.hi-www.com/oracle/aa.sh</span></span><br><span class="line">chmod a+x aa.sh</span><br></pre></td></tr></table></figure></p>
+<p>切换到oracle用户，执行脚本测试以下<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">su</span> - oracle</span><br><span class="line"><span class="keyword">sh</span> aa.<span class="keyword">sh</span></span><br></pre></td></tr></table></figure></p>
+<p>执行之后，查看/tmp/oracle目录下，会生成很多csv文件，如果没有生成，查看sqlplus是否能执行，或者目录是否有写入权限<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ls</span> -<span class="keyword">lh</span> /tmp/oracle</span><br></pre></td></tr></table></figure></p>
+<p>可看到如下，表示正确执行<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/05/1-1024x553.png" alt="enter image description here"><br>可cat查看文件是否有结果，如下<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/05/2-1024x252.png" alt="enter image description here"><br>确认无问题之后，添加到计划任务<br><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/crontab</span><br><span class="line"><span class="keyword">*</span>/1  <span class="keyword">*</span>  <span class="keyword">*</span>  <span class="keyword">*</span>  <span class="keyword">*</span> root su - oracle -c /home/oracle/aa.sh</span><br></pre></td></tr></table></figure></p>
+<p>表示一分钟执行一次脚本，导出结果到csv文件<br>下载csv处理文件到数据库服务器，处理csv文件可用shell，python等语言写，由于本人对以上二种语言都不熟悉，所以用自己还算熟悉的go写了一个，就是文件有点大！<br>csv处理文件打包：<a href="http://grafana.hi-www.com/oracle/zabbix_oracle.tar.gz" target="_blank" rel="external">zabbix_oracle.tar.gz</a>（此为64位版本在centos6.4x86_64系统上运行无问题，稍后发布32位版本）<br>安装文件到zabbix_agentd的bin目录下（可随意选择，赋予可执行权限即可）<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget <span class="string">http:</span><span class="comment">//grafana.hi-www.com/oracle/zabbix_oracle.tar.gz</span></span><br><span class="line">tar zxvf zabbix_oracle.tar.gz</span><br><span class="line">mv oracle <span class="regexp">/usr/</span>local<span class="regexp">/zabbix/</span>bin</span><br><span class="line">chown <span class="string">zabbix:</span>zabbix <span class="regexp">/usr/</span>local<span class="regexp">/zabbix/</span>bin/oracle</span><br><span class="line">chmod a+x <span class="regexp">/usr/</span>local<span class="regexp">/zabbix/</span>bin<span class="regexp">/oracle/</span>*</span><br></pre></td></tr></table></figure></p>
+<p>修改zabbix_agentd.conf文件，添加对应的key<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">vi /usr/local/zabbix/etc/zabbix_agentd.conf</span><br><span class="line"><span class="constant">UnsafeUserParameters=</span><span class="number">1</span></span><br><span class="line"><span class="constant">UserParameter=</span>oracle.tablespace.discovery,<span class="regexp">/usr/local</span><span class="regexp">/zabbix/bin</span><span class="regexp">/oracle/tablespace</span>_name</span><br><span class="line"><span class="constant">UserParameter=</span>oracle.tablespace[*],<span class="regexp">/usr/local</span><span class="regexp">/zabbix/bin</span><span class="regexp">/oracle/tablespace</span>_space <span class="variable">$1</span> <span class="variable">$2</span></span><br><span class="line"><span class="constant">UserParameter=</span>oracle.one[*],<span class="regexp">/usr/local</span><span class="regexp">/zabbix/bin</span><span class="regexp">/oracle/oracle</span>_one <span class="variable">$1</span></span><br><span class="line"><span class="constant">UserParameter=</span>oracle.process,<span class="regexp">/usr/local</span><span class="regexp">/zabbix/bin</span><span class="regexp">/oracle/process</span></span><br><span class="line"><span class="constant">UserParameter=</span>oracle.tablespaceinc[*],<span class="regexp">/usr/local</span><span class="regexp">/zabbix/bin</span><span class="regexp">/oracle/tablespace</span>_inc <span class="variable">$1</span></span><br><span class="line"><span class="constant">UserParameter=</span>oracle.sga[*],<span class="regexp">/usr/local</span><span class="regexp">/zabbix/bin</span><span class="regexp">/oracle/sga</span> <span class="variable">$1</span></span><br><span class="line"><span class="constant">UserParameter=</span>oracle.version,<span class="regexp">/usr/local</span><span class="regexp">/zabbix/bin</span><span class="regexp">/oracle/version</span></span><br><span class="line"><span class="constant">UserParameter=</span>oracle.connect,<span class="regexp">/usr/local</span><span class="regexp">/zabbix/bin</span><span class="regexp">/oracle/connect</span></span><br></pre></td></tr></table></figure></p>
+<p>添加好之后如下<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/05/3-1024x187.png" alt="enter image description here"><br>添加好之后，重启zabbxi－agent，到服务端测试一下<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/<span class="keyword">local</span>/bin/zabbix_get -s <span class="number">192.168</span><span class="number">.7</span><span class="number">.186</span> -k oracle.<span class="property">version</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/05/4-1024x80.png" alt="enter image description here"><br>如果能输出，表示工作正常（192.168.7.186为我的oracle服务器地址）</p>
+<h3 id="zabbix服务端配置">zabbix服务端配置</h3><p>本来要在zabbix上添加key的，有点麻烦，索性坐成了一个模版，大家可直接下载导入即可，zabbix2.4.4版本上导出，不知是否能够在通用！<br>模版文件<a href="http://grafana.hi-www.com/oracle/zabbix_oracle_templates.xml" target="_blank" rel="external">：zabbix_oracle_templates.xml</a><br>下载后直接导入zabbix，关联模版数据库服务器，即可。第一次做模版，有不到之处望大家指出。<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/05/5-1024x414.png" alt="enter image description here"></p>
+<h2 id="最终效果">最终效果</h2><p>表空间自动发现<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/05/6-1024x625.png" alt="enter image description here"><br>SGA<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/05/7-1024x175.png" alt="enter image description here"><br>Session<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/05/8-1024x147.png" alt="enter image description here"><br>Dbinfo<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/05/9-1024x195.png" alt="enter image description here"><br>Tablespace<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/05/10-1024x483.png" alt="enter image description here"><br>Tablespace_free_pct<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/05/11-1024x476.png" alt="enter image description here"><br>Tablespace_free_pct_trigger<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/05/11-1024x476.png" alt="enter image description here"></p>
 
         
       </div>
@@ -171,12 +163,12 @@
         
           <div class="post-tags">
             
-              <a href="/tags/zabbix/">
-                #zabbix
+              <a href="/tags/oracle/">
+                #oracle
               </a>
             
-              <a href="/tags/微信/">
-                #微信
+              <a href="/tags/zabbix/">
+                #zabbix
               </a>
             
           </div>
@@ -186,13 +178,11 @@
           <div class="post-nav">
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2015/05/25/monitoring-oracle-with-zabbix/">monitoring oracle with zabbix</a>
-              
             </div>
 
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2015/04/18/hello-world/">Hello World</a>
+                <a href="/2015/04/18/Configure-Zabbix-to-send-notifications-throught-weixin/">zabbix通过微信告警</a>
               
             </div>
           </div>
@@ -209,8 +199,8 @@
   
     <div class="comments" id="comments">
       
-        <div class="ds-thread" data-thread-key="2015/04/18/Configure-Zabbix-to-send-notifications-throught-weixin/"
-             data-title="zabbix通过微信告警" data-url="http://canghai.me/2015/04/18/Configure-Zabbix-to-send-notifications-throught-weixin/">
+        <div class="ds-thread" data-thread-key="2015/05/25/monitoring-oracle-with-zabbix/"
+             data-title="monitoring oracle with zabbix" data-url="http://canghai.me/2015/05/25/monitoring-oracle-with-zabbix/">
         </div>
 
       
@@ -283,7 +273,7 @@
         <div class="post-toc">
           
           
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#申明："><span class="nav-number">1.</span> <span class="nav-text">申明：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#工具特点："><span class="nav-number">2.</span> <span class="nav-text">工具特点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#工具下载："><span class="nav-number">3.</span> <span class="nav-text">工具下载：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更新记录："><span class="nav-number">4.</span> <span class="nav-text">更新记录：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关注公众账号"><span class="nav-number"></span> <span class="nav-text">关注公众账号</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#zabbix配置"><span class="nav-number">1.</span> <span class="nav-text">zabbix配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PS：后续计划"><span class="nav-number"></span> <span class="nav-text">PS：后续计划</span></a></div>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#整体结构"><span class="nav-number">1.</span> <span class="nav-text">整体结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优点"><span class="nav-number">1.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺点"><span class="nav-number">1.2.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署过程"><span class="nav-number">2.</span> <span class="nav-text">部署过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#被监控端配置"><span class="nav-number">2.1.</span> <span class="nav-text">被监控端配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zabbix服务端配置"><span class="nav-number">2.2.</span> <span class="nav-text">zabbix服务端配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最终效果"><span class="nav-number">3.</span> <span class="nav-text">最终效果</span></a></li></ol></div>
           
         </div>
         <div class="post-toc-indicator-bottom post-toc-indicator"></div>
