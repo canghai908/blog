@@ -148,8 +148,7 @@
       
 
       
-        <p>zabbix监控oracle数据库</p>
-<p>使用zabbix监控oracle数据库之前用过<a href="http://www.smartmarmot.com/product/orabbix/" target="_blank" rel="external">Orabbix</a>和<a href="https://github.com/bicofino/Pyora" target="_blank" rel="external">Pyora</a>，都不太理想，主要问题有以下几点<br>1.orabbix需要数据库安装java环境，另外SQL脚本哪里，本人是在不会配置，调整起来比较麻烦，因为不熟悉<br>2.Pyora需要在服务端指定链接的数据库用户名等信息，有点不安全，另外一个python的cx-Oracle依赖包真心难安装，头疼！<br>于是打算自己用简单的方法做一个！<br><a id="more"></a></p>
+        <p>使用zabbix监控oracle数据库之前用过<a href="http://www.smartmarmot.com/product/orabbix/" target="_blank" rel="external">Orabbix</a>和<a href="https://github.com/bicofino/Pyora" target="_blank" rel="external">Pyora</a>，都不太理想，主要问题有以下几点<br>1.orabbix需要数据库安装java环境，另外SQL脚本哪里，本人是在不会配置，调整起来比较麻烦，因为不熟悉<br>2.Pyora需要在服务端指定链接的数据库用户名等信息，有点不安全，另外一个python的cx-Oracle依赖包真心难安装，头疼！<br>于是打算自己用简单的方法做一个！<br><a id="more"></a></p>
 <h2 id="整体结构">整体结构</h2><p>使用shell脚本，su到oracle 用户，使用sqlplus执行sql查询语句，把结果保存为csv文件，再通过程序处理csv文件，添加对应的key，来使zabbix实现监控oracle数据库。shell脚本使用定时任务，每一分钟执行一次，定时导出结果到CSV文件</p>
 <h3 id="优点">优点</h3><p>1.简单方便，直接使用sqlplus，无依赖组件<br>2.自定定义查询的性能sql语句，可定制程度高<br>3.直接在数据库执行，不需要添加用户，授权等操作<br>4.自动发现表空间，阈值设置。</p>
 <h3 id="缺点">缺点</h3><p>目前还没有发现^_^！</p>
@@ -264,7 +263,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
