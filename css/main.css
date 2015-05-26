@@ -478,39 +478,35 @@ td {
 }
 @font-face {
   font-family: 'Lato';
-  src: url("../fonts/lato/lato-reg-webfont-g.eot");
-  font-weight: normal;
+  src: url("../fonts/lato/Lato-Regular.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/lato/Lato-Regular.eot?#iefix") format('embedded-opentype'), url("../fonts/lato/Lato-Regular.woff") format('woff'), url("../fonts/lato/Lato-Regular.ttf") format('truetype');
   font-style: normal;
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
 }
 @font-face {
   font-family: 'Lato';
-  src: url("../fonts/lato/lato-reg-webfont-g.woff") format('woff');
-  font-weight: normal;
+  src: url("../fonts/lato/Lato-Bold.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/lato/Lato-Bold.eot?#iefix") format('embedded-opentype'), url("../fonts/lato/Lato-Bold.woff") format('woff'), url("../fonts/lato/Lato-Bold.ttf") format('truetype');
   font-style: normal;
-}
-@font-face {
-  font-family: 'Lato';
-  src: url("../fonts/lato/lato-bol-webfont-g.eot");
   font-weight: bold;
-  font-style: normal;
+  text-rendering: optimizeLegibility;
 }
 @font-face {
   font-family: 'Lato';
-  src: url("../fonts/lato/lato-bol-webfont-g.woff") format('woff');
+  src: url("../fonts/lato/Lato-Italic.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/lato/Lato-Italic.eot?#iefix") format('embedded-opentype'), url("../fonts/lato/Lato-Italic.woff") format('woff'), url("../fonts/lato/Lato-Italic.ttf") format('truetype');
+  font-style: italic;
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+}
+@font-face {
+  font-family: 'Lato';
+  src: url("../fonts/lato/Lato-BoldItalic.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/lato/Lato-BoldItalic.eot?#iefix") format('embedded-opentype'), url("../fonts/lato/Lato-BoldItalic.woff") format('woff'), url("../fonts/lato/Lato-BoldItalic.ttf") format('truetype');
+  font-style: italic;
   font-weight: bold;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Lato';
-  src: url("../fonts/lato/lato-regita-webfont-g.eot");
-  font-weight: normal;
-  font-style: italic;
-}
-@font-face {
-  font-family: 'Lato';
-  src: url("../fonts/lato/lato-regita-webfont-g.woff") format('woff');
-  font-weight: normal;
-  font-style: italic;
+  text-rendering: optimizeLegibility;
 }
 @font-face {
   font-family: 'default';
@@ -700,13 +696,13 @@ td {
 }
 .post pre,
 .post .highlight {
-  background: #000;
+  background: #f7f7f7;
   margin: 20px 0;
   padding: 15px;
   overflow: auto;
   font-size: 13px;
-  color: #eaeaea;
-  line-height: 1.8;
+  color: #4d4d4c;
+  line-height: 1.2;
 }
 .post .highlight .gutter pre,
 .post .gist .gist-file .gist-data .line-numbers {
@@ -741,7 +737,7 @@ td {
 }
 .post .highlight figcaption {
   font-size: 0.85em;
-  color: #969896;
+  color: #8e908c;
   line-height: 1em;
   margin-bottom: 1em;
 }
@@ -766,9 +762,9 @@ td {
 .post .gist {
   margin: 20px 0;
   border-style: solid;
-  border-color: $baseBorderColor;
+  border-color: #ccc;
   border-width: 1px 0;
-  background: #000;
+  background: #f7f7f7;
   padding: 15px 40px 15px 15px;
 }
 .post .gist .gist-file {
@@ -794,8 +790,8 @@ td {
   border: none;
 }
 .post .gist .gist-file .gist-meta {
-  background: #000;
-  color: #969896;
+  background: #f7f7f7;
+  color: #8e908c;
   font: 13px Lato, "Microsoft Jhenghei", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
   text-shadow: 0 0;
   padding: 0;
@@ -810,7 +806,7 @@ td {
   text-decoration: underline;
 }
 pre .comment {
-  color: #969896;
+  color: #8e908c;
 }
 pre .variable,
 pre .attribute,
@@ -824,7 +820,7 @@ pre .html .doctype,
 pre .css .id,
 pre .css .class,
 pre .css .pseudo {
-  color: #d54e53;
+  color: #c82829;
 }
 pre .number,
 pre .preprocessor,
@@ -832,11 +828,11 @@ pre .built_in,
 pre .literal,
 pre .params,
 pre .constant {
-  color: #e78c45;
+  color: #f5871f;
 }
 pre .ruby .class .title,
 pre .css .rules .attribute {
-  color: #b9ca4a;
+  color: #718c00;
 }
 pre .string,
 pre .value,
@@ -844,11 +840,11 @@ pre .inheritance,
 pre .header,
 pre .ruby .symbol,
 pre .xml .cdata {
-  color: #b9ca4a;
+  color: #718c00;
 }
 pre .title,
 pre .css .hexcolor {
-  color: #70c0b1;
+  color: #3e999f;
 }
 pre .function,
 pre .python .decorator,
@@ -858,11 +854,11 @@ pre .ruby .title .keyword,
 pre .perl .sub,
 pre .javascript .title,
 pre .coffeescript .title {
-  color: #7aa6da;
+  color: #4271ae;
 }
 pre .keyword,
 pre .javascript .function {
-  color: #c397d8;
+  color: #8959a8;
 }
 html,
 body {
@@ -965,6 +961,11 @@ body {
   display: inline-block;
   margin-left: 20px;
 }
+@media screen and (max-width: 767px) {
+  .menu .menu-item {
+    margin-top: 10px;
+  }
+}
 .menu .menu-item:first-child {
   margin-left: 0;
 }
@@ -981,6 +982,37 @@ body {
 }
 .menu .menu-item a:hover {
   border-bottom-color: #222;
+}
+input.menu-search-input {
+  background-repeat: no-repeat;
+  background-position: 5px center;
+  width: 70px;
+  height: 20px;
+  padding: 3px 9px 3px 23px;
+  border-radius: 25px;
+  border: 1px solid #c4c4c4;
+  box-shadow: inset 1px 1px 1px 1px rgba(0,0,0,0.17);
+  color: #555;
+  font-size: 13px;
+  background-image: url("/images/searchicon.png");
+  background-size: 15px 15px;
+}
+.menu .menu-item-search .st-search-input {
+  width: 80px;
+  float: left;
+}
+.theme-next-mist .menu .menu-item-search .st-search-input {
+  float: none;
+}
+@media screen and (max-width: 767px) {
+  .menu .menu-item-search {
+    margin-bottom: 15px;
+    display: block;
+  }
+  .menu .menu-item-search .st-search-input {
+    width: auto;
+    float: none;
+  }
 }
 .translation {
   margin-top: -20px;
@@ -1037,8 +1069,11 @@ body {
   -webkit-transform: translateZ(0);
 }
 .sidebar a {
-  color: #555;
+  color: #999;
   border-bottom-color: #555;
+}
+.sidebar a:hover {
+  color: #eee;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .sidebar {
@@ -1085,6 +1120,9 @@ body {
 .site-state-item:first-child {
   border-left: none;
 }
+.site-state-item a {
+  border-bottom: none;
+}
 .site-state-item-count {
   display: block;
   text-align: center;
@@ -1122,12 +1160,8 @@ body {
   vertical-align: middle;
   margin-right: 10px;
   margin-bottom: 10px;
-  color: #555;
   border-bottom-color: #555;
   font-size: 13px;
-}
-.links-of-author a:hover {
-  color: #999;
 }
 .links-of-author a:before {
   display: inline-block;
@@ -1137,7 +1171,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff4050;
+  background: #558bff;
 }
 .sidebar-nav {
   margin: 0;
@@ -1361,9 +1395,8 @@ body {
 .posts-expand .post-meta .post-category-list-link {
   color: #999;
 }
-.posts-expand .post-meta .post-comments-count a {
-  border-bottom: none;
-  color: #999;
+.posts-expand .post-body {
+  text-align: justify;
 }
 .posts-expand .post-body h2,
 .posts-expand .post-body h3,
@@ -1500,6 +1533,10 @@ body {
 }
 .posts-collapse .post-header {
   position: relative;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0s;
+  transition-property: border;
   border-bottom: 1px dashed #ccc;
 }
 .posts-collapse .post-header::before {
@@ -1513,6 +1550,10 @@ body {
   background: #bbb;
   border-radius: 50%;
   border: 1px solid #fff;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0s;
+  transition-property: background;
 }
 .posts-collapse .post-header:hover {
   border-bottom-color: #666;
@@ -1634,15 +1675,15 @@ body {
   margin: 10px;
 }
 .post-gallery {
-  overflow: hidden;
   display: table;
   border-spacing: 10px;
   border-collapse: separate;
 }
 .post-gallery a {
   display: table-cell;
-  width: 25%;
-  height: 100px;
+  float: left;
+  width: 33%;
+  height: 130px;
   text-align: center;
   vertical-align: middle;
   border: none;
