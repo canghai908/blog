@@ -1171,7 +1171,7 @@ input.menu-search-input {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #6e8cee;
+  background: #710901;
 }
 .sidebar-nav {
   margin: 0;
@@ -1486,7 +1486,7 @@ input.menu-search-input {
 }
 .post-more-link {
   margin-top: 50px;
-  text-align: left;
+  text-align: center;
 }
 @media (max-width: 767px) {
   .posts-collapse {
