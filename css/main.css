@@ -1171,7 +1171,7 @@ input.menu-search-input {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #fbffff;
+  background: #ff967c;
 }
 .sidebar-nav {
   margin: 0;
@@ -1482,7 +1482,7 @@ input.menu-search-input {
   width: 8%;
   height: 1px;
   background: #ccc;
-  text-align: center;
+  text-align: left;
 }
 .post-more-link {
   margin-top: 50px;
