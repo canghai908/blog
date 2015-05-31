@@ -1,0 +1,535 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+
+
+
+
+  <meta name="keywords" content="cacti,短信，告警," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    analytics: {
+      baidu: '',
+      google: ''
+    },
+    sidebar: 'post'
+  };
+</script>
+
+
+
+
+  <title> setting up sms with cacti // canghai </title>
+</head>
+
+<body>
+<!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">canghai</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+     
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          首页
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              setting up sms with cacti
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-05-31
+        </span>
+
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/05/31/setting-up-sms-with-cacti/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/31/setting-up-sms-with-cacti/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>之前听人说使用飞信告警，由于最近飞信机器人协议更新，不能使用，因此采用了第三方的短信接口，实现了cacti的短信告警。</p>
+<h1 id="接口申请">接口申请</h1><p>市面上短信接口很多，都提供了标准的http接口，我试用了<a href="http://www.yunpian.com/" target="_blank" rel="external">云片网络</a>的短信接口，申请好之后，要申请一个模版，不按照模版是不能发送的，另外还要添加你的主机IP地址到白名单里，不然不能发送成功，使用其他接口的请自行设置<br><a id="more"></a><br>模版配置</p>
+<p><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/05/13.png" alt="模版配置"></p>
+<p>白名单设置</p>
+<p><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/05/21.png" alt="IP白名单"></p>
+<h2 id="接口测试">接口测试</h2><p>我们先放到一个文件到cacti服务器上，测试一下，使用php写了一个简单的测试发送页面，代码如下:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 在PHP 5.5.17 中测试通过。</span><br><span class="line"> * 默认用通用接口(send)发送，若需使用模板接口(tpl_send),请自行将代码注释去掉。</span><br><span class="line"> */</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$subject</span> = <span class="string">"haha"</span>; <span class="comment">//告警内容</span></span><br><span class="line"><span class="comment">//通用接口发送样例</span></span><br><span class="line"><span class="variable">$apikey</span> = <span class="string">"AAAAAAAAAAAA"</span>; <span class="comment">//请用自己的apikey代替</span></span><br><span class="line"><span class="variable">$mobile</span> = <span class="string">"13800121212"</span>; <span class="comment">//请用自己的手机号代替</span></span><br><span class="line"><span class="variable">$text</span>=<span class="string">"【云片网】告警内容:"</span>.<span class="variable">$subject</span>.<span class="string">",请及时处理故障！"</span>; <span class="comment">//模版</span></span><br><span class="line"><span class="keyword">echo</span> send_sms(<span class="variable">$apikey</span>,<span class="variable">$text</span>,<span class="variable">$mobile</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line">* 通用接口发短信</span><br><span class="line">* apikey 为云片分配的apikey</span><br><span class="line">* text 为短信内容</span><br><span class="line">* mobile 为接受短信的手机号</span><br><span class="line">*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">send_sms</span><span class="params">(<span class="variable">$apikey</span>, <span class="variable">$text</span>, <span class="variable">$mobile</span>)</span></span>&#123;</span><br><span class="line">	<span class="variable">$url</span>=<span class="string">"http://yunpian.com/v1/sms/send.json"</span>;</span><br><span class="line">	<span class="variable">$encoded_text</span> = urlencode(<span class="string">"$text"</span>);</span><br><span class="line">	<span class="variable">$post_string</span>=<span class="string">"apikey=$apikey&amp;text=$encoded_text&amp;mobile=$mobile"</span>;</span><br><span class="line">	<span class="keyword">return</span> sock_post(<span class="variable">$url</span>, <span class="variable">$post_string</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span><br><span class="line"></span><br><span class="line">* url 为服务的url地址</span><br><span class="line">* query 为请求串</span><br><span class="line">*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sock_post</span><span class="params">(<span class="variable">$url</span>,<span class="variable">$query</span>)</span></span>&#123;</span><br><span class="line">	<span class="variable">$data</span> = <span class="string">""</span>;</span><br><span class="line">	<span class="variable">$info</span>=parse_url(<span class="variable">$url</span>);</span><br><span class="line">	<span class="variable">$fp</span>=fsockopen(<span class="variable">$info</span>[<span class="string">"host"</span>],<span class="number">80</span>,<span class="variable">$errno</span>,<span class="variable">$errstr</span>,<span class="number">30</span>);</span><br><span class="line">	<span class="keyword">if</span>(!<span class="variable">$fp</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="variable">$data</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="variable">$head</span>=<span class="string">"POST "</span>.<span class="variable">$info</span>[<span class="string">'path'</span>].<span class="string">" HTTP/1.0\r\n"</span>;</span><br><span class="line">	<span class="variable">$head</span>.=<span class="string">"Host: "</span>.<span class="variable">$info</span>[<span class="string">'host'</span>].<span class="string">"\r\n"</span>;</span><br><span class="line">	<span class="variable">$head</span>.=<span class="string">"Referer: http://"</span>.<span class="variable">$info</span>[<span class="string">'host'</span>].<span class="variable">$info</span>[<span class="string">'path'</span>].<span class="string">"\r\n"</span>;</span><br><span class="line">	<span class="variable">$head</span>.=<span class="string">"Content-type: application/x-www-form-urlencoded\r\n"</span>;</span><br><span class="line">	<span class="variable">$head</span>.=<span class="string">"Content-Length: "</span>.strlen(trim(<span class="variable">$query</span>)).<span class="string">"\r\n"</span>;</span><br><span class="line">	<span class="variable">$head</span>.=<span class="string">"\r\n"</span>;</span><br><span class="line">	<span class="variable">$head</span>.=trim(<span class="variable">$query</span>);</span><br><span class="line">	<span class="variable">$write</span>=fputs(<span class="variable">$fp</span>,<span class="variable">$head</span>);</span><br><span class="line">	<span class="variable">$header</span> = <span class="string">""</span>;</span><br><span class="line">	<span class="keyword">while</span> (<span class="variable">$str</span> = trim(fgets(<span class="variable">$fp</span>,<span class="number">4096</span>))) &#123;</span><br><span class="line">		<span class="variable">$header</span>.=<span class="variable">$str</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (!feof(<span class="variable">$fp</span>)) &#123;</span><br><span class="line">		<span class="variable">$data</span> .= fgets(<span class="variable">$fp</span>,<span class="number">4096</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="variable">$data</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>也可下载我的测试脚本：<a href="http://grafana.hi-www.com/cacti/send.php" target="_blank" rel="external">send.php</a><br>文中的apikey和手机号，改成你自己的，保存到cacti的根目录下，保存为send.php，用浏览器访问此文件，如果有错误会有提示，如果出现如下：<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/05/31.png" alt="返回"></p>
+<p>表示发送成功，同时手机也收到了短信，表示配置正确。</p>
+<h2 id="cacti配置">cacti配置</h2><p>thold是cacti的告警插件，可对主机等设备设置阈值，设置之后可通过Email等方式通知管理人员，这里我添加一个Linux用户登录数的告警，登录用户数大于2或者登录用户数小于1，都会发短信通知指定的管理人员:<br>由于我们调用的事邮件函数，所以需要指定一个邮件通知列表，随便填就可以<br>邮件列表<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/05/111.png" alt="1"><br>添加规则<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/05/41.png" alt="1"><br>选择数据源<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/05/51.png" alt="2"><br>规则<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/05/62.png" alt="3"><br>添加好之后的效果<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/05/71.png" alt="4"><br>看到Triggered为no，表示还没有触发。<br>至此阈值配置完成，对于别的项目，可自行对照设置，基本大同小异</p>
+<h2 id="修改Thold插件">修改Thold插件</h2><p>由于Thold插件没有自带输出到短信的接口，所以需要修改thold把告警的信息，通过短信接口发送出去,我是用的thold插件为最新的0.5版本<br>修改thold插件目录下的thold_functions.php文件（我的cacti安装目录为/data/wwwroot/cacti/）<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi <span class="regexp">/data/</span>wwwroot<span class="regexp">/cacti/</span>plugins<span class="regexp">/thold/</span>thold_functions.php</span><br></pre></td></tr></table></figure></p>
+<p>文件2722行之后 添加如下内容：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">2724</span>         <span class="variable">$apikey</span> = <span class="string">"AAAAAAAAAAAAAAAAAAAA"</span>;</span><br><span class="line"><span class="number">2725</span>         <span class="variable">$mobile</span> = <span class="string">"13800001234"</span>;</span><br><span class="line"><span class="number">2726</span>         <span class="variable">$text</span>=<span class="string">"【云片网】告警内容:"</span>.<span class="variable">$subject</span>.<span class="string">",请及时处理故障！"</span>;</span><br><span class="line"><span class="number">2727</span>         <span class="keyword">echo</span> send_sms(<span class="variable">$apikey</span>,<span class="variable">$text</span>,<span class="variable">$mobile</span>);</span><br></pre></td></tr></table></figure></p>
+<p>添加好之后如图：<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/05/81.png" alt="6"></p>
+<p>文件2855行之后，添加二个发送函数，代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">* 通用接口发短信</span><br><span class="line">* apikey 为云片分配的apikey</span><br><span class="line">* text 为短信内容</span><br><span class="line">* mobile 为接受短信的手机号</span><br><span class="line">*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">send_sms</span><span class="params">(<span class="variable">$apikey</span>, <span class="variable">$text</span>, <span class="variable">$mobile</span>)</span></span>&#123;</span><br><span class="line">	<span class="variable">$url</span>=<span class="string">"http://yunpian.com/v1/sms/send.json"</span>;</span><br><span class="line">	<span class="variable">$encoded_text</span> = urlencode(<span class="string">"$text"</span>);</span><br><span class="line">	<span class="variable">$post_string</span>=<span class="string">"apikey=$apikey&amp;text=$encoded_text&amp;mobile=$mobile"</span>;</span><br><span class="line">	<span class="keyword">return</span> sock_post(<span class="variable">$url</span>, <span class="variable">$post_string</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span><br><span class="line"></span><br><span class="line">* url 为服务的url地址</span><br><span class="line">* query 为请求串</span><br><span class="line">*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sock_post</span><span class="params">(<span class="variable">$url</span>,<span class="variable">$query</span>)</span></span>&#123;</span><br><span class="line">	<span class="variable">$data</span> = <span class="string">""</span>;</span><br><span class="line">	<span class="variable">$info</span>=parse_url(<span class="variable">$url</span>);</span><br><span class="line">	<span class="variable">$fp</span>=fsockopen(<span class="variable">$info</span>[<span class="string">"host"</span>],<span class="number">80</span>,<span class="variable">$errno</span>,<span class="variable">$errstr</span>,<span class="number">30</span>);</span><br><span class="line">	<span class="keyword">if</span>(!<span class="variable">$fp</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="variable">$data</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="variable">$head</span>=<span class="string">"POST "</span>.<span class="variable">$info</span>[<span class="string">'path'</span>].<span class="string">" HTTP/1.0\r\n"</span>;</span><br><span class="line">	<span class="variable">$head</span>.=<span class="string">"Host: "</span>.<span class="variable">$info</span>[<span class="string">'host'</span>].<span class="string">"\r\n"</span>;</span><br><span class="line">	<span class="variable">$head</span>.=<span class="string">"Referer: http://"</span>.<span class="variable">$info</span>[<span class="string">'host'</span>].<span class="variable">$info</span>[<span class="string">'path'</span>].<span class="string">"\r\n"</span>;</span><br><span class="line">	<span class="variable">$head</span>.=<span class="string">"Content-type: application/x-www-form-urlencoded\r\n"</span>;</span><br><span class="line">	<span class="variable">$head</span>.=<span class="string">"Content-Length: "</span>.strlen(trim(<span class="variable">$query</span>)).<span class="string">"\r\n"</span>;</span><br><span class="line">	<span class="variable">$head</span>.=<span class="string">"\r\n"</span>;</span><br><span class="line">	<span class="variable">$head</span>.=trim(<span class="variable">$query</span>);</span><br><span class="line">	<span class="variable">$write</span>=fputs(<span class="variable">$fp</span>,<span class="variable">$head</span>);</span><br><span class="line">	<span class="variable">$header</span> = <span class="string">""</span>;</span><br><span class="line">	<span class="keyword">while</span> (<span class="variable">$str</span> = trim(fgets(<span class="variable">$fp</span>,<span class="number">4096</span>))) &#123;</span><br><span class="line">		<span class="variable">$header</span>.=<span class="variable">$str</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (!feof(<span class="variable">$fp</span>)) &#123;</span><br><span class="line">		<span class="variable">$data</span> .= fgets(<span class="variable">$fp</span>,<span class="number">4096</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="variable">$data</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>添加好之后效果：<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/05/91.png" alt="7"></p>
+<p>也可直接下载我的<a href="http://grafana.hi-www.com/cacti/thold_functions.php" target="_blank" rel="external">thold_function.php</a>覆盖你的，注意修改文件里的apikey和手机号码，注意备份你的原有文件。</p>
+<h1 id="最终效果">最终效果</h1><p>添加之后，我们登录四个终端，在cacti界面就会看到thold规则已经触发，手机会就收到短信。<br>触发<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/05/101.png" alt="11"><br>手机收到短信，发送速度很快基本秒到<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/05/M1B1QQK05E7N9HRR1.png" alt="12"></p>
+<p>如有特殊需求，可发邮件到cactifans#gmail.com，联系本人，提供功能定制服务。 （＃换成@）</p>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/cacti/"> #cacti </a>
+          
+            <a href="/tags/短信，告警/"> #短信，告警 </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/05/25/monitoring-oracle-with-zabbix/">monitoring oracle with zabbix</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+      <div class="comments" id="comments">
+        
+          <div class="ds-thread" data-thread-key="2015/05/31/setting-up-sms-with-cacti/"
+               data-title="setting up sms with cacti" data-url="http://canghai.me/2015/05/31/setting-up-sms-with-cacti/">
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="https://avatars1.githubusercontent.com/u/1450994?v=3&s=460" alt="John Doe" />
+          <p class="site-author-name">John Doe</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#接口申请"><span class="nav-number">1.</span> <span class="nav-text">接口申请</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#接口测试"><span class="nav-number">1.1.</span> <span class="nav-text">接口测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cacti配置"><span class="nav-number">1.2.</span> <span class="nav-text">cacti配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改Thold插件"><span class="nav-number">1.3.</span> <span class="nav-text">修改Thold插件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最终效果"><span class="nav-number">2.</span> <span class="nav-text">最终效果</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2015
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">John Doe</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js" id="motion.global"></script>
+
+
+
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"canghai"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+  
+
+</body>
+</html>
