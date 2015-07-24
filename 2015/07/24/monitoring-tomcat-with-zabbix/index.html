@@ -20,7 +20,7 @@
 
 
 
-  <meta name="keywords" content="Hexo,next" />
+  <meta name="keywords" content="jmx,tomat,zabbix," />
 
 
 
@@ -44,14 +44,12 @@
 
 
 
-  <title> canghai </title>
+  <title> monitoring tomcat with zabbix // canghai </title>
 </head>
 
 <body>
 <!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
-  <div class="container one-column 
-   page-home 
-">
+  <div class="container one-column page-post-detail">
     <div class="headband"></div>
 
     <div id="header" class="header">
@@ -105,9 +103,9 @@
       <div class="main-inner">
         <div id="content" class="content">
           
+
   <div id="posts" class="posts-expand">
     
-      
 
   <div class="post post-type-normal ">
     <div class="post-header">
@@ -118,9 +116,7 @@
           
           
             
-              <a class="post-title-link" href="/2015/07/24/monitoring-tomcat-with-zabbix/">
-                monitoring tomcat with zabbix
-              </a>
+              monitoring tomcat with zabbix
             
           
         </h1>
@@ -152,8 +148,7 @@
       
 
       
-        
-          <p>zabbix提供了一个java gateway的应用去监控jmx（Java Management Extensions，即Java管理扩展）是一个为应用程序、设备、系统等植入管理功能的框架。JMX可以跨越一系列异构操作系统平台、系统体系结构和网络传输协议，灵活的开发无缝集成的系统、网络和服务管理应用。</p>
+        <p>zabbix提供了一个java gateway的应用去监控jmx（Java Management Extensions，即Java管理扩展）是一个为应用程序、设备、系统等植入管理功能的框架。JMX可以跨越一系列异构操作系统平台、系统体系结构和网络传输协议，灵活的开发无缝集成的系统、网络和服务管理应用。</p>
 <h2 id="一-_Zabbix_的JMX监控架构">一. Zabbix 的JMX监控架构</h2><p><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/07/01.jpg" alt="enter image description here"></p>
 <h2 id="二-安装Java_gateway［zabbix服务端操作］">二.安装Java gateway［zabbix服务端操作］</h2><h3 id="1-安装jdk">1.安装jdk</h3><p>首先要安装jdk，我的系统位redhat 6.4 x64位，我使用rpm包安装jdk，从<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html下载最新的jdk，rpm包（我使用7u79版本，最新为8）并上传到zabbix" target="_blank" rel="external">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html下载最新的jdk，rpm包（我使用7u79版本，最新为8）并上传到zabbix</a> server<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm －ivh jdk-<span class="number">7u</span>79-linux-x64.rpm</span><br></pre></td></tr></table></figure></p>
 <p>安装成功之后添加系统环境变量<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">vi</span> /etc/<span class="keyword">profile</span></span><br></pre></td></tr></table></figure></p>
@@ -192,7 +187,6 @@
 <h3 id="2-添加模版">2.添加模版</h3><p>模版我已经做好了大家可直接倒入使用<br>模版下载：<a href="http://dl.cactifans.org/tools/zabbix_tomcat_templates.xml" target="_blank" rel="external">zabbix_tomcat_templates.xml</a><br>导入到zabbix，并关联到主机</p>
 <h2 id="五-最终效果">五.最终效果</h2><p><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/07/02-1024x594.jpg" alt="enter image description here"></p>
 
-        
       
     </div>
 
@@ -210,504 +204,37 @@
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
             
-              <a class="post-title-link" href="/2015/05/31/setting-up-sms-with-cacti/">
-                setting up sms with cacti
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2015-05-31
-        </span>
-
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/05/31/setting-up-sms-with-cacti/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/31/setting-up-sms-with-cacti/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>之前听人说使用飞信告警，由于最近飞信机器人协议更新，不能使用，因此采用了第三方的短信接口，实现了cacti的短信告警。</p>
-<h1 id="接口申请">接口申请</h1><p>市面上短信接口很多，都提供了标准的http接口，我试用了<a href="http://www.yunpian.com/">云片网络</a>的短信接口，申请好之后，要申请一个模版，不按照模版是不能发送的，另外还要添加你的主机IP地址到白名单里，不然不能发送成功，使用其他接口的请自行设置<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/31/setting-up-sms-with-cacti/#more">
-              阅读全文 &raquo;
-            </a>
           </div>
-        
-      
-    </div>
 
-    <div class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/cacti/"> #cacti </a>
-          
-            <a href="/tags/短信，告警/"> #短信，告警 </a>
-          
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/05/31/setting-up-sms-with-cacti/">setting up sms with cacti</a>
+            
+          </div>
         </div>
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </div>
   </div>
 
 
+
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2015/05/25/monitoring-oracle-with-zabbix/">
-                monitoring oracle with zabbix
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2015-05-25
-        </span>
-
+      <div class="comments" id="comments">
         
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/05/25/monitoring-oracle-with-zabbix/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/25/monitoring-oracle-with-zabbix/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>使用zabbix监控oracle数据库之前用过<a href="http://www.smartmarmot.com/product/orabbix/">Orabbix</a>和<a href="https://github.com/bicofino/Pyora">Pyora</a>，都不太理想，主要问题有以下几点<br>1.orabbix需要数据库安装java环境，另外SQL脚本哪里，本人是在不会配置，调整起来比较麻烦，因为不熟悉<br>2.Pyora需要在服务端指定链接的数据库用户名等信息，有点不安全，另外一个python的cx-Oracle依赖包真心难安装，头疼！<br>于是打算自己用简单的方法做一个！<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/25/monitoring-oracle-with-zabbix/#more">
-              阅读全文 &raquo;
-            </a>
+          <div class="ds-thread" data-thread-key="2015/07/24/monitoring-tomcat-with-zabbix/"
+               data-title="monitoring tomcat with zabbix" data-url="http://canghai.me/2015/07/24/monitoring-tomcat-with-zabbix/">
           </div>
         
-      
-    </div>
-
-    <div class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/oracle/"> #oracle </a>
-          
-            <a href="/tags/zabbix/"> #zabbix </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2015/04/18/Configure-Zabbix-to-send-notifications-throught-weixin/">
-                zabbix通过微信告警
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2015-04-18
-        </span>
-
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/04/18/Configure-Zabbix-to-send-notifications-throught-weixin/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/18/Configure-Zabbix-to-send-notifications-throught-weixin/"></span>
-            </a>
-          </span>
-          
-        
       </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>zabbix可支持短信，E-mail，脚本等告警方式。之前做过一个cacti通过微信告警的感觉还不错，比邮件好点，因为微信经常开，而邮件却很少看，所以做了一个zabbix微信告警的小工具。<br>微信的告警是通过<a href="https://mp.weixin.qq.com/cgi-bin/loginpage?t=wxm2-login&amp;lang=zh_CN">微信公众账号</a>发送客服消息告警的，后来发现一个问题，就是用户48小时之内不与公众账号交互，公众账号就不能向用户发送消息了。所以后来就放弃了，最近看到了<a href="https://qy.weixin.qq.com/">微信企业号</a>，感觉比之前的公众账号功能更多了，而且可以分应用了。所以就用企业号做了一个简单的zabbix告警小工具<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/04/18/Configure-Zabbix-to-send-notifications-throught-weixin/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/zabbix/"> #zabbix </a>
-          
-            <a href="/tags/微信/"> #微信 </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2015/04/18/hello-world/">
-                Hello World
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2015-04-18
-        </span>
-
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/04/18/hello-world/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/18/hello-world/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>Welcome to <a href="http://hexo.io/">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/04/18/hello-world/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2015/04/03/Monitor-MySQL-Zabbix/">
-                Monitor MySQL Zabbix
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2015-04-03
-        </span>
-
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/04/03/Monitor-MySQL-Zabbix/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/03/Monitor-MySQL-Zabbix/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>环境</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">操作系统</th>
-<th style="text-align:right">CentOS7</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Zabbix版本</td>
-<td style="text-align:right">2.4.3</td>
-</tr>
-<tr>
-<td style="text-align:left">MySql版本</td>
-<td style="text-align:right">5.6.23</td>
-</tr>
-<tr>
-<td style="text-align:left">zabbix_agent安装目录</td>
-<td style="text-align:right">/usr/local/zabbix/</td>
-</tr>
-</tbody>
-</table>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/04/03/Monitor-MySQL-Zabbix/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/mysql/"> #mysql </a>
-          
-            <a href="/tags/zabbix/"> #zabbix </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2015/04/01/Install-Zabbix-2-4-on-Rhel-6-4/">
-                Install Zabbix 2.4 on Rhel 6.4
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2015-04-01
-        </span>
-
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/04/01/Install-Zabbix-2-4-on-Rhel-6-4/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/01/Install-Zabbix-2-4-on-Rhel-6-4/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h1 id="系统安装">系统安装</h1><p>通过iso安装rhel6.4系统64位，一路默认即可，设置好网络。</p>
-<h2 id="注意事项：">注意事项：</h2><p>1.不使用UTC时区<br>2.选择安装基本服务器<br>3.安装好之后同步时间：<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/04/01/Install-Zabbix-2-4-on-Rhel-6-4/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/rhel/"> #rhel </a>
-          
-            <a href="/tags/zabbix/"> #zabbix </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
     
   </div>
 
-  
 
         </div>
 
@@ -728,6 +255,15 @@
   <div id="sidebar" class="sidebar">
     <div class="sidebar-inner">
 
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
       
 
       <div class="site-overview">
@@ -771,6 +307,17 @@
 
       </div>
 
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-_Zabbix_的JMX监控架构"><span class="nav-number">1.</span> <span class="nav-text">一. Zabbix 的JMX监控架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-安装Java_gateway［zabbix服务端操作］"><span class="nav-number">2.</span> <span class="nav-text">二.安装Java gateway［zabbix服务端操作］</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安装jdk"><span class="nav-number">2.1.</span> <span class="nav-text">1.安装jdk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安装Java_gateway"><span class="nav-number">2.2.</span> <span class="nav-text">2.安装Java gateway</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-配置Java_gateway"><span class="nav-number">2.3.</span> <span class="nav-text">3.配置Java gateway</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-启动测试Java_gateway"><span class="nav-number">2.4.</span> <span class="nav-text">4.启动测试Java gateway</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-添加catalina-jmx-remote-jar"><span class="nav-number">2.5.</span> <span class="nav-text">5.添加catalina-jmx-remote.jar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-下载测试工具cmdline-jmxclient-0-10-3-jar"><span class="nav-number">2.6.</span> <span class="nav-text">6.下载测试工具cmdline-jmxclient-0.10.3.jar</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-被监控tomcat_配置［被监控tomcat操作］"><span class="nav-number">3.</span> <span class="nav-text">三.被监控tomcat 配置［被监控tomcat操作］</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-添加catalina-jmx-remote-jar"><span class="nav-number">3.1.</span> <span class="nav-text">1.添加catalina-jmx-remote.jar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-修改setenv-sh"><span class="nav-number">3.2.</span> <span class="nav-text">2.修改setenv.sh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-修改server-xml"><span class="nav-number">3.3.</span> <span class="nav-text">3.修改server.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-添加tomcat应用自动发现脚本"><span class="nav-number">3.4.</span> <span class="nav-text">4.添加tomcat应用自动发现脚本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-测试并添加"><span class="nav-number">4.</span> <span class="nav-text">四.测试并添加</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-测试"><span class="nav-number">4.1.</span> <span class="nav-text">1.测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-添加模版"><span class="nav-number">4.2.</span> <span class="nav-text">2.添加模版</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五-最终效果"><span class="nav-number">5.</span> <span class="nav-text">五.最终效果</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
       
 
     </div>
@@ -832,6 +379,145 @@
 
 
   
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
 
   <script type="text/javascript">
     $(document).ready(function () {
