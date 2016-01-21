@@ -118,6 +118,86 @@
           
           
             
+              <a class="post-title-link" href="/2016/01/21/send-mail-via-smtp/">
+                send mail via smtp
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2016-01-21
+        </span>
+
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2016/01/21/send-mail-via-smtp/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/21/send-mail-via-smtp/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>使用zabbix邮件发送告警消息，老是遇到发送程序出现问题，因此使用go结合开源的邮件库，写了一个smtp发邮件的程序（CentOS 6.4 X64位测试通过）<br>下载地址：<a href="http://dl.cactifans.org/tools/zabbix_mail.x86_64.tar.gz">zabbix_mail.x86_64.tar.gz</a><br>使用方法：<br>zabbix alertscripts 脚本路径为/usr/local/zabbix/alertscripts<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/zabbix/alertscripts</span><br><span class="line">wget http:<span class="comment">//dl.cactifans.org/tools/zabbix_mail.x86_64.tar.gz</span></span><br><span class="line">tar zxvf zabbix_mail<span class="class">.x86_64</span><span class="class">.tar</span><span class="class">.gz</span></span><br><span class="line">rm -r zabbix_mail<span class="class">.x86_64</span><span class="class">.tar</span><span class="class">.gz</span></span><br><span class="line">mv zabbix_mail/mail .</span><br><span class="line">chmod a+x mail</span><br><span class="line">mv zabbix_mail/cfg<span class="class">.json</span> /etc/</span><br></pre></td></tr></table></figure></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/01/21/send-mail-via-smtp/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mail/"> #mail </a>
+          
+            <a href="/tags/smtp/"> #smtp </a>
+          
+            <a href="/tags/zabbix/"> #zabbix </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2015/11/21/monitoring-redis-with-zabbix/">
                 monitoring redis with zabbix
               </a>
@@ -888,7 +968,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -902,7 +982,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -933,7 +1013,7 @@
         <div class="copyright">
   
   &copy; &nbsp; 
-  2015
+  2016
   <span class="with-love">
     <i class="icon-heart"></i>
   </span>
