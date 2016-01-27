@@ -1,0 +1,538 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+
+
+
+
+  <meta name="keywords" content="zabbix,微信," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    analytics: {
+      baidu: '',
+      google: ''
+    },
+    sidebar: 'post'
+  };
+</script>
+
+
+
+
+  <title> zabbix微信告警 // canghai </title>
+</head>
+
+<body>
+<!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">canghai</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+     
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          首页
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              zabbix微信告警
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2016-01-27
+        </span>
+
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2016/01/27/zabbix微信告警/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/27/zabbix微信告警/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>前面写了一个zabbix微信告警的，用的我的企业号，后来发现用的人太多消息都超过限制了，应大家要求发布个可以用主机企业号的发送程序，填自己的企业号就可发送微信告警消息！使用go语言开发，避免脚本掉用的各种bug和奇葩问题！</p>
+<h2 id="首先你得有个企业号！！！！">首先你得有个企业号！！！！</h2><p>关于企业号的申请，什么是corpid，secret，agentid，微信号，用户账号等等问题我就不科普了，大家可以上腾讯的<a href="http://qydev.weixin.qq.com/wiki/index.php?title=%E9%A6%96%E9%A1%B5" target="_blank" rel="external">企业号开发者中心</a>查看，或者查看itnihao的一篇blog，<a href="http://itnihao.blog.51cto.com/1741976/1733245图文并貌写的很清楚。" target="_blank" rel="external">http://itnihao.blog.51cto.com/1741976/1733245图文并貌写的很清楚。</a></p>
+<h2 id="下载程序">下载程序</h2><p>下载地址：<a href="http://dl.cactifans.org/tools/zabbix_weixin.x86_64.tar.gz" target="_blank" rel="external">zabbix_weixin.x86_64.tar.gz</a>（Linux64位版本）</p>
+<h2 id="部署步骤">部署步骤</h2><a id="more"></a>
+<p><strong>下载程序到你的zabbix server的AlertScriptsPath目录下</strong>。不知道什么是AlertScriptsPath目录，不知道怎么配置的，直接看官方文档！！！<a href="https://www.zabbix.com/documentation/2.4/manual/appendix/config/zabbix_server" target="_blank" rel="external">zabbix server配置文件</a><br>如果之前没有设置过AlertScriptsPath，设置之后要重启zabbix server<br>假设我的zabbix server的AlertScriptsPath目录为/usr/local/zabbix/alertscripts<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wget http://dl.cactifans.org/tools/zabbix_weixin.x86_64.tar.gz</span><br><span class="line">tar zxvf zabbix_weixin.x86_64.tar.gz</span><br><span class="line">mv zabbix_weixin/weixin .</span><br><span class="line">chmod a+x weixin</span><br><span class="line">mv zabbix_weixin/weixincfg.json /etc/</span><br><span class="line">rm -rf zxvf zabbix_weixin.x86_64.tar.gz</span><br><span class="line">rm -rf zabbix_weixin/</span><br></pre></td></tr></table></figure></p>
+<p>接下来一步很重要，编辑/etc/weixincfg.json文件，配置你的企业号corpid，secret，agentid，<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">"<span class="attribute">corp</span>": <span class="value">&#123;</span><br><span class="line">        "<span class="attribute">corpid</span>": <span class="value"><span class="string">"wxxxxxx"</span></span>,</span><br><span class="line">        "<span class="attribute">secret</span>": <span class="value"><span class="string">"Vn6dxxxx"</span></span>,</span><br><span class="line">        "<span class="attribute">agentid</span>": <span class="value"><span class="number">1</span></span><br><span class="line">    </span>&#125;</span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>不知道哪里看corpid，scret，agentid的直接看itnihao的文章，不要再问我！</strong></p>
+<h2 id="测试">测试</h2><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/usr/</span>local<span class="regexp">/zabbix/</span>alertscripts<span class="regexp">/weixin xxx subject body</span></span><br></pre></td></tr></table></figure>
+<p>解释一下<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xxx为你的微信账号！注意不是微信号！也不是微信昵称！当然你也可以把用户账号设置成微信号或者微信昵称，自己设置！</span><br><span class="line">subject 告警主题</span><br><span class="line">boyd 告警闲情</span><br></pre></td></tr></table></figure></p>
+<p>如果发送显示“OK”，表示发送成功，应该就会收到消息！</p>
+<h2 id="zabbix设置">zabbix设置</h2><p>先添加微信到告警媒介<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/01/62CCF386-0FE1-4AE7-833C-D7F88405B539.jpg" alt="告警媒介"><br>关联到用户<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/01/27FED34F-E27A-485E-90E5-36DFAEDA95C8.jpg" alt="用户"><br>告警内容定制<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/01/64E42502-131B-4DE0-B81A-4716EAAB92DF.jpg" alt="内容"><br>注意：收件人哪里填需要收消息的人的企业账号，多个人中间用“｜”号隔开，如图所示<br>告警内容是我自己定制的,大家可以参考我的，直接复制过去用<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">告警主题：</span><br><span class="line">[<span class="list">&#123;TRIGGER.SEVERITY&#125;</span>]服务器:<span class="list">&#123;HOSTNAME1&#125;</span>发生:<span class="list">&#123;TRIGGER.NAME&#125;</span>故障！</span><br><span class="line">告警内容：</span><br><span class="line">告警主机: <span class="list">&#123;HOSTNAME1&#125;</span></span><br><span class="line">主机分组: <span class="list">&#123;TRIGGER.HOSTGROUP.NAME&#125;</span></span><br><span class="line">告警时间: <span class="list">&#123;EVENT.DATE&#125;</span> <span class="list">&#123;EVENT.TIME&#125;</span></span><br><span class="line">告警等级: <span class="list">&#123;TRIGGER.SEVERITY&#125;</span></span><br><span class="line">告警信息: <span class="list">&#123;TRIGGER.NAME&#125;</span></span><br><span class="line">告警项目: <span class="list">&#123;TRIGGER.KEY1&#125;</span></span><br><span class="line">问题详情: <span class="list">&#123;ITEM.NAME&#125;</span>:<span class="list">&#123;ITEM.VALUE&#125;</span></span><br><span class="line">当前状态: <span class="list">&#123;TRIGGER.STATUS&#125;</span></span><br><span class="line">事件ID: <span class="list">&#123;EVENT.ID&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>告警恢复内容<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">恢复主题：</span><br><span class="line">[<span class="list">&#123;TRIGGER.SEVERITY&#125;</span>]服务器:<span class="list">&#123;HOSTNAME1&#125;</span><span class="list">&#123;TRIGGER.NAME&#125;</span>已恢复！</span><br><span class="line">恢复内容：</span><br><span class="line">告警主机: <span class="list">&#123;HOSTNAME1&#125;</span></span><br><span class="line">主机分组: <span class="list">&#123;TRIGGER.HOSTGROUP.NAME&#125;</span></span><br><span class="line">告警时间: <span class="list">&#123;EVENT.DATE&#125;</span> <span class="list">&#123;EVENT.TIME&#125;</span></span><br><span class="line">告警等级: <span class="list">&#123;TRIGGER.SEVERITY&#125;</span></span><br><span class="line">告警信息: <span class="list">&#123;TRIGGER.NAME&#125;</span></span><br><span class="line">告警项目: <span class="list">&#123;TRIGGER.KEY1&#125;</span></span><br><span class="line">问题详情: <span class="list">&#123;ITEM.NAME&#125;</span>:<span class="list">&#123;ITEM.VALUE&#125;</span></span><br><span class="line">当前状态: <span class="list">&#123;TRIGGER.STATUS&#125;</span></span><br><span class="line">事件ID: <span class="list">&#123;EVENT.ID&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>设置好之后，设置动作时，掉用weiixn就是了<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/01/4998E246-A2D0-4136-AC89-75316ECA7B60.jpg" alt="调用"><br>至此设置完成！</p>
+<h2 id="最终效果">最终效果</h2><p><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/01/%E6%B6%82%E9%B8%A6_Screenshot_2016-01-27-12-03-45-359_%E5%BE%AE%E4%BF%A1.png" alt="效果"></p>
+<p>FAQ：<br>A.测试不能通过，返回errcode！</p>
+<p>1.检查/etc/weixincfg.json文件里的corpid，secert，agentid配置是否正确<br>2.检查接受者企业账号是否正确<br>3.检查接受着是否在这个应用的通讯录里</p>
+<p>B.zabbix不能收到告警消息<br>1.检查发送程序有无可执行权限<br>2.检查发送程序是否在zabbix server的AlertScriptsPath目录下<br>3.检查是否关联到用户<br>4.检查是否掉用了发送</p>
+<p>C. 发送限制<br>1.发送频率基本可以满足需求,没有别的限制。<br>2.每日发送次数有一定限制，具体与企业号关注人数有关，详情查看企业号开发文档</p>
+<p>zabbix二次开发和技术支持事宜请联系本人<br>QQ:80629340    mail:lovecanghai#gmail.com</p>
+<p><strong>如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作！</strong><br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/01/Screenshot_2016-01-27-13-23-04-158_%E5%BE%AE%E4%BF%A1.png?imageView2/1/w/300/h/300" alt="微信"></p>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/zabbix/"> #zabbix </a>
+          
+            <a href="/tags/微信/"> #微信 </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/21/send-mail-via-smtp/">send mail via smtp</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+      <div class="comments" id="comments">
+        
+          <div class="ds-thread" data-thread-key="2016/01/27/zabbix微信告警/"
+               data-title="zabbix微信告警" data-url="http://canghai.me/2016/01/27/zabbix微信告警/">
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="https://avatars1.githubusercontent.com/u/1450994?v=3&s=460" alt="John Doe" />
+          <p class="site-author-name">John Doe</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#首先你得有个企业号！！！！"><span class="nav-number">1.</span> <span class="nav-text">首先你得有个企业号！！！！</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载程序"><span class="nav-number">2.</span> <span class="nav-text">下载程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署步骤"><span class="nav-number">3.</span> <span class="nav-text">部署步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">4.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zabbix设置"><span class="nav-number">5.</span> <span class="nav-text">zabbix设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最终效果"><span class="nav-number">6.</span> <span class="nav-text">最终效果</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2016
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">John Doe</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js" id="motion.global"></script>
+
+
+
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"canghai"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+  
+
+</body>
+</html>
