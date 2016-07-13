@@ -20,7 +20,7 @@
 
 
 
-  <meta name="keywords" content="redis,zabbix," />
+  <meta name="keywords" content="zabbix,redis," />
 
 
 
@@ -171,14 +171,14 @@
 </tr>
 </tbody>
 </table>
-<h4 id="监控客户端下载">监控客户端下载</h4><p>linux 32位系统<br><a href="http://dl.cactifans.org/tools/zabbix_redis.x86.tar.gz" target="_blank" rel="external">zabbix_redis.x86.tar.gz</a><br>linux64位系统<br><a href="http://dl.cactifans.org/tools/zabbix_redis.x86_64.tar.gz" target="_blank" rel="external">zabbix_redis.x86_64.tar.gz</a></p>
-<h4 id="配置方法">配置方法</h4><p>修改zabbix agentd配置文件(具体位置根据自身情况设置)，添加key<br><a id="more"></a><br>添加如下内容<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#redis</span></span><br><span class="line"><span class="constant">UserParameter=</span>redis.port.discovery,sudo /usr/local/zabbix/bin/redis/redis_discovery</span><br><span class="line"><span class="constant">UserParameter=</span>redis[*],<span class="regexp">/usr/local</span><span class="regexp">/zabbix/bin</span><span class="regexp">/redis/redis</span> <span class="variable">$1</span> <span class="variable">$2</span></span><br></pre></td></tr></table></figure></p>
-<p>添加好之后执行(zabbix-agent安装路径为/usr/local/zabbix/)<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/zabbix/bin/</span><br><span class="line">wget http:<span class="comment">//dl.cactifans.org/tools/zabbix_redis.x86_64.tar.gz</span></span><br><span class="line">tar zxvf zabbix_redis<span class="class">.x86_64</span><span class="class">.tar</span><span class="class">.gz</span></span><br></pre></td></tr></table></figure></p>
-<p>添加之后，需要重启zabbix agent，由于需要sudo权限，因此需要修改sudoer文件,<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zabbix  <span class="constant">ALL</span>=<span class="constant">NOPASSWD</span><span class="symbol">:/usr/local/zabbix/bin/redis/redis_discovery</span></span><br><span class="line"><span class="constant">Defaults</span><span class="symbol">:zabbix</span>  !requiretty</span><br></pre></td></tr></table></figure></p>
-<p>测试执行<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/usr/</span>local<span class="regexp">/zabbix/</span>bin<span class="regexp">/redis/</span>redis_discovery</span><br></pre></td></tr></table></figure></p>
-<p>执行之后,可显示本机所有redis端口（json格式）<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;"<span class="attribute">data</span>":<span class="value">[&#123;"<span class="attribute">&#123;#PORT&#125;</span>":<span class="value"><span class="string">"6379"</span></span>&#125;,&#123;"<span class="attribute">&#123;#PORT&#125;</span>":<span class="value"><span class="string">"6380"</span></span>&#125;]</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="监控客户端下载"><a href="#监控客户端下载" class="headerlink" title="监控客户端下载"></a>监控客户端下载</h4><p>linux 32位系统<br><a href="http://dl.cactifans.org/tools/zabbix_redis.x86.tar.gz" target="_blank" rel="external">zabbix_redis.x86.tar.gz</a><br>linux64位系统<br><a href="http://dl.cactifans.org/tools/zabbix_redis.x86_64.tar.gz" target="_blank" rel="external">zabbix_redis.x86_64.tar.gz</a></p>
+<h4 id="配置方法"><a href="#配置方法" class="headerlink" title="配置方法"></a>配置方法</h4><p>修改zabbix agentd配置文件(具体位置根据自身情况设置)，添加key<br><a id="more"></a><br>添加如下内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#redis</div><div class="line">UserParameter=redis.port.discovery,sudo /usr/local/zabbix/bin/redis/redis_discovery</div><div class="line">UserParameter=redis[*],/usr/local/zabbix/bin/redis/redis $1 $2</div></pre></td></tr></table></figure></p>
+<p>添加好之后执行(zabbix-agent安装路径为/usr/local/zabbix/)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/zabbix/bin/</div><div class="line">wget http://dl.cactifans.org/tools/zabbix_redis.x86_64.tar.gz</div><div class="line">tar zxvf zabbix_redis.x86_64.tar.gz</div></pre></td></tr></table></figure></p>
+<p>添加之后，需要重启zabbix agent，由于需要sudo权限，因此需要修改sudoer文件,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">zabbix  ALL=NOPASSWD:/usr/local/zabbix/bin/redis/redis_discovery</div><div class="line">Defaults:zabbix  !requiretty</div></pre></td></tr></table></figure></p>
+<p>测试执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/zabbix/bin/redis/redis_discovery</div></pre></td></tr></table></figure></p>
+<p>执行之后,可显示本机所有redis端口（json格式）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;&quot;data&quot;:[&#123;&quot;&#123;#PORT&#125;&quot;:&quot;6379&quot;&#125;,&#123;&quot;&#123;#PORT&#125;&quot;:&quot;6380&quot;&#125;]&#125;</div></pre></td></tr></table></figure></p>
 <p>表示执行成功</p>
-<h4 id="server端操作">server端操作</h4><p>导入redis监控模版: <a href="http://dl.cactifans.org/tools/zabbix_redis_templates.tar.gz" target="_blank" rel="external">zabbix_redis_templates.tar.gz</a><br>关联redis模版，即可查看数据<br>效果：<br>1<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/11/1.png" alt="1"><br>2<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/11/2-1024x878.png" alt="2"><br>3<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/11/3-1024x467.png" alt="3"><br>4<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/11/4-1024x454.png" alt="enter image description here"></p>
+<h4 id="server端操作"><a href="#server端操作" class="headerlink" title="server端操作"></a>server端操作</h4><p>导入redis监控模版: <a href="http://dl.cactifans.org/tools/zabbix_redis_templates.tar.gz" target="_blank" rel="external">zabbix_redis_templates.tar.gz</a><br>关联redis模版，即可查看数据<br>效果：<br>1<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/11/1.png" alt="1"><br>2<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/11/2-1024x878.png" alt="2"><br>3<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/11/3-1024x467.png" alt="3"><br>4<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/11/4-1024x454.png" alt="enter image description here"></p>
 
       
     </div>
@@ -187,9 +187,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/redis/"> #redis </a>
-          
             <a href="/tags/zabbix/"> #zabbix </a>
+          
+            <a href="/tags/redis/"> #redis </a>
           
         </div>
       

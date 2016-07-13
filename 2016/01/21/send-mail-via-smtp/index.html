@@ -20,7 +20,7 @@
 
 
 
-  <meta name="keywords" content="mail,smtp,zabbix," />
+  <meta name="keywords" content="zabbix,smtp,mail," />
 
 
 
@@ -148,11 +148,11 @@
       
 
       
-        <p>使用zabbix邮件发送告警消息，老是遇到发送程序出现问题，因此使用go结合开源的邮件库，写了一个smtp发邮件的程序（CentOS 6.4 X64位测试通过）<br>下载地址：<a href="http://dl.cactifans.org/tools/zabbix_mail.x86_64.tar.gz" target="_blank" rel="external">zabbix_mail.x86_64.tar.gz</a><br>使用方法：<br>zabbix alertscripts 脚本路径为/usr/local/zabbix/alertscripts<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/zabbix/alertscripts</span><br><span class="line">wget http:<span class="comment">//dl.cactifans.org/tools/zabbix_mail.x86_64.tar.gz</span></span><br><span class="line">tar zxvf zabbix_mail<span class="class">.x86_64</span><span class="class">.tar</span><span class="class">.gz</span></span><br><span class="line">rm -r zabbix_mail<span class="class">.x86_64</span><span class="class">.tar</span><span class="class">.gz</span></span><br><span class="line">mv zabbix_mail/mail .</span><br><span class="line">chmod a+x mail</span><br><span class="line">mv zabbix_mail/cfg<span class="class">.json</span> /etc/</span><br></pre></td></tr></table></figure></p>
+        <p>使用zabbix邮件发送告警消息，老是遇到发送程序出现问题，因此使用go结合开源的邮件库，写了一个smtp发邮件的程序（CentOS 6.4 X64位测试通过）<br>下载地址：<a href="http://dl.cactifans.org/tools/zabbix_mail.x86_64.tar.gz" target="_blank" rel="external">zabbix_mail.x86_64.tar.gz</a><br>使用方法：<br>zabbix alertscripts 脚本路径为/usr/local/zabbix/alertscripts<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/zabbix/alertscripts</div><div class="line">wget http://dl.cactifans.org/tools/zabbix_mail.x86_64.tar.gz</div><div class="line">tar zxvf zabbix_mail.x86_64.tar.gz</div><div class="line">rm -r zabbix_mail.x86_64.tar.gz</div><div class="line">mv zabbix_mail/mail .</div><div class="line">chmod a+x mail</div><div class="line">mv zabbix_mail/cfg.json /etc/</div></pre></td></tr></table></figure></p>
 <a id="more"></a>
-<p>编辑/etc/cfg.json配置SMTP邮件服务器信息<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">"<span class="attribute">smtp</span>": <span class="value">&#123;</span><br><span class="line">        "<span class="attribute">username</span>": <span class="value"><span class="string">"alarm@126.com"</span></span>,</span><br><span class="line">        "<span class="attribute">password</span>": <span class="value"><span class="string">"password"</span></span>,</span><br><span class="line">        "<span class="attribute">description</span>": <span class="value"><span class="string">"运维监控"</span></span>,</span><br><span class="line">        "<span class="attribute">host</span>": <span class="value"><span class="string">"smtp.126.com"</span></span>,</span><br><span class="line">        "<span class="attribute">port</span>": <span class="value"><span class="number">587</span></span><br><span class="line">    </span>&#125;</span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure></p>
-<p>根据实际情况填写，最好使用企业内部邮件服务器的smtp，163，126发送邮件过多会屏蔽，请慎重使用！！！<br>测试<br>执行<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/usr/</span>local<span class="regexp">/zabbix/</span>alertscripts<span class="regexp">/mail xxxx@126.com 邮件主题 邮件内容</span></span><br></pre></td></tr></table></figure></p>
-<p>如果能收到邮件表示发送成功，xxx@126.com为接受人邮件<br>mail后面可跟三个参数，与zabbix一致，可查看zabbix官方文档<br><a href="https://www.zabbix.com/documentation/2.4/manual/config/notifications/media/script" target="_blank" rel="external">Zabbix Custom alertscripts</a><br>参数解释<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$1</span> 邮件接收人，过个接收人用；号分割</span><br><span class="line"><span class="variable">$2</span> 邮件主题</span><br><span class="line"><span class="variable">$3</span> 邮件内容</span><br></pre></td></tr></table></figure></p>
+<p>编辑/etc/cfg.json配置SMTP邮件服务器信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">&quot;smtp&quot;: &#123;</div><div class="line">        &quot;username&quot;: &quot;alarm@126.com&quot;,</div><div class="line">        &quot;password&quot;: &quot;password&quot;,</div><div class="line">        &quot;description&quot;: &quot;运维监控&quot;,</div><div class="line">        &quot;host&quot;: &quot;smtp.126.com&quot;,</div><div class="line">        &quot;port&quot;: 587</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>根据实际情况填写，最好使用企业内部邮件服务器的smtp，163，126发送邮件过多会屏蔽，请慎重使用！！！<br>测试<br>执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/zabbix/alertscripts/mail xxxx@126.com 邮件主题 邮件内容</div></pre></td></tr></table></figure></p>
+<p>如果能收到邮件表示发送成功，xxx@126.com为接受人邮件<br>mail后面可跟三个参数，与zabbix一致，可查看zabbix官方文档<br><a href="https://www.zabbix.com/documentation/2.4/manual/config/notifications/media/script" target="_blank" rel="external">Zabbix Custom alertscripts</a><br>参数解释<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$1 邮件接收人，过个接收人用；号分割</div><div class="line">$2 邮件主题</div><div class="line">$3 邮件内容</div></pre></td></tr></table></figure></p>
 <p> 在zabbix里添加告警脚本<br> 添加告警媒介<br> <img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/01/F29BC2EA-E01F-41FE-AF61-22240D77DB1A.jpg" alt=" 添加告警媒介"><br> 关联到用户<br> <img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/01/5207E7CC-44CB-44F2-9145-D2B994E6956C.jpg" alt="关联到用户"><br> 关联到动作<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/01/33801C4B-682A-4A91-9A62-DCF39DC95555.jpg" alt="关联到动作"><br> 配置完成！</p>
 <p>具体设置也可参考我的另外一篇文章<br> <a href="http://canghai.coding.io/2015/04/18/Configure-Zabbix-to-send-notifications-throught-weixin/" target="_blank" rel="external">zabbix通过微信告警</a></p>
 
@@ -163,11 +163,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/mail/"> #mail </a>
+            <a href="/tags/zabbix/"> #zabbix </a>
           
             <a href="/tags/smtp/"> #smtp </a>
           
-            <a href="/tags/zabbix/"> #zabbix </a>
+            <a href="/tags/mail/"> #mail </a>
           
         </div>
       

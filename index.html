@@ -153,8 +153,8 @@
 
       
         
-          <h2 id="一-环境介绍">一.环境介绍</h2><p>操作系统：CentOS-7-x86_64-Minimal-1511.iso<br>最小化安装，<strong>语言选择英文</strong><br>iso下载地址：<a href="http://mirrors.163.com/centos/7.2.1511/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso">http://mirrors.163.com/centos/7.2.1511/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso</a><br>zabbix：zabbix 3.0.2<br>rpm包下载地址：<a href="http://dl.cactifans.org/zabbix/mysql.tar.gz">http://dl.cactifans.org/zabbix/mysql.tar.gz</a><br><a href="http://dl.cactifans.org/zabbix/rpm.tar.gz">http://dl.cactifans.org/zabbix/rpm.tar.gz</a><br>安装方式：rpm包安装</p>
-<h2 id="二-安装依赖包">二.安装依赖包</h2><p>由于使用离线安装方式，因此通过rpm包安装所有依赖包。<br>
+          <h2 id="一-环境介绍"><a href="#一-环境介绍" class="headerlink" title="一.环境介绍"></a>一.环境介绍</h2><p>操作系统：CentOS-7-x86_64-Minimal-1511.iso<br>最小化安装，<strong>语言选择英文</strong><br>iso下载地址：<a href="http://mirrors.163.com/centos/7.2.1511/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso">http://mirrors.163.com/centos/7.2.1511/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso</a><br>zabbix：zabbix 3.0.2<br>rpm包下载地址：<a href="http://dl.cactifans.org/zabbix/mysql.tar.gz">http://dl.cactifans.org/zabbix/mysql.tar.gz</a><br><a href="http://dl.cactifans.org/zabbix/rpm.tar.gz">http://dl.cactifans.org/zabbix/rpm.tar.gz</a><br>安装方式：rpm包安装</p>
+<h2 id="二-安装依赖包"><a href="#二-安装依赖包" class="headerlink" title="二.安装依赖包"></a>二.安装依赖包</h2><p>由于使用离线安装方式，因此通过rpm包安装所有依赖包。<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/05/14/zabbix-3-0离线安装手册/#more">
               阅读全文 &raquo;
@@ -168,19 +168,19 @@
       
         <div class="post-tags">
           
-            <a href="/tags/centos7/"> #centos7 </a>
-          
-            <a href="/tags/redhat7/"> #redhat7 </a>
-          
-            <a href="/tags/rpm/"> #rpm </a>
-          
             <a href="/tags/zabbix/"> #zabbix </a>
           
             <a href="/tags/zabbix-3-0/"> #zabbix 3.0 </a>
           
+            <a href="/tags/rpm/"> #rpm </a>
+          
             <a href="/tags/zabbix安装/"> #zabbix安装 </a>
           
             <a href="/tags/离线安装/"> #离线安装 </a>
+          
+            <a href="/tags/redhat7/"> #redhat7 </a>
+          
+            <a href="/tags/centos7/"> #centos7 </a>
           
         </div>
       
@@ -243,9 +243,9 @@
       
         
           <p>前面写了一个zabbix微信告警的，用的我的企业号，后来发现用的人太多消息都超过限制了，应大家要求发布个可以用主机企业号的发送程序，填自己的企业号就可发送微信告警消息！使用go语言开发（感谢<a href="https://github.com/chanxuehong/wechat">老司机</a>提供的微信sdk)</p>
-<h2 id="首先你得有个企业号！！！！">首先你得有个企业号！！！！</h2><p>关于企业号的申请，什么是corpid，secret，agentid，微信号，用户账号等等问题我就不科普了，大家可以上腾讯的<a href="http://qydev.weixin.qq.com/wiki/index.php?title=%E9%A6%96%E9%A1%B5">企业号开发者中心</a>查看，或者查看itnihao的一篇blog，<a href="http://itnihao.blog.51cto.com/1741976/1733245">http://itnihao.blog.51cto.com/1741976/1733245</a>图文并貌写的很清楚。</p>
-<h2 id="下载程序">下载程序</h2><p>下载地址：<br><a href="http://dl.cactifans.org/tools/zabbix_weixin.x86.tar.gz">zabbix_weixin.x86.tar.gz</a>（Linux32位版本）<br><a href="http://dl.cactifans.org/tools/zabbix_weixin.x86_64.tar.gz">zabbix_weixin.x86_64.tar.gz</a>（Linux64位版本）</p>
-<h2 id="部署步骤">部署步骤</h2>
+<h2 id="首先你得有个企业号！！！！"><a href="#首先你得有个企业号！！！！" class="headerlink" title="首先你得有个企业号！！！！"></a>首先你得有个企业号！！！！</h2><p>关于企业号的申请，什么是corpid，secret，agentid，微信号，用户账号等等问题我就不科普了，大家可以上腾讯的<a href="http://qydev.weixin.qq.com/wiki/index.php?title=%E9%A6%96%E9%A1%B5">企业号开发者中心</a>查看，或者查看itnihao的一篇blog，<a href="http://itnihao.blog.51cto.com/1741976/1733245">http://itnihao.blog.51cto.com/1741976/1733245</a>图文并貌写的很清楚。</p>
+<h2 id="下载程序"><a href="#下载程序" class="headerlink" title="下载程序"></a>下载程序</h2><p>下载地址：<br><a href="http://dl.cactifans.org/tools/zabbix_weixin.x86.tar.gz">zabbix_weixin.x86.tar.gz</a>（Linux32位版本）<br><a href="http://dl.cactifans.org/tools/zabbix_weixin.x86_64.tar.gz">zabbix_weixin.x86_64.tar.gz</a>（Linux64位版本）</p>
+<h2 id="部署步骤"><a href="#部署步骤" class="headerlink" title="部署步骤"></a>部署步骤</h2>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/01/27/zabbix微信告警/#more">
               阅读全文 &raquo;
@@ -323,7 +323,7 @@
 
       
         
-          <p>使用zabbix邮件发送告警消息，老是遇到发送程序出现问题，因此使用go结合开源的邮件库，写了一个smtp发邮件的程序（CentOS 6.4 X64位测试通过）<br>下载地址：<a href="http://dl.cactifans.org/tools/zabbix_mail.x86_64.tar.gz">zabbix_mail.x86_64.tar.gz</a><br>使用方法：<br>zabbix alertscripts 脚本路径为/usr/local/zabbix/alertscripts<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/zabbix/alertscripts</span><br><span class="line">wget http:<span class="comment">//dl.cactifans.org/tools/zabbix_mail.x86_64.tar.gz</span></span><br><span class="line">tar zxvf zabbix_mail<span class="class">.x86_64</span><span class="class">.tar</span><span class="class">.gz</span></span><br><span class="line">rm -r zabbix_mail<span class="class">.x86_64</span><span class="class">.tar</span><span class="class">.gz</span></span><br><span class="line">mv zabbix_mail/mail .</span><br><span class="line">chmod a+x mail</span><br><span class="line">mv zabbix_mail/cfg<span class="class">.json</span> /etc/</span><br></pre></td></tr></table></figure></p>
+          <p>使用zabbix邮件发送告警消息，老是遇到发送程序出现问题，因此使用go结合开源的邮件库，写了一个smtp发邮件的程序（CentOS 6.4 X64位测试通过）<br>下载地址：<a href="http://dl.cactifans.org/tools/zabbix_mail.x86_64.tar.gz">zabbix_mail.x86_64.tar.gz</a><br>使用方法：<br>zabbix alertscripts 脚本路径为/usr/local/zabbix/alertscripts<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/zabbix/alertscripts</div><div class="line">wget http://dl.cactifans.org/tools/zabbix_mail.x86_64.tar.gz</div><div class="line">tar zxvf zabbix_mail.x86_64.tar.gz</div><div class="line">rm -r zabbix_mail.x86_64.tar.gz</div><div class="line">mv zabbix_mail/mail .</div><div class="line">chmod a+x mail</div><div class="line">mv zabbix_mail/cfg.json /etc/</div></pre></td></tr></table></figure></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/01/21/send-mail-via-smtp/#more">
               阅读全文 &raquo;
@@ -337,11 +337,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/mail/"> #mail </a>
+            <a href="/tags/zabbix/"> #zabbix </a>
           
             <a href="/tags/smtp/"> #smtp </a>
           
-            <a href="/tags/zabbix/"> #zabbix </a>
+            <a href="/tags/mail/"> #mail </a>
           
         </div>
       
@@ -426,8 +426,8 @@
 </tr>
 </tbody>
 </table>
-<h4 id="监控客户端下载">监控客户端下载</h4><p>linux 32位系统<br><a href="http://dl.cactifans.org/tools/zabbix_redis.x86.tar.gz">zabbix_redis.x86.tar.gz</a><br>linux64位系统<br><a href="http://dl.cactifans.org/tools/zabbix_redis.x86_64.tar.gz">zabbix_redis.x86_64.tar.gz</a></p>
-<h4 id="配置方法">配置方法</h4><p>修改zabbix agentd配置文件(具体位置根据自身情况设置)，添加key<br>
+<h4 id="监控客户端下载"><a href="#监控客户端下载" class="headerlink" title="监控客户端下载"></a>监控客户端下载</h4><p>linux 32位系统<br><a href="http://dl.cactifans.org/tools/zabbix_redis.x86.tar.gz">zabbix_redis.x86.tar.gz</a><br>linux64位系统<br><a href="http://dl.cactifans.org/tools/zabbix_redis.x86_64.tar.gz">zabbix_redis.x86_64.tar.gz</a></p>
+<h4 id="配置方法"><a href="#配置方法" class="headerlink" title="配置方法"></a>配置方法</h4><p>修改zabbix agentd配置文件(具体位置根据自身情况设置)，添加key<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/11/21/monitoring-redis-with-zabbix/#more">
               阅读全文 &raquo;
@@ -441,9 +441,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/redis/"> #redis </a>
-          
             <a href="/tags/zabbix/"> #zabbix </a>
+          
+            <a href="/tags/redis/"> #redis </a>
           
         </div>
       
@@ -506,7 +506,7 @@
       
         
           <p>使用go语言写了一个采集mysql性能的小程序，通过SDK连接mysql数据库，采集数据库性能指标，同时采集远程数据库的性能，大家可试用一下，欢迎提出修改意见和建议</p>
-<h2 id="被监控端设置">被监控端设置</h2><p>监控下载：<br>Linux：<br><a href="http://dl.cactifans.org/tools/mymon_x86.tar.gz">mymon_x86.tar.gz</a><br><a href="http://dl.cactifans.org/tools/mymon_x64.tar.gz">mymon_x64.tar.gz</a><br>Windows:<br><a href="http://dl.cactifans.org/tools/mymon_windows_amd64.zip">mymon_windows_amd64.zip</a></p>
+<h2 id="被监控端设置"><a href="#被监控端设置" class="headerlink" title="被监控端设置"></a>被监控端设置</h2><p>监控下载：<br>Linux：<br><a href="http://dl.cactifans.org/tools/mymon_x86.tar.gz">mymon_x86.tar.gz</a><br><a href="http://dl.cactifans.org/tools/mymon_x64.tar.gz">mymon_x64.tar.gz</a><br>Windows:<br><a href="http://dl.cactifans.org/tools/mymon_windows_amd64.zip">mymon_windows_amd64.zip</a></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/07/29/monitoring-mysql-with-zabbix/#more">
               阅读全文 &raquo;
@@ -520,9 +520,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/mysql/"> #mysql </a>
-          
             <a href="/tags/zabbix/"> #zabbix </a>
+          
+            <a href="/tags/mysql/"> #mysql </a>
           
         </div>
       
@@ -585,7 +585,7 @@
       
         
           <p>zabbix提供了一个java gateway的应用去监控jmx（Java Management Extensions，即Java管理扩展）是一个为应用程序、设备、系统等植入管理功能的框架。JMX可以跨越一系列异构操作系统平台、系统体系结构和网络传输协议，灵活的开发无缝集成的系统、网络和服务管理应用。</p>
-<h2 id="一-_Zabbix_的JMX监控架构">一. Zabbix 的JMX监控架构</h2><p><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/07/01.jpg" alt="enter image description here"></p>
+<h2 id="一-Zabbix-的JMX监控架构"><a href="#一-Zabbix-的JMX监控架构" class="headerlink" title="一. Zabbix 的JMX监控架构"></a>一. Zabbix 的JMX监控架构</h2><p><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/07/01.jpg" alt="enter image description here"></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/07/24/monitoring-tomcat-with-zabbix/#more">
               阅读全文 &raquo;
@@ -599,11 +599,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/jmx/"> #jmx </a>
+            <a href="/tags/zabbix/"> #zabbix </a>
           
             <a href="/tags/tomat/"> #tomat </a>
           
-            <a href="/tags/zabbix/"> #zabbix </a>
+            <a href="/tags/jmx/"> #jmx </a>
           
         </div>
       
@@ -666,7 +666,7 @@
       
         
           <p>之前听人说使用飞信告警，由于最近飞信机器人协议更新，不能使用，因此采用了第三方的短信接口，实现了cacti的短信告警。</p>
-<h1 id="接口申请">接口申请</h1><p>市面上短信接口很多，都提供了标准的http接口，我试用了<a href="http://www.yunpian.com/">云片网络</a>的短信接口，申请好之后，要申请一个模版，不按照模版是不能发送的，另外还要添加你的主机IP地址到白名单里，不然不能发送成功，使用其他接口的请自行设置<br>
+<h1 id="接口申请"><a href="#接口申请" class="headerlink" title="接口申请"></a>接口申请</h1><p>市面上短信接口很多，都提供了标准的http接口，我试用了<a href="http://www.yunpian.com/">云片网络</a>的短信接口，申请好之后，要申请一个模版，不按照模版是不能发送的，另外还要添加你的主机IP地址到白名单里，不然不能发送成功，使用其他接口的请自行设置<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/05/31/setting-up-sms-with-cacti/#more">
               阅读全文 &raquo;
@@ -758,9 +758,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/oracle/"> #oracle </a>
-          
             <a href="/tags/zabbix/"> #zabbix </a>
+          
+            <a href="/tags/oracle/"> #oracle </a>
           
         </div>
       
@@ -865,8 +865,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/04/18/hello-world/">
-                Hello World
+              <a class="post-title-link" href="/2015/04/03/Monitor-MySQL-Zabbix/">
+                Monitor MySQL Zabbix
               </a>
             
           
@@ -875,7 +875,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2015-04-18
+          发表于 2015-04-03
         </span>
 
         
@@ -884,8 +884,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/04/18/hello-world/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/18/hello-world/"></span>
+            <a href="/2015/04/03/Monitor-MySQL-Zabbix/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/03/Monitor-MySQL-Zabbix/"></span>
             </a>
           </span>
           
@@ -900,10 +900,31 @@
 
       
         
-          <p>Welcome to <a href="http://hexo.io/">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+          <p>环境</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">操作系统</th>
+<th style="text-align:right">CentOS7</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Zabbix版本</td>
+<td style="text-align:right">2.4.3</td>
+</tr>
+<tr>
+<td style="text-align:left">MySql版本</td>
+<td style="text-align:right">5.6.23</td>
+</tr>
+<tr>
+<td style="text-align:left">zabbix_agent安装目录</td>
+<td style="text-align:right">/usr/local/zabbix/</td>
+</tr>
+</tbody>
+</table>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/04/18/hello-world/#more">
+            <a class="btn" href="/2015/04/03/Monitor-MySQL-Zabbix/#more">
               阅读全文 &raquo;
             </a>
           </div>
@@ -912,6 +933,14 @@
     </div>
 
     <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/zabbix/"> #zabbix </a>
+          
+            <a href="/tags/mysql/"> #mysql </a>
+          
+        </div>
       
 
       
