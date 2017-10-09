@@ -1,0 +1,609 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="zabbix,redis," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="使用go语言写了一个采集redis性能的小程序，通过redis的go客户端连接redis，采集数据库性能指标，大家可试用一下，欢迎提出修改意见和建议。zabbix环境    环境 版本     zabbix server版本 2.4.4   zabbix agent版本 2.4.4   centos 6.6 x86_64    监控客户端下载linux 32位系统zabbix_redis.x86.">
+<meta name="keywords" content="zabbix,redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="monitoring redis with zabbix">
+<meta property="og:url" content="http://canghai.me/2015/11/21/monitoring-redis-with-zabbix/index.html">
+<meta property="og:site_name" content="canghai">
+<meta property="og:description" content="使用go语言写了一个采集redis性能的小程序，通过redis的go客户端连接redis，采集数据库性能指标，大家可试用一下，欢迎提出修改意见和建议。zabbix环境    环境 版本     zabbix server版本 2.4.4   zabbix agent版本 2.4.4   centos 6.6 x86_64    监控客户端下载linux 32位系统zabbix_redis.x86.">
+<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/11/1.png">
+<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/11/2-1024x878.png">
+<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/11/3-1024x467.png">
+<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/11/4-1024x454.png">
+<meta property="og:updated_time" content="2015-11-22T13:16:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="monitoring redis with zabbix">
+<meta name="twitter:description" content="使用go语言写了一个采集redis性能的小程序，通过redis的go客户端连接redis，采集数据库性能指标，大家可试用一下，欢迎提出修改意见和建议。zabbix环境    环境 版本     zabbix server版本 2.4.4   zabbix agent版本 2.4.4   centos 6.6 x86_64    监控客户端下载linux 32位系统zabbix_redis.x86.">
+<meta name="twitter:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/11/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://canghai.me/2015/11/21/monitoring-redis-with-zabbix/"/>
+
+
+  <title> monitoring redis with zabbix | canghai </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">canghai</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                monitoring redis with zabbix
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-11-21T22:20:49+08:00" content="2015-11-21">
+              2015-11-21
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/11/21/monitoring-redis-with-zabbix/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/21/monitoring-redis-with-zabbix/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>使用go语言写了一个采集redis性能的小程序，通过redis的go客户端连接redis，采集数据库性能指标，大家可试用一下，欢迎提出修改意见和建议。<br>zabbix环境</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">环境</th>
+<th style="text-align:right">版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">zabbix server版本</td>
+<td style="text-align:right">2.4.4</td>
+</tr>
+<tr>
+<td style="text-align:left">zabbix agent版本</td>
+<td style="text-align:right">2.4.4</td>
+</tr>
+<tr>
+<td style="text-align:left">centos</td>
+<td style="text-align:right">6.6 x86_64</td>
+</tr>
+</tbody>
+</table>
+<h4 id="监控客户端下载"><a href="#监控客户端下载" class="headerlink" title="监控客户端下载"></a>监控客户端下载</h4><p>linux 32位系统<br><a href="http://dl.cactifans.org/tools/zabbix_redis.x86.tar.gz" target="_blank" rel="external">zabbix_redis.x86.tar.gz</a><br>linux64位系统<br><a href="http://dl.cactifans.org/tools/zabbix_redis.x86_64.tar.gz" target="_blank" rel="external">zabbix_redis.x86_64.tar.gz</a></p>
+<h4 id="配置方法"><a href="#配置方法" class="headerlink" title="配置方法"></a>配置方法</h4><p>修改zabbix agentd配置文件(具体位置根据自身情况设置)，添加key<br><a id="more"></a><br>添加如下内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#redis</div><div class="line">UserParameter=redis.port.discovery,sudo /usr/local/zabbix/bin/redis/redis_discovery</div><div class="line">UserParameter=redis[*],/usr/local/zabbix/bin/redis/redis $1 $2</div></pre></td></tr></table></figure></p>
+<p>添加好之后执行(zabbix-agent安装路径为/usr/local/zabbix/)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/zabbix/bin/</div><div class="line">wget http://dl.cactifans.org/tools/zabbix_redis.x86_64.tar.gz</div><div class="line">tar zxvf zabbix_redis.x86_64.tar.gz</div></pre></td></tr></table></figure></p>
+<p>添加之后，需要重启zabbix agent，由于需要sudo权限，因此需要修改sudoer文件,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">zabbix  ALL=NOPASSWD:/usr/local/zabbix/bin/redis/redis_discovery</div><div class="line">Defaults:zabbix  !requiretty</div></pre></td></tr></table></figure></p>
+<p>测试执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/zabbix/bin/redis/redis_discovery</div></pre></td></tr></table></figure></p>
+<p>执行之后,可显示本机所有redis端口（json格式）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;&quot;data&quot;:[&#123;&quot;&#123;#PORT&#125;&quot;:&quot;6379&quot;&#125;,&#123;&quot;&#123;#PORT&#125;&quot;:&quot;6380&quot;&#125;]&#125;</div></pre></td></tr></table></figure></p>
+<p>表示执行成功</p>
+<h4 id="server端操作"><a href="#server端操作" class="headerlink" title="server端操作"></a>server端操作</h4><p>导入redis监控模版: <a href="http://dl.cactifans.org/tools/zabbix_redis_templates.tar.gz" target="_blank" rel="external">zabbix_redis_templates.tar.gz</a><br>关联redis模版，即可查看数据<br>效果：<br>1<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/11/1.png" alt="1"><br>2<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/11/2-1024x878.png" alt="2"><br>3<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/11/3-1024x467.png" alt="3"><br>4<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/11/4-1024x454.png" alt="enter image description here"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/zabbix/" rel="tag">#zabbix</a>
+          
+            <a href="/tags/redis/" rel="tag">#redis</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/29/monitoring-mysql-with-zabbix/" rel="next" title="monitoring mysql with zabbix">
+                <i class="fa fa-chevron-left"></i> monitoring mysql with zabbix
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/01/21/send-mail-via-smtp/" rel="prev" title="send mail via smtp">
+                send mail via smtp <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/11/21/monitoring-redis-with-zabbix/"
+           data-title="monitoring redis with zabbix" data-url="http://canghai.me/2015/11/21/monitoring-redis-with-zabbix/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars1.githubusercontent.com/u/1450994?v=3&s=460"
+               alt="当代张思德" />
+          <p class="site-author-name" itemprop="name">当代张思德</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#监控客户端下载"><span class="nav-number">1.</span> <span class="nav-text">监控客户端下载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置方法"><span class="nav-number">2.</span> <span class="nav-text">配置方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#server端操作"><span class="nav-number">3.</span> <span class="nav-text">server端操作</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">当代张思德</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"canghai"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

@@ -1,0 +1,617 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="zabbix,tomat,jmx," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="zabbix提供了一个java gateway的应用去监控jmx（Java Management Extensions，即Java管理扩展）是一个为应用程序、设备、系统等植入管理功能的框架。JMX可以跨越一系列异构操作系统平台、系统体系结构和网络传输协议，灵活的开发无缝集成的系统、网络和服务管理应用。 一. Zabbix 的JMX监控架构">
+<meta name="keywords" content="zabbix,tomat,jmx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="monitoring tomcat with zabbix">
+<meta property="og:url" content="http://canghai.me/2015/07/24/monitoring-tomcat-with-zabbix/index.html">
+<meta property="og:site_name" content="canghai">
+<meta property="og:description" content="zabbix提供了一个java gateway的应用去监控jmx（Java Management Extensions，即Java管理扩展）是一个为应用程序、设备、系统等植入管理功能的框架。JMX可以跨越一系列异构操作系统平台、系统体系结构和网络传输协议，灵活的开发无缝集成的系统、网络和服务管理应用。 一. Zabbix 的JMX监控架构">
+<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/07/01.jpg">
+<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/07/02-1024x594.jpg">
+<meta property="og:updated_time" content="2016-10-24T07:28:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="monitoring tomcat with zabbix">
+<meta name="twitter:description" content="zabbix提供了一个java gateway的应用去监控jmx（Java Management Extensions，即Java管理扩展）是一个为应用程序、设备、系统等植入管理功能的框架。JMX可以跨越一系列异构操作系统平台、系统体系结构和网络传输协议，灵活的开发无缝集成的系统、网络和服务管理应用。 一. Zabbix 的JMX监控架构">
+<meta name="twitter:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/07/01.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://canghai.me/2015/07/24/monitoring-tomcat-with-zabbix/"/>
+
+
+  <title> monitoring tomcat with zabbix | canghai </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">canghai</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                monitoring tomcat with zabbix
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-07-24T10:21:36+08:00" content="2015-07-24">
+              2015-07-24
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/07/24/monitoring-tomcat-with-zabbix/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/24/monitoring-tomcat-with-zabbix/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>zabbix提供了一个java gateway的应用去监控jmx（Java Management Extensions，即Java管理扩展）是一个为应用程序、设备、系统等植入管理功能的框架。JMX可以跨越一系列异构操作系统平台、系统体系结构和网络传输协议，灵活的开发无缝集成的系统、网络和服务管理应用。</p>
+<h2 id="一-Zabbix-的JMX监控架构"><a href="#一-Zabbix-的JMX监控架构" class="headerlink" title="一. Zabbix 的JMX监控架构"></a>一. Zabbix 的JMX监控架构</h2><p><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/07/01.jpg" alt="enter image description here"></p>
+<a id="more"></a>
+<h2 id="二-安装Java-gateway［zabbix服务端操作］"><a href="#二-安装Java-gateway［zabbix服务端操作］" class="headerlink" title="二.安装Java gateway［zabbix服务端操作］"></a>二.安装Java gateway［zabbix服务端操作］</h2><h3 id="1-安装jdk"><a href="#1-安装jdk" class="headerlink" title="1.安装jdk"></a>1.安装jdk</h3><p>首先要安装jdk，我的系统位redhat 6.4 x64位，我使用rpm包安装jdk，从<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html下载最新的jdk，rpm包（我使用7u79版本，最新为8）并上传到zabbix" target="_blank" rel="external">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html下载最新的jdk，rpm包（我使用7u79版本，最新为8）并上传到zabbix</a> server<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm －ivh jdk-7u79-linux-x64.rpm</div></pre></td></tr></table></figure></p>
+<p>安装成功之后添加系统环境变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi /etc/profile</div></pre></td></tr></table></figure></p>
+<p>添加如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">JAVA_HOME=/usr/java/jdk1.7.0_79</div><div class="line">JRE_HOME=/usr/java/jdk1.7.0_79/jre</div><div class="line">PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin</div><div class="line">CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib</div><div class="line">export JAVA_HOME JRE_HOME PATH CLASSPATH</div></pre></td></tr></table></figure></p>
+<p>使配置生效<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source /etc/profile</div></pre></td></tr></table></figure></p>
+<p>测试，输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -version</div></pre></td></tr></table></figure></p>
+<p>如果显示如下信息表示jdk安装完成<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">java version &quot;1.7.0_79&quot;</div><div class="line">Java(TM) SE Runtime Environment (build 1.7.0_79-b15)</div><div class="line">Java HotSpot(TM) 64-Bit Server VM (build 24.79-b02, mixed mode)</div><div class="line">You have mail in /var/spool/mail/root</div></pre></td></tr></table></figure></p>
+<h3 id="2-安装Java-gateway"><a href="#2-安装Java-gateway" class="headerlink" title="2.安装Java gateway"></a>2.安装Java gateway</h3><p>可使用rpm进行安装，我使用源码安装，大家可在安装zabbix时启用–enable-java参数即可安装zabbix java gateway，如果第一次没有加载，可重新加载编译安装，我使用以下参数安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./configure --prefix=/usr/local/zabbix --enable-server --enable-agent --enable-java --with-mysql --enable-ipv6 --with-net-snmp --with-libcurl --with-libxml2</div></pre></td></tr></table></figure></p>
+<p>以上参数可安装zabbix server，java gateway，snmp，zabbix agent<br>，建议大家使用。</p>
+<h3 id="3-配置Java-gateway"><a href="#3-配置Java-gateway" class="headerlink" title="3.配置Java gateway"></a>3.配置Java gateway</h3><p>安装好之后可在/usr/local/zabbix/sbin/目录下看到zabbix_java目录（具体根据实际安装情况）<br>编辑配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">vi /usr/local/zabbix/sbin/zabbix_java/settings.sh </div><div class="line">LISTEN_IP=&quot;127.0.0.1&quot;</div><div class="line">LISTEN_PORT=10052</div><div class="line">PID_FILE=&quot;/tmp/zabbix_java.pid&quot;</div><div class="line">START_POLLERS=5</div></pre></td></tr></table></figure></p>
+<p>修改zabbix server配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">vi /usr/local/zabbix/etc/zabbix_server.conf</div><div class="line">JavaGateway=127.0.0.1</div><div class="line">JavaGatewayPort=10052</div><div class="line">StartJavaPollers=5</div></pre></td></tr></table></figure></p>
+<h3 id="4-启动测试Java-gateway"><a href="#4-启动测试Java-gateway" class="headerlink" title="4.启动测试Java gateway"></a>4.启动测试Java gateway</h3><p>启动Java gateway<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/zabbix/sbin/zabbix_java/startup.sh</div></pre></td></tr></table></figure></p>
+<p>可使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -lntp | grep 10052</div></pre></td></tr></table></figure></p>
+<p>查看是否已经监听10052端口，如果已监听，表示启动成功，如果没有，可通过zabbix_server日志查看解决.</p>
+<h3 id="5-添加catalina-jmx-remote-jar"><a href="#5-添加catalina-jmx-remote-jar" class="headerlink" title="5.添加catalina-jmx-remote.jar"></a>5.添加catalina-jmx-remote.jar</h3><p>添加catalina-jmx-remote.jar到zabbix java gateway的lib目录下，catalina-jmx-remote.jar包可在<a href="http://archive.apache.org/dist/tomcat/下，在各版本目录的bin/extras/子目录下" target="_blank" rel="external">http://archive.apache.org/dist/tomcat/下，在各版本目录的bin/extras/子目录下</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/zabbix/sbin/zabbix_java/lib/</div><div class="line">wget http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.61/bin/extras/catalina-jmx-remote.jar</div></pre></td></tr></table></figure></p>
+<p>并重启zabbix和java gateway<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">/usr/local/zabbix/sbin/zabbix_java/shutdown.sh</div><div class="line">/usr/local/zabbix/sbin/zabbix_java/startup.sh</div><div class="line">/etc/init.d/zabbix-server restart</div></pre></td></tr></table></figure></p>
+<h3 id="6-下载测试工具cmdline-jmxclient-0-10-3-jar"><a href="#6-下载测试工具cmdline-jmxclient-0-10-3-jar" class="headerlink" title="6.下载测试工具cmdline-jmxclient-0.10.3.jar"></a>6.下载测试工具cmdline-jmxclient-0.10.3.jar</h3><p>cmdline-jmxclient-0.10.3.jar为一个测试工具，可用来测试jmx是否配置正确，下载cmdline-jmxclient-0.10.3.jar(下载到任意目录)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://crawler.archive.org/cmdline-jmxclient/cmdline-jmxclient-0.10.3.jar</div></pre></td></tr></table></figure></p>
+<h2 id="三-被监控tomcat-配置［被监控tomcat操作］"><a href="#三-被监控tomcat-配置［被监控tomcat操作］" class="headerlink" title="三.被监控tomcat 配置［被监控tomcat操作］"></a>三.被监控tomcat 配置［被监控tomcat操作］</h2><h3 id="1-添加catalina-jmx-remote-jar"><a href="#1-添加catalina-jmx-remote-jar" class="headerlink" title="1.添加catalina-jmx-remote.jar"></a>1.添加catalina-jmx-remote.jar</h3><p>添加catalina-jmx-remote.jar文件到tomcat的lib目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /opt/apache-tomcat/lib/</div><div class="line">wget http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.61/bin/extras/catalina-jmx-remote.jar</div></pre></td></tr></table></figure></p>
+<h3 id="2-修改setenv-sh"><a href="#2-修改setenv-sh" class="headerlink" title="2.修改setenv.sh"></a>2.修改setenv.sh</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi /opt/apache-tomcat/bin/setenv.sh</div></pre></td></tr></table></figure>
+<p>添加如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">CATALINA_OPTS=&quot;$&#123;CATALINA_OPTS&#125; -Djava.rmi.server.hostname=192.168.7.186&quot;</div><div class="line">CATALINA_OPTS=&quot;$&#123;CATALINA_OPTS&#125; -Djavax.management.builder.initial=&quot;</div><div class="line">CATALINA_OPTS=&quot;$&#123;CATALINA_OPTS&#125; -Dcom.sun.management.jmxremote=true&quot;</div><div class="line">CATALINA_OPTS=&quot;$&#123;CATALINA_OPTS&#125; -Dcom.sun.management.jmxremote.ssl=false&quot;</div><div class="line">CATALINA_OPTS=&quot;$&#123;CATALINA_OPTS&#125; -Dcom.sun.management.jmxremote.authenticate=false&quot;</div></pre></td></tr></table></figure></p>
+<p>注意：hostname位机器ip地址，即被监控机器对外服务地址</p>
+<h3 id="3-修改server-xml"><a href="#3-修改server-xml" class="headerlink" title="3.修改server.xml"></a>3.修改server.xml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi /opt/apache-tomcat/conf/server.xml</div></pre></td></tr></table></figure>
+<p>添加如下，注意添加位置在<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Listener className=&quot;org.apache.catalina.core.ThreadLocalLeakPreventionListener&quot; /&gt;</div></pre></td></tr></table></figure></p>
+<p>之后添加如下代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Listener className=&quot;org.apache.catalina.mbeans.JmxRemoteLifecycleListener&quot; rmiRegistryPortPlatform=&quot;12345&quot; rmiServerPortPlatform=&quot;12346&quot; /&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="4-添加tomcat应用自动发现脚本"><a href="#4-添加tomcat应用自动发现脚本" class="headerlink" title="4.添加tomcat应用自动发现脚本"></a>4.添加tomcat应用自动发现脚本</h3><p>由于默认的jmx不能自动发现部署的新应用，因此需要添加一个脚本自动发现，并且利用zabbix的LLD（Low-level discovery）来发现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">mkdir /opt/tomcat/</div><div class="line">mkdir /tmp/tomcat/</div><div class="line">chmod -R 777 /tmp/tomcat/</div><div class="line">cd /opt/tomcat/</div><div class="line">wget http://dl.cactifans.org/tools/context.sh</div><div class="line">wget http://dl.cactifans.org/tools/cmdline-jmxclient-0.10.3.jar</div><div class="line">chmod a+x /opt/tomcat/context.sh</div><div class="line">echo &quot;*/1  *  *  *  * root /opt/tomcat/context.sh&quot; &gt;&gt;/etc/crontab</div></pre></td></tr></table></figure></p>
+<p>context.sh脚本内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">java -jar /opt/tomcat/cmdline-jmxclient-0.10.3.jar - 192.168.7.186:12345 Catalina:type=Manager,*| awk -F &quot;,&quot; &apos;&#123; print $1 &#125;&apos;|awk -F: &apos;&#123; print $2 &#125;&apos;&gt;/tmp/tomcat/context.csv</div></pre></td></tr></table></figure></p>
+<p>此脚本在被监控端添加，注意要把ip改成本机的服务IP地址<br>添加一个应用自动发现的程序，我放到zabbix agent的bin目录下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/zabbix/bin/</div><div class="line">wget http://dl.cactifans.org/tools/context</div><div class="line">chmod a+x /usr/local/zabbix/bin/context</div></pre></td></tr></table></figure></p>
+<p>修改zabbix agentd设置，添加应用自动发现的key<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">vi /usr/local/zabbix/etc/zabbix_agentd.conf</div><div class="line">#tomcat</div><div class="line">UserParameter=tomcat.context.discovery,/usr/local/zabbix/bin／context</div></pre></td></tr></table></figure></p>
+<p>重启tomcat<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/opt/apache-tomcat/bin/shutdown.sh</div><div class="line">/opt/apache-tomcat/bin/startup.sh</div></pre></td></tr></table></figure></p>
+<p>重启zabbix agent<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service zabbix-agent restart</div></pre></td></tr></table></figure></p>
+<p>注：防火墙需要开放12345，12346端口</p>
+<h2 id="四-测试并添加"><a href="#四-测试并添加" class="headerlink" title="四.测试并添加"></a>四.测试并添加</h2><h3 id="1-测试"><a href="#1-测试" class="headerlink" title="1.测试"></a>1.测试</h3><p>在zabbix server上执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -jar /root/cmdline-jmxclient-0.10.3.jar - 192.168.7.186:12345 java.lang:type=Memory NonHeapMemoryUsage</div></pre></td></tr></table></figure></p>
+<p>如果有如下回显表示jmx配置正确，如不正确，请检查配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">07/23/2015 23:25:29 +0800 org.archive.jmx.Client NonHeapMemoryUsage: </div><div class="line">committed: 271646720</div><div class="line">init: 270991360</div><div class="line">max: 587202560</div><div class="line">used: 38207984</div></pre></td></tr></table></figure></p>
+<p>在zabbix server上用zabbix_get执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">zabbix_get -s 192.168.7.153 -k tomcat.context.discovery</div></pre></td></tr></table></figure></p>
+<p>如果能回显如下数据表示获取成功<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"data"</span>: [</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"&#123;#CONTEXT&#125;"</span>: <span class="string">"context=/manager"</span></div><div class="line">        &#125;, </div><div class="line">        &#123;</div><div class="line">            <span class="attr">"&#123;#CONTEXT&#125;"</span>: <span class="string">"context=/omai"</span></div><div class="line">        &#125;, </div><div class="line">        &#123;</div><div class="line">            <span class="attr">"&#123;#CONTEXT&#125;"</span>: <span class="string">"context=/examples"</span></div><div class="line">        &#125;, </div><div class="line">        &#123;</div><div class="line">            <span class="attr">"&#123;#CONTEXT&#125;"</span>: <span class="string">"context=/docs"</span></div><div class="line">        &#125;, </div><div class="line">        &#123;</div><div class="line">            <span class="attr">"&#123;#CONTEXT&#125;"</span>: <span class="string">"context=/"</span></div><div class="line">        &#125;, </div><div class="line">        &#123;</div><div class="line">            <span class="attr">"&#123;#CONTEXT&#125;"</span>: <span class="string">"context=/host-manager"</span></div><div class="line">        &#125;</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="2-添加模版"><a href="#2-添加模版" class="headerlink" title="2.添加模版"></a>2.添加模版</h3><p>模版我已经做好了大家可直接倒入使用<br>模版下载：<a href="http://dl.cactifans.org/tools/zabbix_tomcat_templates.tar.gz" target="_blank" rel="external">zabbix_tomcat_templates.xml</a>（2016年10月24日新地址已更新！）<br>导入到zabbix，并关联到主机</p>
+<h2 id="五-最终效果"><a href="#五-最终效果" class="headerlink" title="五.最终效果"></a>五.最终效果</h2><p><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/07/02-1024x594.jpg" alt="enter image description here"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/zabbix/" rel="tag">#zabbix</a>
+          
+            <a href="/tags/tomat/" rel="tag">#tomat</a>
+          
+            <a href="/tags/jmx/" rel="tag">#jmx</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/05/31/setting-up-sms-with-cacti/" rel="next" title="setting up sms with cacti">
+                <i class="fa fa-chevron-left"></i> setting up sms with cacti
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/07/29/monitoring-mysql-with-zabbix/" rel="prev" title="monitoring mysql with zabbix">
+                monitoring mysql with zabbix <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/07/24/monitoring-tomcat-with-zabbix/"
+           data-title="monitoring tomcat with zabbix" data-url="http://canghai.me/2015/07/24/monitoring-tomcat-with-zabbix/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars1.githubusercontent.com/u/1450994?v=3&s=460"
+               alt="当代张思德" />
+          <p class="site-author-name" itemprop="name">当代张思德</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-Zabbix-的JMX监控架构"><span class="nav-number">1.</span> <span class="nav-text">一. Zabbix 的JMX监控架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-安装Java-gateway［zabbix服务端操作］"><span class="nav-number">2.</span> <span class="nav-text">二.安装Java gateway［zabbix服务端操作］</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安装jdk"><span class="nav-number">2.1.</span> <span class="nav-text">1.安装jdk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安装Java-gateway"><span class="nav-number">2.2.</span> <span class="nav-text">2.安装Java gateway</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-配置Java-gateway"><span class="nav-number">2.3.</span> <span class="nav-text">3.配置Java gateway</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-启动测试Java-gateway"><span class="nav-number">2.4.</span> <span class="nav-text">4.启动测试Java gateway</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-添加catalina-jmx-remote-jar"><span class="nav-number">2.5.</span> <span class="nav-text">5.添加catalina-jmx-remote.jar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-下载测试工具cmdline-jmxclient-0-10-3-jar"><span class="nav-number">2.6.</span> <span class="nav-text">6.下载测试工具cmdline-jmxclient-0.10.3.jar</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-被监控tomcat-配置［被监控tomcat操作］"><span class="nav-number">3.</span> <span class="nav-text">三.被监控tomcat 配置［被监控tomcat操作］</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-添加catalina-jmx-remote-jar"><span class="nav-number">3.1.</span> <span class="nav-text">1.添加catalina-jmx-remote.jar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-修改setenv-sh"><span class="nav-number">3.2.</span> <span class="nav-text">2.修改setenv.sh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-修改server-xml"><span class="nav-number">3.3.</span> <span class="nav-text">3.修改server.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-添加tomcat应用自动发现脚本"><span class="nav-number">3.4.</span> <span class="nav-text">4.添加tomcat应用自动发现脚本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-测试并添加"><span class="nav-number">4.</span> <span class="nav-text">四.测试并添加</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-测试"><span class="nav-number">4.1.</span> <span class="nav-text">1.测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-添加模版"><span class="nav-number">4.2.</span> <span class="nav-text">2.添加模版</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五-最终效果"><span class="nav-number">5.</span> <span class="nav-text">五.最终效果</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">当代张思德</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"canghai"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
