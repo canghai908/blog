@@ -58,22 +58,22 @@
 
 
 
-<meta name="description" content="以前使用cadvisor监控Docker容器状态,最近看到可以使用Zabbix Module的方式，通过部署一个zabbix agent的docker容器来监控宿主机器和宿主机器上docker的状态。原文可在https://github.com/monitoringartist/zabbix-docker-monitoring处查看，我只是搬运工! 1.客户端配置在需要监控的宿主机器上运行运行Ag">
+<meta name="description" content="以前使用cadvisor监控Docker容器状态,最近看到可以使用Zabbix Module的方式，通过部署一个zabbix agent的docker容器来监控宿主机器和宿主机器上docker的状态。原文:https://github.com/monitoringartist/zabbix-docker-monitoring我只是搬运工! 1.客户端配置在需要监控的宿主机器上运行运行Agent容器">
 <meta name="keywords" content="zabbix,docker,容器监控">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Zabbix监控docker">
 <meta property="og:url" content="http://canghai.me/2017/12/10/Zabbix-Docker-Monitoring/index.html">
 <meta property="og:site_name" content="canghai">
-<meta property="og:description" content="以前使用cadvisor监控Docker容器状态,最近看到可以使用Zabbix Module的方式，通过部署一个zabbix agent的docker容器来监控宿主机器和宿主机器上docker的状态。原文可在https://github.com/monitoringartist/zabbix-docker-monitoring处查看，我只是搬运工! 1.客户端配置在需要监控的宿主机器上运行运行Ag">
+<meta property="og:description" content="以前使用cadvisor监控Docker容器状态,最近看到可以使用Zabbix Module的方式，通过部署一个zabbix agent的docker容器来监控宿主机器和宿主机器上docker的状态。原文:https://github.com/monitoringartist/zabbix-docker-monitoring我只是搬运工! 1.客户端配置在需要监控的宿主机器上运行运行Agent容器">
 <meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2017/12/035A26BD-2F06-49B7-948B-CE6FE839CA3D.jpg">
 <meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2017/12/AFCEB933-09F0-4BE4-B0AF-3720D2A96772.jpg">
 <meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2017/12/FC1EFAFD-D375-4B6D-85EC-C42215B603E7.jpg">
 <meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2017/12/91C130BE-68E5-4203-91AE-C57AB6065FC8.jpg">
 <meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/01/Screenshot_2016-01-27-13-23-04-158_%E5%BE%AE%E4%BF%A1.png?imageView2/1/w/300/h/300">
-<meta property="og:updated_time" content="2017-12-11T08:28:23.177Z">
+<meta property="og:updated_time" content="2017-12-13T00:50:24.950Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix监控docker">
-<meta name="twitter:description" content="以前使用cadvisor监控Docker容器状态,最近看到可以使用Zabbix Module的方式，通过部署一个zabbix agent的docker容器来监控宿主机器和宿主机器上docker的状态。原文可在https://github.com/monitoringartist/zabbix-docker-monitoring处查看，我只是搬运工! 1.客户端配置在需要监控的宿主机器上运行运行Ag">
+<meta name="twitter:description" content="以前使用cadvisor监控Docker容器状态,最近看到可以使用Zabbix Module的方式，通过部署一个zabbix agent的docker容器来监控宿主机器和宿主机器上docker的状态。原文:https://github.com/monitoringartist/zabbix-docker-monitoring我只是搬运工! 1.客户端配置在需要监控的宿主机器上运行运行Agent容器">
 <meta name="twitter:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2017/12/035A26BD-2F06-49B7-948B-CE6FE839CA3D.jpg">
 
 
@@ -267,7 +267,7 @@
       
 
       
-        <p>以前使用cadvisor监控Docker容器状态,最近看到可以使用Zabbix Module的方式，通过部署一个zabbix agent的docker容器来监控宿主机器和宿主机器上docker的状态。原文可在<a href="https://github.com/monitoringartist/zabbix-docker-monitoring处查看，我只是搬运工!" target="_blank" rel="external">https://github.com/monitoringartist/zabbix-docker-monitoring处查看，我只是搬运工!</a></p>
+        <p>以前使用cadvisor监控Docker容器状态,最近看到可以使用Zabbix Module的方式，通过部署一个zabbix agent的docker容器来监控宿主机器和宿主机器上docker的状态。原文:<a href="https://github.com/monitoringartist/zabbix-docker-monitoring" target="_blank" rel="external">https://github.com/monitoringartist/zabbix-docker-monitoring</a><br>我只是搬运工!</p>
 <h3 id="1-客户端配置"><a href="#1-客户端配置" class="headerlink" title="1.客户端配置"></a>1.客户端配置</h3><p>在需要监控的宿主机器上运行运行Agent容器<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">docker run \</div><div class="line">  --name=dockbix-agent-xxl \</div><div class="line">  --net=host \</div><div class="line">  --privileged \</div><div class="line">  -v /:/rootfs \</div><div class="line">  -v /var/run:/var/run \</div><div class="line">  --restart unless-stopped \</div><div class="line">  -e <span class="string">"ZA_Server=192.168.0.252"</span> \</div><div class="line">  -e <span class="string">"ZA_ServerActive=192.168.0.252"</span> \</div><div class="line">  -d hub.c.163.com/canghai809/dockbix-agent-xxl-limited:latest</div></pre></td></tr></table></figure></p>
 <p>192.168.0.252为已经安装好的zabbix server的ip地址。具体根据自身情况修改，最好填写IP地址。由于Docker官方的hub在国内下载较慢，我已同步到网易蜂巢镜像，提供多个版本主要为Zabbix Agent版本区别和Dockbix版本区别。<br>Agent 镜像（latest版本为Zabbix Agent 3.4版本+Dockbix V3版本，推荐使用）<br><a id="more"></a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">docker pull hub.c.163.com/canghai809/dockbix-agent-xxl-limited:latest</div><div class="line">docker pull hub.c.163.com/canghai809/dockbix-agent-xxl-limited:3.2-2</div><div class="line">docker pull hub.c.163.com/canghai809/dockbix-agent-xxl-limited:3.2-1</div></pre></td></tr></table></figure></p>
 <p>运行之后，使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker logs -f xxxxx</div></pre></td></tr></table></figure></p>
