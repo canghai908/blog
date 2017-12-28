@@ -212,6 +212,110 @@
             
               
                 
+                <a class="post-title-link" href="/2017/12/29/zabbix-3-4新功能介绍1——Preprocessing/" itemprop="url">
+                  zabbix-3.4新功能介绍1——Preprocessing
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-12-29T01:14:50+08:00" content="2017-12-29">
+              2017-12-29
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/12/29/zabbix-3-4新功能介绍1——Preprocessing/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/12/29/zabbix-3-4新功能介绍1——Preprocessing/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>随着3.4版本的发布,出现了一大波新功能，后续会陆续推出3.4版本新功能介绍及实践.本次说一下3.4新增的Preprocessing这个功能.（3.4中文翻译好像有点问题把Preprocessing翻译为进程，翻译有点错误）Preprocessing为预处理，预加工（google翻译^_^）使用这个功能可以对item收到的数据行处理，处理之后再存入数据库或展示出来.<br>下面结合一个监控nginx状态的实际应用来介绍一下item预处理功能及Dependent item的使用.</p>
+<h2 id="Nginx-status配置"><a href="#Nginx-status配置" class="headerlink" title="Nginx status配置"></a>Nginx status配置</h2><p>nginx作为一款强大的web服务器已被广泛使用，结合nginx-module-vts（<a href="https://github.com/vozlt/nginx-module-vts）" target="_blank" rel="external">https://github.com/vozlt/nginx-module-vts）</a>   插件可以将nginx的状态通过http方式输出，可使用这种方式来监控nginx的运行状态，配置好插件之后,访问插件页面可以看到如下状态页面<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2017/12/913CF9A8-5A4F-45BF-9F3D-78CBF37887E3.jpg" alt="status"><br>点击下面的json可以输出为标准的json格式<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/12/29/zabbix-3-4新功能介绍1——Preprocessing/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/12/10/Zabbix-Docker-Monitoring/" itemprop="url">
                   Zabbix监控docker
                 </a>
@@ -1151,109 +1255,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/04/18/Configure-Zabbix-to-send-notifications-throught-weixin/" itemprop="url">
-                  zabbix通过微信告警
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-04-18T14:20:14+08:00" content="2015-04-18">
-              2015-04-18
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/04/18/Configure-Zabbix-to-send-notifications-throught-weixin/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/18/Configure-Zabbix-to-send-notifications-throught-weixin/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>zabbix可支持短信，E-mail，脚本等告警方式。之前做过一个cacti通过微信告警的感觉还不错，比邮件好点，因为微信经常开，而邮件却很少看，所以做了一个zabbix微信告警的小工具。<br>微信的告警是通过<a href="https://mp.weixin.qq.com/cgi-bin/loginpage?t=wxm2-login&amp;lang=zh_CN" target="_blank" rel="external">微信公众账号</a>发送客服消息告警的，后来发现一个问题，就是用户48小时之内不与公众账号交互，公众账号就不能向用户发送消息了。所以后来就放弃了，最近看到了<a href="https://qy.weixin.qq.com/" target="_blank" rel="external">微信企业号</a>，感觉比之前的公众账号功能更多了，而且可以分应用了。所以就用企业号做了一个简单的zabbix告警小工具<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/04/18/Configure-Zabbix-to-send-notifications-throught-weixin/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1299,7 +1300,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1309,7 +1310,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
