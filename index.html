@@ -263,7 +263,7 @@
       
         
           <p>随着3.4版本的发布,出现了一大波新功能，后续会陆续推出3.4版本新功能介绍及实践.本次说一下3.4新增的Preprocessing这个功能.（3.4中文翻译好像有点问题把Preprocessing翻译为进程，翻译有点错误）Preprocessing为预处理，预加工（google翻译^_^）使用这个功能可以对item收到的数据行处理，处理之后再存入数据库或展示出来.<br>下面结合一个监控nginx状态的实际应用来介绍一下item预处理功能及Dependent item的使用.</p>
-<h2 id="Nginx-status配置"><a href="#Nginx-status配置" class="headerlink" title="Nginx status配置"></a>Nginx status配置</h2><p>nginx作为一款强大的web服务器已被广泛使用，结合nginx-module-vts（<a href="https://github.com/vozlt/nginx-module-vts）" target="_blank" rel="external">https://github.com/vozlt/nginx-module-vts）</a>   插件可以将nginx的状态通过http方式输出，可使用这种方式来监控nginx的运行状态，配置好插件之后,访问插件页面可以看到如下状态页面<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2017/12/913CF9A8-5A4F-45BF-9F3D-78CBF37887E3.jpg" alt="status"><br>点击下面的json可以输出为标准的json格式<br>
+<h2 id="Nginx-status配置"><a href="#Nginx-status配置" class="headerlink" title="Nginx status配置"></a>Nginx status配置</h2><p>nginx作为一款强大的web服务器已被广泛使用，结合nginx-module-vts（<a href="https://github.com/vozlt/nginx-module-vts）" target="_blank" rel="external">https://github.com/vozlt/nginx-module-vts）</a>   插件可以将nginx的状态通过http方式输出，可使用这种方式来监控nginx的运行状态，配置好插件之后,访问插件页面可以看到如下状态页面<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2017/12/29/zabbix-3-4新功能介绍1——Preprocessing/#more" rel="contents">
               阅读全文 &raquo;
