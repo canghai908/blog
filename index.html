@@ -212,6 +212,235 @@
             
               
                 
+                <a class="post-title-link" href="/2018/01/20/zabbix监控redis/" itemprop="url">
+                  zabbix监控redis
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-01-20T16:16:20+08:00" content="2018-01-20">
+              2018-01-20
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/01/20/zabbix监控redis/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/01/20/zabbix监控redis/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>使用go语言写了一个采集redis性能的小程序，通过redis的go客户端连接redis，采集数据库性能指标，大家可试用一下，欢迎提出修改意见和建议。<br>zabbix环境</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">环境</th>
+<th style="text-align:right">版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">zabbix server版本</td>
+<td style="text-align:right">2.4.4</td>
+</tr>
+<tr>
+<td style="text-align:left">zabbix agent版本</td>
+<td style="text-align:right">2.4.4</td>
+</tr>
+<tr>
+<td style="text-align:left">centos</td>
+<td style="text-align:right">6.6 x86_64</td>
+</tr>
+</tbody>
+</table>
+<h4 id="监控客户端下载"><a href="#监控客户端下载" class="headerlink" title="监控客户端下载"></a>监控客户端下载</h4>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/01/20/zabbix监控redis/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/01/20/Cacti95计费配置/" itemprop="url">
+                  Cacti95计费配置
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-01-20T16:12:06+08:00" content="2018-01-20">
+              2018-01-20
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/01/20/Cacti95计费配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/01/20/Cacti95计费配置/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="一-95计费"><a href="#一-95计费" class="headerlink" title="一.95计费"></a>一.95计费</h2><p>　95计费（95th Percentile charging）95计费是把一个结算时间里的流量（通常为一个月），按每5分钟统计一次，取流量最高值做一个点。这样一个月会得到很多流量峰值点。然后把图中高流量的5%的点去掉，按照剩下（100-5）% 来计算费用。<br>如果是每月结一次款。每5分钟取一个流量最高点，1个小时12个点，1天12×24个点，一个月按30天算12×24×30=8640个点，然后把数值最高的5%的点去掉，剩下的最高带宽就是95计费的计费值了。需要计费的点数是8640-432=8208个点。其中有432个点不用计费，就是异常高流量的时间为432点×5分钟/60分钟/小时=36个小时，即每月不超过36小时的异常大带宽（流量），不影响本月的计费。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/01/20/Cacti95计费配置/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/12/29/zabbix-3-4新功能介绍1——Preprocessing/" itemprop="url">
                   zabbix-3.4新功能介绍1——Preprocessing
                 </a>
@@ -1048,213 +1277,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/05/31/setting-up-sms-with-cacti/" itemprop="url">
-                  setting up sms with cacti
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-05-31T22:49:32+08:00" content="2015-05-31">
-              2015-05-31
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/05/31/setting-up-sms-with-cacti/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/31/setting-up-sms-with-cacti/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>之前听人说使用飞信告警，由于最近飞信机器人协议更新，不能使用，因此采用了第三方的短信接口，实现了cacti的短信告警。</p>
-<h1 id="接口申请"><a href="#接口申请" class="headerlink" title="接口申请"></a>接口申请</h1><p>市面上短信接口很多，都提供了标准的http接口，我试用了<a href="http://www.yunpian.com/" target="_blank" rel="external">云片网络</a>的短信接口，申请好之后，要申请一个模版，不按照模版是不能发送的，另外还要添加你的主机IP地址到白名单里，不然不能发送成功，使用其他接口的请自行设置<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/31/setting-up-sms-with-cacti/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/05/25/monitoring-oracle-with-zabbix/" itemprop="url">
-                  monitoring oracle with zabbix
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-05-25T21:49:06+08:00" content="2015-05-25">
-              2015-05-25
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/05/25/monitoring-oracle-with-zabbix/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/25/monitoring-oracle-with-zabbix/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>使用zabbix监控oracle数据库之前用过<a href="http://www.smartmarmot.com/product/orabbix/" target="_blank" rel="external">Orabbix</a>和<a href="https://github.com/bicofino/Pyora" target="_blank" rel="external">Pyora</a>，都不太理想，主要问题有以下几点<br>1.orabbix需要数据库安装java环境，另外SQL脚本哪里，本人是在不会配置，调整起来比较麻烦，因为不熟悉<br>2.Pyora需要在服务端指定链接的数据库用户名等信息，有点不安全，另外一个python的cx-Oracle依赖包真心难安装，头疼！<br>于是打算自己用简单的方法做一个！<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/25/monitoring-oracle-with-zabbix/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1300,7 +1322,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

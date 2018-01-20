@@ -42,7 +42,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="zabbix,smtp,mail," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -58,21 +58,35 @@
 
 
 
-<meta name="description" content="使用zabbix邮件发送告警消息，老是遇到发送程序出现问题，因此使用go结合开源的邮件库，写了一个smtp发邮件的程序（CentOS 6.4 X64位测试通过）下载地址：zabbix_mail.x86_64.tar.gz使用方法：zabbix alertscripts 脚本路径为/usr/local/zabbix/alertscripts1234567cd /usr/local/zabbix/al">
-<meta name="keywords" content="zabbix,smtp,mail">
+<meta name="description" content="一.95计费　95计费（95th Percentile charging）95计费是把一个结算时间里的流量（通常为一个月），按每5分钟统计一次，取流量最高值做一个点。这样一个月会得到很多流量峰值点。然后把图中高流量的5%的点去掉，按照剩下（100-5）% 来计算费用。如果是每月结一次款。每5分钟取一个流量最高点，1个小时12个点，1天12×24个点，一个月按30天算12×24×30=8640个点，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="send mail via smtp">
-<meta property="og:url" content="http://canghai.me/2016/01/21/send-mail-via-smtp/index.html">
+<meta property="og:title" content="Cacti95计费配置">
+<meta property="og:url" content="http://canghai.me/2018/01/20/Cacti95计费配置/index.html">
 <meta property="og:site_name" content="canghai">
-<meta property="og:description" content="使用zabbix邮件发送告警消息，老是遇到发送程序出现问题，因此使用go结合开源的邮件库，写了一个smtp发邮件的程序（CentOS 6.4 X64位测试通过）下载地址：zabbix_mail.x86_64.tar.gz使用方法：zabbix alertscripts 脚本路径为/usr/local/zabbix/alertscripts1234567cd /usr/local/zabbix/al">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/01/F29BC2EA-E01F-41FE-AF61-22240D77DB1A.jpg">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/01/5207E7CC-44CB-44F2-9145-D2B994E6956C.jpg">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/01/33801C4B-682A-4A91-9A62-DCF39DC95555.jpg">
-<meta property="og:updated_time" content="2017-12-06T00:59:41.851Z">
+<meta property="og:description" content="一.95计费　95计费（95th Percentile charging）95计费是把一个结算时间里的流量（通常为一个月），按每5分钟统计一次，取流量最高值做一个点。这样一个月会得到很多流量峰值点。然后把图中高流量的5%的点去掉，按照剩下（100-5）% 来计算费用。如果是每月结一次款。每5分钟取一个流量最高点，1个小时12个点，1天12×24个点，一个月按30天算12×24×30=8640个点，">
+<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/D620E97E-4AD3-4499-8BB8-DFD9FBF2854C.jpg">
+<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-08_104120.png">
+<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-08_104915.png">
+<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-08_105039.png">
+<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_230545.png">
+<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_230707.png">
+<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_231223.png">
+<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_231301.png">
+<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_231447.png">
+<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_231719.png">
+<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_232042.png">
+<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_232206.png">
+<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_232224.png">
+<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_232348.png">
+<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_232405.png">
+<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_232520.png">
+<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_232540.png">
+<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2017/12/qrcode_for_gh_5c46969f2957_258-1-1.jpg">
+<meta property="og:updated_time" content="2018-01-20T08:16:43.326Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="send mail via smtp">
-<meta name="twitter:description" content="使用zabbix邮件发送告警消息，老是遇到发送程序出现问题，因此使用go结合开源的邮件库，写了一个smtp发邮件的程序（CentOS 6.4 X64位测试通过）下载地址：zabbix_mail.x86_64.tar.gz使用方法：zabbix alertscripts 脚本路径为/usr/local/zabbix/alertscripts1234567cd /usr/local/zabbix/al">
-<meta name="twitter:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/01/F29BC2EA-E01F-41FE-AF61-22240D77DB1A.jpg">
+<meta name="twitter:title" content="Cacti95计费配置">
+<meta name="twitter:description" content="一.95计费　95计费（95th Percentile charging）95计费是把一个结算时间里的流量（通常为一个月），按每5分钟统计一次，取流量最高值做一个点。这样一个月会得到很多流量峰值点。然后把图中高流量的5%的点去掉，按照剩下（100-5）% 来计算费用。如果是每月结一次款。每5分钟取一个流量最高点，1个小时12个点，1天12×24个点，一个月按30天算12×24×30=8640个点，">
+<meta name="twitter:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/D620E97E-4AD3-4499-8BB8-DFD9FBF2854C.jpg">
 
 
 
@@ -93,10 +107,10 @@
 
 
 
-  <link rel="canonical" href="http://canghai.me/2016/01/21/send-mail-via-smtp/"/>
+  <link rel="canonical" href="http://canghai.me/2018/01/20/Cacti95计费配置/"/>
 
 
-  <title> send mail via smtp | canghai </title>
+  <title> Cacti95计费配置 | canghai </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -218,7 +232,7 @@
             
             
               
-                send mail via smtp
+                Cacti95计费配置
               
             
           </h1>
@@ -230,8 +244,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-01-21T17:06:18+08:00" content="2016-01-21">
-              2016-01-21
+            <time itemprop="dateCreated" datetime="2018-01-20T16:12:06+08:00" content="2018-01-20">
+              2018-01-20
             </time>
           </span>
 
@@ -241,8 +255,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/01/21/send-mail-via-smtp/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/21/send-mail-via-smtp/" itemprop="commentsCount"></span>
+                <a href="/2018/01/20/Cacti95计费配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/01/20/Cacti95计费配置/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -265,13 +279,9 @@
       
 
       
-        <p>使用zabbix邮件发送告警消息，老是遇到发送程序出现问题，因此使用go结合开源的邮件库，写了一个smtp发邮件的程序（CentOS 6.4 X64位测试通过）<br>下载地址：<a href="http://dl.cactifans.org/tools/zabbix_mail.x86_64.tar.gz" target="_blank" rel="external">zabbix_mail.x86_64.tar.gz</a><br>使用方法：<br>zabbix alertscripts 脚本路径为/usr/local/zabbix/alertscripts<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/zabbix/alertscripts</div><div class="line">wget http://dl.cactifans.org/tools/zabbix_mail.x86_64.tar.gz</div><div class="line">tar zxvf zabbix_mail.x86_64.tar.gz</div><div class="line">rm -r zabbix_mail.x86_64.tar.gz</div><div class="line">mv zabbix_mail/mail .</div><div class="line">chmod a+x mail</div><div class="line">mv zabbix_mail/cfg.json /etc/</div></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<p>编辑/etc/cfg.json配置SMTP邮件服务器信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">&quot;smtp&quot;: &#123;</div><div class="line">        &quot;username&quot;: &quot;alarm@126.com&quot;,</div><div class="line">        &quot;password&quot;: &quot;password&quot;,</div><div class="line">        &quot;description&quot;: &quot;运维监控&quot;,</div><div class="line">        &quot;host&quot;: &quot;smtp.126.com&quot;,</div><div class="line">        &quot;port&quot;: 587</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>根据实际情况填写，最好使用企业内部邮件服务器的smtp，163，126发送邮件过多会屏蔽，请慎重使用！！！<br>测试<br>执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/zabbix/alertscripts/mail xxxx@126.com 邮件主题 邮件内容</div></pre></td></tr></table></figure></p>
-<p>xxx@126.com为接受人邮件地址,后面接邮件主题，邮件内容。如果能收到邮件表示发送成功!<br>mail后面可跟三个参数，与zabbix一致，可查看zabbix官方文档<br><a href="https://www.zabbix.com/documentation/2.4/manual/config/notifications/media/script" target="_blank" rel="external">Zabbix Custom alertscripts</a><br>参数解释<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$1 邮件接收人，过个接收人用；号分割</div><div class="line">$2 邮件主题</div><div class="line">$3 邮件内容</div></pre></td></tr></table></figure></p>
-<p> 在zabbix里添加告警脚本<br> 添加告警媒介<br> <img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/01/F29BC2EA-E01F-41FE-AF61-22240D77DB1A.jpg" alt=" 添加告警媒介"><br> 关联到用户<br> <img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/01/5207E7CC-44CB-44F2-9145-D2B994E6956C.jpg" alt="关联到用户"><br> 关联到动作<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/01/33801C4B-682A-4A91-9A62-DCF39DC95555.jpg" alt="关联到动作"><br> 配置完成！</p>
-<p>具体设置也可参考我的另外一篇文章<br> <a href="http://canghai.coding.io/2015/04/18/Configure-Zabbix-to-send-notifications-throught-weixin/" target="_blank" rel="external">zabbix通过微信告警</a></p>
+        <h2 id="一-95计费"><a href="#一-95计费" class="headerlink" title="一.95计费"></a>一.95计费</h2><p>　95计费（95th Percentile charging）95计费是把一个结算时间里的流量（通常为一个月），按每5分钟统计一次，取流量最高值做一个点。这样一个月会得到很多流量峰值点。然后把图中高流量的5%的点去掉，按照剩下（100-5）% 来计算费用。<br>如果是每月结一次款。每5分钟取一个流量最高点，1个小时12个点，1天12×24个点，一个月按30天算12×24×30=8640个点，然后把数值最高的5%的点去掉，剩下的最高带宽就是95计费的计费值了。需要计费的点数是8640-432=8208个点。其中有432个点不用计费，就是异常高流量的时间为432点×5分钟/60分钟/小时=36个小时，即每月不超过36小时的异常大带宽（流量），不影响本月的计费。<br><a id="more"></a><br>直接导入95计费模版，即可实现95计费<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/D620E97E-4AD3-4499-8BB8-DFD9FBF2854C.jpg" alt="5"></p>
+<h2 id="二-95计费聚合"><a href="#二-95计费聚合" class="headerlink" title="二.95计费聚合"></a>二.95计费聚合</h2><p> 95聚合可聚合几个端口的流量，端口不需要在一个主机，可以分布在多个主机<br>创建图形，这里选择图形在那个主机下查看<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-08_104120.png" alt="2"><br>默认不用改，修改图形名称<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-08_104915.png" alt="2"><br>添加聚合端口<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-08_105039.png" alt="2"><br>选择需要聚合的主机端口，注意类型<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_230545.png" alt="2"><br>如图，依次添加需要聚合的端口<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_230707.png" alt="2"><br>添加总流量数据<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_231223.png" alt="2"><br>总流量<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_231301.png" alt="2"><br>添加聚合Current流量<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_231447.png" alt="2"><br>添加聚合Average流量<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_231719.png" alt="2"><br>添加聚合Max流量<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_232042.png" alt="2"><br>添加累计流量图<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_232206.png" alt="2"><br>效果<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_232224.png" alt="2"><br>添加95线<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_232348.png" alt="2"><br>效果<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_232405.png" alt="2"><br>添加聚合95流量数字<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_232520.png" alt="2"><br>最终效果<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_232540.png" alt="2"><br>关于95计费的具体参数，可以查看cacti官方文档<br><a href="http://www.cacti.net/downloads/docs/html/variables.html#GRAPH_VARIABLES" target="_blank" rel="external">cacti参数</a></p>
+<p><strong>如果觉得我的文章对您有用，请关注我的公众号，有更多技术干货！</strong><br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2017/12/qrcode_for_gh_5c46969f2957_258-1-1.jpg" alt="微信"></p>
 
       
     </div>
@@ -292,31 +302,21 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/zabbix/" rel="tag">#zabbix</a>
-          
-            <a href="/tags/smtp/" rel="tag">#smtp</a>
-          
-            <a href="/tags/mail/" rel="tag">#mail</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/11/21/monitoring-redis-with-zabbix/" rel="next" title="monitoring redis with zabbix">
-                <i class="fa fa-chevron-left"></i> monitoring redis with zabbix
+              <a href="/2017/12/29/zabbix-3-4新功能介绍1——Preprocessing/" rel="next" title="zabbix-3.4新功能介绍1——Preprocessing">
+                <i class="fa fa-chevron-left"></i> zabbix-3.4新功能介绍1——Preprocessing
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/01/27/zabbix微信告警/" rel="prev" title="zabbix微信告警">
-                zabbix微信告警 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/01/20/zabbix监控redis/" rel="prev" title="zabbix监控redis">
+                zabbix监控redis <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -343,8 +343,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/01/21/send-mail-via-smtp/"
-           data-title="send mail via smtp" data-url="http://canghai.me/2016/01/21/send-mail-via-smtp/">
+      <div class="ds-thread" data-thread-key="2018/01/20/Cacti95计费配置/"
+           data-title="Cacti95计费配置" data-url="http://canghai.me/2018/01/20/Cacti95计费配置/">
       </div>
     
   </div>
@@ -428,7 +428,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-95计费"><span class="nav-number">1.</span> <span class="nav-text">一.95计费</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-95计费聚合"><span class="nav-number">2.</span> <span class="nav-text">二.95计费聚合</span></a></li></ol></div>
             
           </div>
         </section>
