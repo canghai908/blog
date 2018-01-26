@@ -212,6 +212,112 @@
             
               
                 
+                <a class="post-title-link" href="/2018/01/26/prometheus监控1-主机监控/" itemprop="url">
+                  prometheus监控1-主机监控
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-01-26T13:18:42+08:00" content="2018-01-26">
+              2018-01-26
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/01/26/prometheus监控1-主机监控/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/01/26/prometheus监控1-主机监控/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>之前研究k8s时候用部署过prometheus，使用它来监控k8s集群，不过也是照文档操作,并没有深入研究,最近大概看了一下。后续会陆续介绍，由于prometheus下载速度比较慢，因此我用的下载包我已同步到<a href="http://cactifans.hi-www.com/prometheus/" target="_blank" rel="external">http://cactifans.hi-www.com/prometheus/</a> 有需要的可以下载</p>
+<h2 id="安装运行"><a href="#安装运行" class="headerlink" title="安装运行"></a>安装运行</h2><p>prometheus安装比较简单,下载编译好的二进制文件，修改好配置文件，直启动即可。可以在<a href="https://github.com/prometheus/prometheus/releases" target="_blank" rel="external">https://github.com/prometheus/prometheus/releases</a> 下载最新版本。由于网络原因不能下载的，可在我的站点下载<a href="http://cactifans.hi-www.com/prometheus/prometheus-2.1.0.linux-amd64.tar.gz" target="_blank" rel="external">http://cactifans.hi-www.com/prometheus/prometheus-2.1.0.linux-amd64.tar.gz</a><br>下载之后解压<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar zxvf prometheus-2.1.0.linux-amd64.tar.gz</div></pre></td></tr></table></figure></p>
+<p>解压之后,会有一个默认的配置文件，可以直接使用这个配置文件启动<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> prometheus-2.1.0.linux-amd64</div><div class="line">./prometheus --config.file=prometheus.yml</div></pre></td></tr></table></figure></p>
+<p>即可启动prometheus,默认端口为9090.通过浏览器可以看到如下页面，表示prometheus启动正常。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/01/26/prometheus监控1-主机监控/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/01/20/zabbix监控redis/" itemprop="url">
                   zabbix监控redis
                 </a>
@@ -1173,110 +1279,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/07/24/monitoring-tomcat-with-zabbix/" itemprop="url">
-                  monitoring tomcat with zabbix
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-07-24T10:21:36+08:00" content="2015-07-24">
-              2015-07-24
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/07/24/monitoring-tomcat-with-zabbix/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/24/monitoring-tomcat-with-zabbix/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>zabbix提供了一个java gateway的应用去监控jmx（Java Management Extensions，即Java管理扩展）是一个为应用程序、设备、系统等植入管理功能的框架。JMX可以跨越一系列异构操作系统平台、系统体系结构和网络传输协议，灵活的开发无缝集成的系统、网络和服务管理应用。</p>
-<h2 id="一-Zabbix-的JMX监控架构"><a href="#一-Zabbix-的JMX监控架构" class="headerlink" title="一. Zabbix 的JMX监控架构"></a>一. Zabbix 的JMX监控架构</h2><p><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/07/01.jpg" alt="enter image description here"></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/24/monitoring-tomcat-with-zabbix/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1322,7 +1324,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1332,7 +1334,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
