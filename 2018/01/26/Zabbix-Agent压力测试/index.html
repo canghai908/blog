@@ -42,7 +42,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="zabbix,agent,压力测试," />
 
 
 
@@ -58,16 +58,22 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="description" content="一直以来在zabbix群就经常见有人问到Zabbix Server到底能监控多少主机？如何做压力测试？Zabbx Agent对主机性能有何影响?本文将为你介绍如何对Zabbix Agent进行压力测试。压力测试脚本为py，下载地址http://cactifans.hi-www.com/zabbix/zabbix-agent-stress-test.py 下载之后最好是放到非压测机器，以免影响测试结">
+<meta name="keywords" content="zabbix,agent,压力测试">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://canghai.me/2015/03/31/hello-world/index.html">
+<meta property="og:title" content="Zabbix Agent压力测试">
+<meta property="og:url" content="http://canghai.me/2018/01/26/Zabbix-Agent压力测试/index.html">
 <meta property="og:site_name" content="canghai">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta property="og:updated_time" content="2015-04-18T06:07:45.000Z">
+<meta property="og:description" content="一直以来在zabbix群就经常见有人问到Zabbix Server到底能监控多少主机？如何做压力测试？Zabbx Agent对主机性能有何影响?本文将为你介绍如何对Zabbix Agent进行压力测试。压力测试脚本为py，下载地址http://cactifans.hi-www.com/zabbix/zabbix-agent-stress-test.py 下载之后最好是放到非压测机器，以免影响测试结">
+<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2018/01/8.jpg">
+<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2018/01/10.jpg">
+<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2018/01/9.png">
+<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2017/12/qrcode_for_gh_5c46969f2957_258-1-1.jpg">
+<meta property="og:updated_time" content="2018-01-26T08:20:40.797Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="Zabbix Agent压力测试">
+<meta name="twitter:description" content="一直以来在zabbix群就经常见有人问到Zabbix Server到底能监控多少主机？如何做压力测试？Zabbx Agent对主机性能有何影响?本文将为你介绍如何对Zabbix Agent进行压力测试。压力测试脚本为py，下载地址http://cactifans.hi-www.com/zabbix/zabbix-agent-stress-test.py 下载之后最好是放到非压测机器，以免影响测试结">
+<meta name="twitter:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2018/01/8.jpg">
 
 
 
@@ -88,10 +94,10 @@
 
 
 
-  <link rel="canonical" href="http://canghai.me/2015/03/31/hello-world/"/>
+  <link rel="canonical" href="http://canghai.me/2018/01/26/Zabbix-Agent压力测试/"/>
 
 
-  <title> Hello World | canghai </title>
+  <title> Zabbix Agent压力测试 | canghai </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -213,7 +219,7 @@
             
             
               
-                Hello World
+                Zabbix Agent压力测试
               
             
           </h1>
@@ -225,8 +231,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-03-31T10:11:53+08:00" content="2015-03-31">
-              2015-03-31
+            <time itemprop="dateCreated" datetime="2018-01-26T16:14:35+08:00" content="2018-01-26">
+              2018-01-26
             </time>
           </span>
 
@@ -236,8 +242,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/03/31/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/31/hello-world/" itemprop="commentsCount"></span>
+                <a href="/2018/01/26/Zabbix-Agent压力测试/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/01/26/Zabbix-Agent压力测试/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -260,16 +266,76 @@
       
 
       
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <p>一直以来在zabbix群就经常见有人问到Zabbix Server到底能监控多少主机？如何做压力测试？Zabbx Agent对主机性能有何影响?本文将为你介绍如何对Zabbix Agent进行压力测试。压力测试脚本为py，下载地址<a href="http://cactifans.hi-www.com/zabbix/zabbix-agent-stress-test.py" target="_blank" rel="external">http://cactifans.hi-www.com/zabbix/zabbix-agent-stress-test.py</a> 下载之后最好是放到非压测机器，以免影响测试结果。本次我在zabbix server上测试Agent的压力情况。<br>使用./zabbix-agent-stress-test.py -h可查看使用帮助<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2018/01/8.jpg" alt="1"><br>机器基本配置</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">指标</th>
+<th style="text-align:left">数值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">机器配置</td>
+<td style="text-align:left">E5-2620 v3  8vcpu/8G</td>
+</tr>
+<tr>
+<td style="text-align:left">操作系统</td>
+<td style="text-align:left">CentOS 7.3.1611</td>
+</tr>
+<tr>
+<td style="text-align:left">Agent版本</td>
+<td style="text-align:left">3.4.4</td>
+</tr>
+<tr>
+<td style="text-align:left">StartAgents</td>
+<td style="text-align:left">3</td>
+</tr>
+</tbody>
+</table>
+<p>Agent配置文件如下<br><a id="more"></a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">PidFile=/var/run/zabbix/zabbix_agentd.pid</div><div class="line">LogFile=/var/<span class="built_in">log</span>/zabbix/zabbix_agentd.log</div><div class="line">LogFileSize=0</div><div class="line">Server=10.110.200.12</div><div class="line">ServerActive=10.110.200.12</div><div class="line">Hostname=mysqldb_16</div></pre></td></tr></table></figure>
+<p>Server为我的zabbix server的ip<br>测试命令如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./zabbix-agent-stress-test.py -s 10.110.200.16 -k <span class="string">"system.run[sleep 1]"</span> -t 4</div></pre></td></tr></table></figure></p>
+<p>10.110.200.16 为我已安装好的Zabbix  Agent主机。<br>测试结果<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2018/01/10.jpg" alt="2"><br>Agent服务器负载<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2018/01/9.png" alt="3"></p>
+<p>通过以上方法对agent进行测试总体结果如下</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">测试key</th>
+<th style="text-align:left">线程数</th>
+<th style="text-align:left">StartAgents</th>
+<th style="text-align:left">qps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">system.run[sleep 1]</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left">2677.98</td>
+</tr>
+<tr>
+<td style="text-align:left">system.run[sleep 1]</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left">20</td>
+<td style="text-align:left">2727.12</td>
+</tr>
+<tr>
+<td style="text-align:left">agent</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left">2566.53</td>
+</tr>
+<tr>
+<td style="text-align:left">agent</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left">20</td>
+<td style="text-align:left">2612.39</td>
+</tr>
+</tbody>
+</table>
+<p>经过以上测试，当StartAgents配置3时，每秒大约2600左右，agent每个进程cpu占用率为9%左右，内存占用很少。修改StartAgents线程时，qps也大概在2600左右，没有明显提升。Agent一般情况下不会对系统造成很大的影响，不过实际系统占用可能与你的自定义脚本有关系。可在<a href="https://github.com/monitoringartist/zabbix-agent-stress-test" target="_blank" rel="external">https://github.com/monitoringartist/zabbix-agent-stress-test</a> 查看更多细节<br>下期为大家介绍对Zabbix Server进行压力测试</p>
+<p><strong>如果觉得我的文章对您有用，请关注我的公众号，有更多技术干货！</strong><br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2017/12/qrcode_for_gh_5c46969f2957_258-1-1.jpg" alt="微信"></p>
 
       
     </div>
@@ -290,18 +356,28 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/zabbix/" rel="tag">#zabbix</a>
+          
+            <a href="/tags/agent/" rel="tag">#agent</a>
+          
+            <a href="/tags/压力测试/" rel="tag">#压力测试</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/01/26/prometheus监控1-主机监控/" rel="next" title="prometheus监控1-主机监控">
+                <i class="fa fa-chevron-left"></i> prometheus监控1-主机监控
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/04/01/Install-Zabbix-2-4-on-Rhel-6-4/" rel="prev" title="Install Zabbix 2.4 on Rhel 6.4">
-                Install Zabbix 2.4 on Rhel 6.4 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -327,8 +403,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/03/31/hello-world/"
-           data-title="Hello World" data-url="http://canghai.me/2015/03/31/hello-world/">
+      <div class="ds-thread" data-thread-key="2018/01/26/Zabbix-Agent压力测试/"
+           data-title="Zabbix Agent压力测试" data-url="http://canghai.me/2018/01/26/Zabbix-Agent压力测试/">
       </div>
     
   </div>
@@ -412,7 +488,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
         </section>

@@ -212,6 +212,136 @@
             
               
                 
+                <a class="post-title-link" href="/2018/01/26/Zabbix-Agent压力测试/" itemprop="url">
+                  Zabbix Agent压力测试
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-01-26T16:14:35+08:00" content="2018-01-26">
+              2018-01-26
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/01/26/Zabbix-Agent压力测试/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/01/26/Zabbix-Agent压力测试/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>一直以来在zabbix群就经常见有人问到Zabbix Server到底能监控多少主机？如何做压力测试？Zabbx Agent对主机性能有何影响?本文将为你介绍如何对Zabbix Agent进行压力测试。压力测试脚本为py，下载地址<a href="http://cactifans.hi-www.com/zabbix/zabbix-agent-stress-test.py" target="_blank" rel="external">http://cactifans.hi-www.com/zabbix/zabbix-agent-stress-test.py</a> 下载之后最好是放到非压测机器，以免影响测试结果。本次我在zabbix server上测试Agent的压力情况。<br>使用./zabbix-agent-stress-test.py -h可查看使用帮助<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2018/01/8.jpg" alt="1"><br>机器基本配置</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">指标</th>
+<th style="text-align:left">数值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">机器配置</td>
+<td style="text-align:left">E5-2620 v3  8vcpu/8G</td>
+</tr>
+<tr>
+<td style="text-align:left">操作系统</td>
+<td style="text-align:left">CentOS 7.3.1611</td>
+</tr>
+<tr>
+<td style="text-align:left">Agent版本</td>
+<td style="text-align:left">3.4.4</td>
+</tr>
+<tr>
+<td style="text-align:left">StartAgents</td>
+<td style="text-align:left">3</td>
+</tr>
+</tbody>
+</table>
+<p>Agent配置文件如下<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/01/26/Zabbix-Agent压力测试/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/01/26/prometheus监控1-主机监控/" itemprop="url">
                   prometheus监控1-主机监控
                 </a>
@@ -1175,110 +1305,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/07/29/monitoring-mysql-with-zabbix/" itemprop="url">
-                  monitoring mysql with zabbix
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-07-29T23:38:22+08:00" content="2015-07-29">
-              2015-07-29
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/07/29/monitoring-mysql-with-zabbix/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/29/monitoring-mysql-with-zabbix/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>使用go语言写了一个采集mysql性能的小程序，通过SDK连接mysql数据库，采集数据库性能指标，同时采集远程数据库的性能，大家可试用一下，欢迎提出修改意见和建议</p>
-<h2 id="被监控端设置"><a href="#被监控端设置" class="headerlink" title="被监控端设置"></a>被监控端设置</h2><p>监控下载：<br>Linux：<br><a href="http://dl.cactifans.org/tools/mymon_x86.tar.gz" target="_blank" rel="external">mymon_x86.tar.gz</a><br><a href="http://dl.cactifans.org/tools/mymon_x64.tar.gz" target="_blank" rel="external">mymon_x64.tar.gz</a><br>Windows:<br><a href="http://dl.cactifans.org/tools/mymon_windows_amd64.zip" target="_blank" rel="external">mymon_windows_amd64.zip</a></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/29/monitoring-mysql-with-zabbix/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1324,7 +1350,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-count">18</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1334,7 +1360,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
