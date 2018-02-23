@@ -212,136 +212,6 @@
             
               
                 
-                <a class="post-title-link" href="/2018/01/26/Agent压力测试/" itemprop="url">
-                  Zabbix Agent压力测试
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-01-26T16:14:35+08:00" content="2018-01-26">
-              2018-01-26
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/01/26/Agent压力测试/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/01/26/Agent压力测试/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>一直以来在zabbix群就经常见有人问到Zabbix Server到底能监控多少主机？如何做压力测试？Zabbx Agent对主机性能有何影响?本文将为你介绍如何对Zabbix Agent进行压力测试。压力测试脚本为py，下载地址<a href="http://cactifans.hi-www.com/zabbix/zabbix-agent-stress-test.py" target="_blank" rel="external">http://cactifans.hi-www.com/zabbix/zabbix-agent-stress-test.py</a> 下载之后最好是放到非压测机器，以免影响测试结果。本次我在zabbix server上测试Agent的压力情况。<br>使用./zabbix-agent-stress-test.py -h可查看使用帮助<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2018/01/8.jpg" alt="1"><br>机器基本配置</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">指标</th>
-<th style="text-align:left">数值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">机器配置</td>
-<td style="text-align:left">E5-2620 v3  8vcpu/8G</td>
-</tr>
-<tr>
-<td style="text-align:left">操作系统</td>
-<td style="text-align:left">CentOS 7.3.1611</td>
-</tr>
-<tr>
-<td style="text-align:left">Agent版本</td>
-<td style="text-align:left">3.4.4</td>
-</tr>
-<tr>
-<td style="text-align:left">StartAgents</td>
-<td style="text-align:left">3</td>
-</tr>
-</tbody>
-</table>
-<p>Agent配置文件如下<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/01/26/Agent压力测试/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2018/01/26/Zabbix-Agent压力测试/" itemprop="url">
                   Zabbix Agent压力测试
                 </a>
@@ -1308,6 +1178,133 @@
 
 
     
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/11/21/monitoring-redis-with-zabbix/" itemprop="url">
+                  monitoring redis with zabbix
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-11-21T22:20:49+08:00" content="2015-11-21">
+              2015-11-21
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/11/21/monitoring-redis-with-zabbix/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/21/monitoring-redis-with-zabbix/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>使用go语言写了一个采集redis性能的小程序，通过redis的go客户端连接redis，采集数据库性能指标，大家可试用一下，欢迎提出修改意见和建议。<br>zabbix环境</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">环境</th>
+<th style="text-align:right">版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">zabbix server版本</td>
+<td style="text-align:right">2.4.4</td>
+</tr>
+<tr>
+<td style="text-align:left">zabbix agent版本</td>
+<td style="text-align:right">2.4.4</td>
+</tr>
+<tr>
+<td style="text-align:left">centos</td>
+<td style="text-align:right">6.6 x86_64</td>
+</tr>
+</tbody>
+</table>
+<h4 id="监控客户端下载"><a href="#监控客户端下载" class="headerlink" title="监控客户端下载"></a>监控客户端下载</h4><p>linux 32位系统<br><a href="http://dl.cactifans.org/tools/zabbix_redis.x86.tar.gz" target="_blank" rel="external">zabbix_redis.x86.tar.gz</a><br>linux64位系统<br><a href="http://dl.cactifans.org/tools/zabbix_redis.x86_64.tar.gz" target="_blank" rel="external">zabbix_redis.x86_64.tar.gz</a></p>
+<h4 id="配置方法"><a href="#配置方法" class="headerlink" title="配置方法"></a>配置方法</h4><p>修改zabbix agentd配置文件(具体位置根据自身情况设置)，添加key<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/21/monitoring-redis-with-zabbix/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
@@ -1353,7 +1350,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-count">18</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
