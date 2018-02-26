@@ -365,34 +365,7 @@
 
       
         
-          <p>一直以来在zabbix群就经常见有人问到Zabbix Server到底能监控多少主机？如何做压力测试？Zabbx Agent对主机性能有何影响?本文将为你介绍如何对Zabbix Agent进行压力测试。压力测试脚本为py，下载地址<a href="http://cactifans.hi-www.com/zabbix/zabbix-agent-stress-test.py" target="_blank" rel="external">http://cactifans.hi-www.com/zabbix/zabbix-agent-stress-test.py</a> 下载之后最好是放到非压测机器，以免影响测试结果。本次我在zabbix server上测试Agent的压力情况。<br>使用./zabbix-agent-stress-test.py -h可查看使用帮助<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2018/01/8.jpg" alt="1"><br>机器基本配置</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">指标</th>
-<th style="text-align:left">数值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">机器配置</td>
-<td style="text-align:left">E5-2620 v3  8vcpu/8G</td>
-</tr>
-<tr>
-<td style="text-align:left">操作系统</td>
-<td style="text-align:left">CentOS 7.3.1611</td>
-</tr>
-<tr>
-<td style="text-align:left">Agent版本</td>
-<td style="text-align:left">3.4.4</td>
-</tr>
-<tr>
-<td style="text-align:left">StartAgents</td>
-<td style="text-align:left">3</td>
-</tr>
-</tbody>
-</table>
-<p>Agent配置文件如下<br>
+          <p>一直以来在zabbix群就经常见有人问到Zabbix Server到底能监控多少主机？如何做压力测试？Zabbx Agent对主机性能有何影响?本文将为你介绍如何对Zabbix Agent进行压力测试。压力测试脚本为py，下载地址<a href="http://cactifans.hi-www.com/zabbix/zabbix-agent-stress-test.py" target="_blank" rel="external">http://cactifans.hi-www.com/zabbix/zabbix-agent-stress-test.py</a> 下载之后最好是放到非压测机器，以免影响测试结果。本次我在zabbix server上测试Agent的压力情况。<br>使用./zabbix-agent-stress-test.py -h可查看使用帮助<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2018/01/26/Zabbix-Agent压力测试/#more" rel="contents">
               阅读全文 &raquo;
@@ -496,9 +469,7 @@
       
         
           <p>之前研究k8s时候用部署过prometheus，使用它来监控k8s集群，不过也是照文档操作,并没有深入研究,最近大概看了一下。后续会陆续介绍，由于prometheus下载速度比较慢，因此我用的下载包我已同步到<a href="http://cactifans.hi-www.com/prometheus/" target="_blank" rel="external">http://cactifans.hi-www.com/prometheus/</a> 有需要的可以下载</p>
-<h2 id="安装运行"><a href="#安装运行" class="headerlink" title="安装运行"></a>安装运行</h2><p>prometheus安装比较简单,下载编译好的二进制文件，修改好配置文件，直启动即可。可以在<a href="https://github.com/prometheus/prometheus/releases" target="_blank" rel="external">https://github.com/prometheus/prometheus/releases</a> 下载最新版本。由于网络原因不能下载的，可在我的站点下载<a href="http://cactifans.hi-www.com/prometheus/prometheus-2.1.0.linux-amd64.tar.gz" target="_blank" rel="external">http://cactifans.hi-www.com/prometheus/prometheus-2.1.0.linux-amd64.tar.gz</a><br>下载之后解压<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar zxvf prometheus-2.1.0.linux-amd64.tar.gz</div></pre></td></tr></table></figure></p>
-<p>解压之后,会有一个默认的配置文件，可以直接使用这个配置文件启动<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> prometheus-2.1.0.linux-amd64</div><div class="line">./prometheus --config.file=prometheus.yml</div></pre></td></tr></table></figure></p>
-<p>即可启动prometheus,默认端口为9090.通过浏览器可以看到如下页面，表示prometheus启动正常。<br>
+<h2 id="安装运行"><a href="#安装运行" class="headerlink" title="安装运行"></a>安装运行</h2><p>prometheus安装比较简单,下载编译好的二进制文件，修改好配置文件，直启动即可。可以在<a href="https://github.com/prometheus/prometheus/releases" target="_blank" rel="external">https://github.com/prometheus/prometheus/releases</a> 下载最新版本。由于网络原因不能下载的，可在我的站点下载<a href="http://cactifans.hi-www.com/prometheus/prometheus-2.1.0.linux-amd64.tar.gz" target="_blank" rel="external">http://cactifans.hi-www.com/prometheus/prometheus-2.1.0.linux-amd64.tar.gz</a><br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2018/01/26/prometheus监控1-主机监控/#more" rel="contents">
               阅读全文 &raquo;
