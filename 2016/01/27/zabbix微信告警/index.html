@@ -95,7 +95,7 @@
 <meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/01/4998E246-A2D0-4136-AC89-75316ECA7B60.jpg">
 <meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/01/%E6%B6%82%E9%B8%A6_Screenshot_2016-01-27-12-03-45-359_%E5%BE%AE%E4%BF%A1.png">
 <meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2017/12/qrcode_for_gh_5c46969f2957_258-1-1.jpg">
-<meta property="og:updated_time" content="2018-01-05T01:24:55.555Z">
+<meta property="og:updated_time" content="2018-03-03T09:44:50.196Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="zabbix微信告警">
 <meta name="twitter:description" content="前面写了一个zabbix微信告警的，用的我的企业号，后来发现用的人太多消息都超过限制了，应大家要求发布个可以用主机企业号的发送程序，填自己的企业号就可发送微信告警消息！使用go语言开发（感谢老司机提供的微信sdk) 首先你得有个企业号！！！！关于企业号的申请，什么是corpid，secret，agentid，微信号，用户账号等等问题我就不科普了，大家可以上腾讯的企业号开发者中心查看，或者查看itn">
@@ -342,9 +342,9 @@
       
         <p>前面写了一个zabbix微信告警的，用的我的企业号，后来发现用的人太多消息都超过限制了，应大家要求发布个可以用主机企业号的发送程序，填自己的企业号就可发送微信告警消息！使用go语言开发（感谢<a href="https://github.com/chanxuehong/wechat" target="_blank" rel="external">老司机</a>提供的微信sdk)</p>
 <h2 id="首先你得有个企业号！！！！"><a href="#首先你得有个企业号！！！！" class="headerlink" title="首先你得有个企业号！！！！"></a>首先你得有个企业号！！！！</h2><p>关于企业号的申请，什么是corpid，secret，agentid，微信号，用户账号等等问题我就不科普了，大家可以上腾讯的<a href="http://qydev.weixin.qq.com/wiki/index.php?title=%E9%A6%96%E9%A1%B5" target="_blank" rel="external">企业号开发者中心</a>查看，或者查看itnihao的一篇blog，<a href="http://itnihao.blog.51cto.com/1741976/1733245" target="_blank" rel="external">http://itnihao.blog.51cto.com/1741976/1733245</a>图文并貌写的很清楚。</p>
-<h2 id="下载程序"><a href="#下载程序" class="headerlink" title="下载程序"></a>下载程序</h2><p>下载地址：<br><a href="http://dl.cactifans.org/tools/zabbix_weixin.x86.tar.gz" target="_blank" rel="external">zabbix_weixin.x86.tar.gz</a>（Linux32位版本）<br><a href="http://dl.cactifans.org/tools/zabbix_weixin.x86_64.tar.gz" target="_blank" rel="external">zabbix_weixin.x86_64.tar.gz</a>（Linux64位版本）</p>
+<h2 id="下载程序"><a href="#下载程序" class="headerlink" title="下载程序"></a>下载程序</h2><p>下载地址：<br><a href="https://dl.cactifans.com/tools/zabbix_weixin.x86.tar.gz" target="_blank" rel="external">zabbix_weixin.x86.tar.gz</a>（Linux32位版本）<br><a href="https://dl.cactifans.com/tools/zabbix_weixin.x86_64.tar.gz" target="_blank" rel="external">zabbix_weixin.x86_64.tar.gz</a>（Linux64位版本）</p>
 <h2 id="部署步骤"><a href="#部署步骤" class="headerlink" title="部署步骤"></a>部署步骤</h2><a id="more"></a>
-<p><strong>下载程序到你的zabbix server的AlertScriptsPath目录下</strong>。不知道什么是AlertScriptsPath目录，不知道怎么配置的，直接看官方文档！！！<a href="https://www.zabbix.com/documentation/2.4/manual/appendix/config/zabbix_server" target="_blank" rel="external">zabbix server配置文件</a><br>如果之前没有设置过AlertScriptsPath，设置之后要重启zabbix server<br>假设我的zabbix server的AlertScriptsPath目录为/usr/local/zabbix/alertscripts<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">wget http://dl.cactifans.org/tools/zabbix_weixin.x86_64.tar.gz</div><div class="line">tar zxvf zabbix_weixin.x86_64.tar.gz</div><div class="line">mv zabbix_weixin/weixin .</div><div class="line">chmod a+x weixin</div><div class="line">mv zabbix_weixin/weixincfg.json /etc/</div><div class="line">rm -rf zxvf zabbix_weixin.x86_64.tar.gz</div><div class="line">rm -rf zabbix_weixin/</div></pre></td></tr></table></figure></p>
+<p><strong>下载程序到你的zabbix server的AlertScriptsPath目录下</strong>。不知道什么是AlertScriptsPath目录，不知道怎么配置的，直接看官方文档！！！<a href="https://www.zabbix.com/documentation/2.4/manual/appendix/config/zabbix_server" target="_blank" rel="external">zabbix server配置文件</a><br>如果之前没有设置过AlertScriptsPath，设置之后要重启zabbix server<br>假设我的zabbix server的AlertScriptsPath目录为/usr/local/zabbix/alertscripts<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">wget https://dl.cactifans.com/tools/zabbix_weixin.x86_64.tar.gz</div><div class="line">tar zxvf zabbix_weixin.x86_64.tar.gz</div><div class="line">mv zabbix_weixin/weixin .</div><div class="line">chmod a+x weixin</div><div class="line">mv zabbix_weixin/weixincfg.json /etc/</div><div class="line">rm -rf zxvf zabbix_weixin.x86_64.tar.gz</div><div class="line">rm -rf zabbix_weixin/</div></pre></td></tr></table></figure></p>
 <p>接下来一步很重要，编辑/etc/weixincfg.json文件，配置你的企业号corpid，secret，agentid，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">&quot;corp&quot;: &#123;</div><div class="line">        &quot;corpid&quot;: &quot;wxxxxxx&quot;,</div><div class="line">        &quot;secret&quot;: &quot;Vn6dxxxx&quot;,</div><div class="line">        &quot;agentid&quot;: 1</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p><strong>不知道哪里看corpid，scret，agentid的直接看itnihao的文章，不要再问我！</strong><br>AgentId<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/01/55102EE3-8C8C-4B65-ABA1-C80FCC980F48.jpg" alt="AgentId"></p>
 <h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/zabbix/alertscripts/weixin xxx subject body</div></pre></td></tr></table></figure>
@@ -490,7 +490,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -503,7 +503,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

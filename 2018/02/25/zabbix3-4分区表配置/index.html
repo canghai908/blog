@@ -88,7 +88,7 @@
 <meta property="og:description" content="在使用zabbix的过程中，随着时间的推移，数据库中的历史数据会越来越多，会发现打开页面，查询数据等会变慢。zabbix 自带的 housekeeper会定时清理（默认一小时清理一次）旧的数据。不过在 housekeeper清理过中，会导致数据库负载极具增加。这里介绍另外一种办法，就是对几个历史数据表做分区表（partition table）可按照时间（每天）为维度，把历史数据存到各个分区表中，这">
 <meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2018/02/12.jpg">
 <meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2017/12/qrcode_for_gh_5c46969f2957_258-1-1.jpg">
-<meta property="og:updated_time" content="2018-02-25T14:30:52.028Z">
+<meta property="og:updated_time" content="2018-03-03T09:48:46.252Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="zabbix3.4分区表配置">
 <meta name="twitter:description" content="在使用zabbix的过程中，随着时间的推移，数据库中的历史数据会越来越多，会发现打开页面，查询数据等会变慢。zabbix 自带的 housekeeper会定时清理（默认一小时清理一次）旧的数据。不过在 housekeeper清理过中，会导致数据库负载极具增加。这里介绍另外一种办法，就是对几个历史数据表做分区表（partition table）可按照时间（每天）为维度，把历史数据存到各个分区表中，这">
@@ -334,7 +334,7 @@
 
       
         <p>在使用zabbix的过程中，随着时间的推移，数据库中的历史数据会越来越多，会发现打开页面，查询数据等会变慢。zabbix 自带的 housekeeper会定时清理（默认一小时清理一次）旧的数据。不过在 housekeeper清理过中，会导致数据库负载极具增加。这里介绍另外一种办法，就是对几个历史数据表做分区表（partition table）可按照时间（每天）为维度，把历史数据存到各个分区表中，这样做有以下好处：<br><strong>1.加快查询速度</strong><br><strong>2.快速清理过去一时间的历史数据（删除分区表）</strong><br><a id="more"></a></p>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>这里以zabbix3.4版本为例。使用itnihao的脚本即可（本人做了稍加修改）:<br><strong>zabbix 2.2分区脚本</strong><br><a href="http://cactifans.hi-www.com/zabbix/partitiontables.sh" target="_blank" rel="external">http://cactifans.hi-www.com/zabbix/partitiontables.sh</a><br><strong>zabbix3.4分区脚本</strong><br><a href="http://cactifans.hi-www.com/zabbix/partitiontables_gt_zbx34.sh" target="_blank" rel="external">http://cactifans.hi-www.com/zabbix/partitiontables_gt_zbx34.sh</a><br>下载脚本到并赋予可执行权限，默认脚本详情数据保留30天，趋势数据保留12个月，可根据实际情况修改。修改脚本以下地方即可<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">daily_history_min=30</div><div class="line">monthly_history_min=12</div></pre></td></tr></table></figure></p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>这里以zabbix3.4版本为例。使用itnihao的脚本即可（本人做了稍加修改）:<br><strong>zabbix 2.2分区脚本</strong><br><a href="https://dl.cactifans.com/zabbix/partitiontables.sh" target="_blank" rel="external">https://dl.cactifans.com/zabbix/partitiontables.sh</a><br><strong>zabbix3.4分区脚本</strong><br><a href="https://dl.cactifans.com/zabbix/partitiontables_gt_zbx34.sh" target="_blank" rel="external">https://dl.cactifans.com/zabbix/partitiontables_gt_zbx34.sh</a><br>下载脚本到并赋予可执行权限，默认脚本详情数据保留30天，趋势数据保留12个月，可根据实际情况修改。修改脚本以下地方即可<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">daily_history_min=30</div><div class="line">monthly_history_min=12</div></pre></td></tr></table></figure></p>
 <p>脚本里默认的zabbix数据库主机为localhost，用户为zabbix，密码为zabbix，如果你的信息不是这个，可以修改脚本里的如下对应信息<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">DBHOST=localhost</div><div class="line">DBUSER=zabbix</div><div class="line">DBPASS=zabbix</div></pre></td></tr></table></figure></p>
 <p>修改好之后，赋予可执行权限。</p>
 <h2 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h2><p>注意：执行分区表之前建议先停止zabbix server，如果不停止可能导致意外事件，备份好zabbix server数据库。因此建议安装好zabbix server之后就进行分区表。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./partitiontables_gt_zbx34.sh</div></pre></td></tr></table></figure></p>
@@ -478,7 +478,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -491,7 +491,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
