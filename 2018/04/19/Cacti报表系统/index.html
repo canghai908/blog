@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="cacti,报表," />
 
 
 
@@ -80,12 +80,13 @@
 
 
 <meta name="description" content="本系统是结合Cacti监控，通过读取Cacti监控数据，导出指定设备的详情数据。 设计初衷Cacti是一套基于PHP,MySQL,SNMP及RRDTool开发的开源网络流量监测图形分析工具。主要给予一下原因考虑，开发设计此系统  如果需要导出某一设备一段时间内的详情数据，Cacti默认只能导出2天左右的详情数据（默认为5分钟一采集）。如果需要修改，可参考此文章http://www.cactifan">
+<meta name="keywords" content="cacti,报表">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cacti报表系统">
 <meta property="og:url" content="https://blog.cactifans.com/2018/04/19/Cacti报表系统/index.html">
 <meta property="og:site_name" content="canghai">
 <meta property="og:description" content="本系统是结合Cacti监控，通过读取Cacti监控数据，导出指定设备的详情数据。 设计初衷Cacti是一套基于PHP,MySQL,SNMP及RRDTool开发的开源网络流量监测图形分析工具。主要给予一下原因考虑，开发设计此系统  如果需要导出某一设备一段时间内的详情数据，Cacti默认只能导出2天左右的详情数据（默认为5分钟一采集）。如果需要修改，可参考此文章http://www.cactifan">
-<meta property="og:updated_time" content="2018-04-19T12:40:27.168Z">
+<meta property="og:updated_time" content="2018-04-19T12:41:16.867Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cacti报表系统">
 <meta name="twitter:description" content="本系统是结合Cacti监控，通过读取Cacti监控数据，导出指定设备的详情数据。 设计初衷Cacti是一套基于PHP,MySQL,SNMP及RRDTool开发的开源网络流量监测图形分析工具。主要给予一下原因考虑，开发设计此系统  如果需要导出某一设备一段时间内的详情数据，Cacti默认只能导出2天左右的详情数据（默认为5分钟一采集）。如果需要修改，可参考此文章http://www.cactifan">
@@ -335,7 +336,8 @@
 <li>如果需要导出某一设备一段时间内的详情数据，Cacti默认只能导出2天左右的详情数据（默认为5分钟一采集）。如果需要修改，可参考此文章<a href="http://www.cactifans.org/cacti/1564.html" target="_blank" rel="external">http://www.cactifans.org/cacti/1564.html</a> 修改，修改之后需要删除所有RRD文件（Cacti数据存储，所有<strong>历史监控数据将会丢失</strong>）</li>
 <li>如果需要批量导出某些设备的监控数据，在页面操作就会比较麻烦</li>
 </ol>
-<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><h4 id="1-添加报表"><a href="#1-添加报表" class="headerlink" title="1. 添加报表"></a>1. 添加报表</h4><p>默认不会读取监控数据。如果采集某一设备的数据并做报表，首先要将该设备需要报表的图形添加到报表<br>点击【报表设置】–选择设备会出现该设备所有的监控图形，选择需要出报表的图形，点击【添加到报表】，添加成功之后，数据就会开始采集，默认为1小时读取一次</p>
+<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><a id="more"></a>
+<h4 id="1-添加报表"><a href="#1-添加报表" class="headerlink" title="1. 添加报表"></a>1. 添加报表</h4><p>默认不会读取监控数据。如果采集某一设备的数据并做报表，首先要将该设备需要报表的图形添加到报表<br>点击【报表设置】–选择设备会出现该设备所有的监控图形，选择需要出报表的图形，点击【添加到报表】，添加成功之后，数据就会开始采集，默认为1小时读取一次</p>
 <h4 id="2-报表导出"><a href="#2-报表导出" class="headerlink" title="2. 报表导出"></a>2. 报表导出</h4><p>添加到报表之后，后台程序会自动读取该监控图形的数据，并写入数据库存储。点击【批量报表】选择设备之后，会展示该设备下面添加到报表的所有图形以及已经采集的历史数据时间，以小时为单位。如需要导出数据可选择时间，选择图形之后，点击【导出报表】之后点击【下载报表】就会将所有的图形报表打包成zip下载</p>
 <h4 id="3-日常查询"><a href="#3-日常查询" class="headerlink" title="3. 日常查询"></a>3. 日常查询</h4><p>如需要查询某一图形的数据及信息，可点击【报表查询】，选择对应图形及时间段之后，点击【查询】导出独立的报表</p>
 <h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><ol>
@@ -358,6 +360,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/cacti/" rel="tag"># cacti</a>
+          
+            <a href="/tags/报表/" rel="tag"># 报表</a>
+          
+        </div>
       
 
       
@@ -475,7 +485,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
