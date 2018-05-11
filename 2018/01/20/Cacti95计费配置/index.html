@@ -85,29 +85,29 @@
 <meta property="og:url" content="https://blog.cactifans.com/2018/01/20/Cacti95计费配置/index.html">
 <meta property="og:site_name" content="canghai">
 <meta property="og:description" content="一.95计费　95计费（95th Percentile charging）95计费是把一个结算时间里的流量（通常为一个月），按每5分钟统计一次，取流量最高值做一个点。这样一个月会得到很多流量峰值点。然后把图中高流量的5%的点去掉，按照剩下（100-5）% 来计算费用。如果是每月结一次款。每5分钟取一个流量最高点，1个小时12个点，1天12×24个点，一个月按30天算12×24×30=8640个点，">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/D620E97E-4AD3-4499-8BB8-DFD9FBF2854C.jpg">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-08_104120.png">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-08_104915.png">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-08_105039.png">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_230545.png">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_230707.png">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_231223.png">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_231301.png">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_231447.png">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_231719.png">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_232042.png">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_232206.png">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_232224.png">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_232348.png">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_232405.png">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_232520.png">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_232540.png">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2017/12/qrcode_for_gh_5c46969f2957_258-1-1.jpg">
-<meta property="og:updated_time" content="2018-04-13T15:02:39.140Z">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2016/08/D620E97E-4AD3-4499-8BB8-DFD9FBF2854C.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-08_104120.png">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-08_104915.png">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-08_105039.png">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-14_230545.png">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-14_230707.png">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-14_231223.png">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-14_231301.png">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-14_231447.png">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-14_231719.png">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-14_232042.png">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-14_232206.png">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-14_232224.png">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-14_232348.png">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-14_232405.png">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-14_232520.png">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-14_232540.png">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2017/12/qrcode_for_gh_5c46969f2957_258-1-1.jpg">
+<meta property="og:updated_time" content="2018-05-11T07:37:22.794Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cacti95计费配置">
 <meta name="twitter:description" content="一.95计费　95计费（95th Percentile charging）95计费是把一个结算时间里的流量（通常为一个月），按每5分钟统计一次，取流量最高值做一个点。这样一个月会得到很多流量峰值点。然后把图中高流量的5%的点去掉，按照剩下（100-5）% 来计算费用。如果是每月结一次款。每5分钟取一个流量最高点，1个小时12个点，1天12×24个点，一个月按30天算12×24×30=8640个点，">
-<meta name="twitter:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/D620E97E-4AD3-4499-8BB8-DFD9FBF2854C.jpg">
+<meta name="twitter:image" content="https://img.cactifans.com/wp-content/uploads/2016/08/D620E97E-4AD3-4499-8BB8-DFD9FBF2854C.jpg">
 
 
 
@@ -348,9 +348,9 @@
       
 
       
-        <h2 id="一-95计费"><a href="#一-95计费" class="headerlink" title="一.95计费"></a>一.95计费</h2><p>　95计费（95th Percentile charging）95计费是把一个结算时间里的流量（通常为一个月），按每5分钟统计一次，取流量最高值做一个点。这样一个月会得到很多流量峰值点。然后把图中高流量的5%的点去掉，按照剩下（100-5）% 来计算费用。<br>如果是每月结一次款。每5分钟取一个流量最高点，1个小时12个点，1天12×24个点，一个月按30天算12×24×30=8640个点，然后把数值最高的5%的点去掉，剩下的最高带宽就是95计费的计费值了。需要计费的点数是8640-432=8208个点。其中有432个点不用计费，就是异常高流量的时间为432点×5分钟/60分钟/小时=36个小时，即每月不超过36小时的异常大带宽（流量），不影响本月的计费。<br><a id="more"></a><br>直接导入95计费模版，即可实现95计费<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/D620E97E-4AD3-4499-8BB8-DFD9FBF2854C.jpg" alt="5"></p>
-<h2 id="二-95计费聚合"><a href="#二-95计费聚合" class="headerlink" title="二.95计费聚合"></a>二.95计费聚合</h2><p> 95聚合可聚合几个端口的流量，端口不需要在一个主机，可以分布在多个主机<br>创建图形，这里选择图形在那个主机下查看<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-08_104120.png" alt="2"><br>默认不用改，修改图形名称<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-08_104915.png" alt="2"><br>添加聚合端口<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-08_105039.png" alt="2"><br>选择需要聚合的主机端口，注意类型<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_230545.png" alt="2"><br>如图，依次添加需要聚合的端口<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_230707.png" alt="2"><br>添加总流量数据<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_231223.png" alt="2"><br>总流量<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_231301.png" alt="2"><br>添加聚合Current流量<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_231447.png" alt="2"><br>添加聚合Average流量<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_231719.png" alt="2"><br>添加聚合Max流量<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_232042.png" alt="2"><br>添加累计流量图<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_232206.png" alt="2"><br>效果<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_232224.png" alt="2"><br>添加95线<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_232348.png" alt="2"><br>效果<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_232405.png" alt="2"><br>添加聚合95流量数字<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_232520.png" alt="2"><br>最终效果<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/08/2016-08-14_232540.png" alt="2"><br>关于95计费的具体参数，可以查看cacti官方文档<br><a href="http://www.cacti.net/downloads/docs/html/variables.html#GRAPH_VARIABLES" target="_blank" rel="external">cacti参数</a></p>
-<p><strong>如果觉得我的文章对您有用，请关注我的公众号，有更多技术干货！</strong><br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2017/12/qrcode_for_gh_5c46969f2957_258-1-1.jpg" alt="微信"></p>
+        <h2 id="一-95计费"><a href="#一-95计费" class="headerlink" title="一.95计费"></a>一.95计费</h2><p>　95计费（95th Percentile charging）95计费是把一个结算时间里的流量（通常为一个月），按每5分钟统计一次，取流量最高值做一个点。这样一个月会得到很多流量峰值点。然后把图中高流量的5%的点去掉，按照剩下（100-5）% 来计算费用。<br>如果是每月结一次款。每5分钟取一个流量最高点，1个小时12个点，1天12×24个点，一个月按30天算12×24×30=8640个点，然后把数值最高的5%的点去掉，剩下的最高带宽就是95计费的计费值了。需要计费的点数是8640-432=8208个点。其中有432个点不用计费，就是异常高流量的时间为432点×5分钟/60分钟/小时=36个小时，即每月不超过36小时的异常大带宽（流量），不影响本月的计费。<br><a id="more"></a><br>直接导入95计费模版，即可实现95计费<br><img src="https://img.cactifans.com/wp-content/uploads/2016/08/D620E97E-4AD3-4499-8BB8-DFD9FBF2854C.jpg" alt="5"></p>
+<h2 id="二-95计费聚合"><a href="#二-95计费聚合" class="headerlink" title="二.95计费聚合"></a>二.95计费聚合</h2><p> 95聚合可聚合几个端口的流量，端口不需要在一个主机，可以分布在多个主机<br>创建图形，这里选择图形在那个主机下查看<br><img src="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-08_104120.png" alt="2"><br>默认不用改，修改图形名称<br><img src="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-08_104915.png" alt="2"><br>添加聚合端口<br><img src="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-08_105039.png" alt="2"><br>选择需要聚合的主机端口，注意类型<br><img src="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-14_230545.png" alt="2"><br>如图，依次添加需要聚合的端口<br><img src="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-14_230707.png" alt="2"><br>添加总流量数据<br><img src="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-14_231223.png" alt="2"><br>总流量<br><img src="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-14_231301.png" alt="2"><br>添加聚合Current流量<br><img src="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-14_231447.png" alt="2"><br>添加聚合Average流量<br><img src="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-14_231719.png" alt="2"><br>添加聚合Max流量<br><img src="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-14_232042.png" alt="2"><br>添加累计流量图<br><img src="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-14_232206.png" alt="2"><br>效果<br><img src="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-14_232224.png" alt="2"><br>添加95线<br><img src="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-14_232348.png" alt="2"><br>效果<br><img src="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-14_232405.png" alt="2"><br>添加聚合95流量数字<br><img src="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-14_232520.png" alt="2"><br>最终效果<br><img src="https://img.cactifans.com/wp-content/uploads/2016/08/2016-08-14_232540.png" alt="2"><br>关于95计费的具体参数，可以查看cacti官方文档<br><a href="http://www.cacti.net/downloads/docs/html/variables.html#GRAPH_VARIABLES" target="_blank" rel="external">cacti参数</a></p>
+<p><strong>如果觉得我的文章对您有用，请关注我的公众号，有更多技术干货！</strong><br><img src="https://img.cactifans.com/wp-content/uploads/2017/12/qrcode_for_gh_5c46969f2957_258-1-1.jpg" alt="微信"></p>
 
       
     </div>

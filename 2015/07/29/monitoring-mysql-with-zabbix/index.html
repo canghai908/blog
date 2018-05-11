@@ -86,14 +86,14 @@
 <meta property="og:url" content="https://blog.cactifans.com/2015/07/29/monitoring-mysql-with-zabbix/index.html">
 <meta property="og:site_name" content="canghai">
 <meta property="og:description" content="使用go语言写了一个采集mysql性能的小程序，通过SDK连接mysql数据库，采集数据库性能指标，同时采集远程数据库的性能，大家可试用一下，欢迎提出修改意见和建议 被监控端设置监控下载：Linux：mymon_x86.tar.gzmymon_x64.tar.gz">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/07/1.png">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/07/2.png">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/07/3.png">
-<meta property="og:updated_time" content="2018-03-03T09:41:45.768Z">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2015/07/1.png">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2015/07/2.png">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2015/07/3.png">
+<meta property="og:updated_time" content="2018-05-11T07:37:21.677Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="monitoring mysql with zabbix">
 <meta name="twitter:description" content="使用go语言写了一个采集mysql性能的小程序，通过SDK连接mysql数据库，采集数据库性能指标，同时采集远程数据库的性能，大家可试用一下，欢迎提出修改意见和建议 被监控端设置监控下载：Linux：mymon_x86.tar.gzmymon_x64.tar.gz">
-<meta name="twitter:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/07/1.png">
+<meta name="twitter:image" content="https://img.cactifans.com/wp-content/uploads/2015/07/1.png">
 
 
 
@@ -345,8 +345,8 @@
 <p>登录数据库的账号，密码等信息，log项目不用设置，默认即可<br>设置好之后重启zabixx agent<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service zabbix-agent restart</div></pre></td></tr></table></figure></p>
 <h2 id="zabbix服务端设置"><a href="#zabbix服务端设置" class="headerlink" title="zabbix服务端设置"></a>zabbix服务端设置</h2><p>测试agent是否工作正常<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/bin/zabbix_get -s 192.168.7.186 -k mysql.status[GlobalStatus,Uptime]</div></pre></td></tr></table></figure></p>
 <p>如果有一下回显，表示工作正常<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[root@vm153 ~]#  /usr/local/bin/zabbix_get -s 192.168.7.186 -k mysql.status[GlobalStatus,Uptime]</div><div class="line">12364726</div><div class="line">[root@vm153 ~]#</div></pre></td></tr></table></figure></p>
-<p>导入模版：<a href="https://dl.cactifans.com/tools/zabbix_mysql_templates.tar.gz" target="_blank" rel="external">zabbix_mysql_templates.xml</a><br>并关联到主机<br>效果<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/07/1.png" alt="screen1"><br>参数<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/07/2.png" alt="screen2"></p>
-<p>PS：可自行添加对应key可监控项目，模版自带了几种，脚本包括800多项目，<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/07/3.png" alt="screen3"><br>具体更具key定义，括号内第一项为key类型，分GlobalStatus和GlobalVariables二种，后面的数值为在mysql里执行“SHOW /<em>!50001 GLOBAL </em>/ STATUS”和“SHOW /<em>!50001 GLOBAL </em>/ VARIABLES”，对应的key，注意有些数值为固定数值，有些key的类型为每秒速差，自行添加.</p>
+<p>导入模版：<a href="https://dl.cactifans.com/tools/zabbix_mysql_templates.tar.gz" target="_blank" rel="external">zabbix_mysql_templates.xml</a><br>并关联到主机<br>效果<br><img src="https://img.cactifans.com/wp-content/uploads/2015/07/1.png" alt="screen1"><br>参数<br><img src="https://img.cactifans.com/wp-content/uploads/2015/07/2.png" alt="screen2"></p>
+<p>PS：可自行添加对应key可监控项目，模版自带了几种，脚本包括800多项目，<br><img src="https://img.cactifans.com/wp-content/uploads/2015/07/3.png" alt="screen3"><br>具体更具key定义，括号内第一项为key类型，分GlobalStatus和GlobalVariables二种，后面的数值为在mysql里执行“SHOW /<em>!50001 GLOBAL </em>/ STATUS”和“SHOW /<em>!50001 GLOBAL </em>/ VARIABLES”，对应的key，注意有些数值为固定数值，有些key的类型为每秒速差，自行添加.</p>
 
       
     </div>

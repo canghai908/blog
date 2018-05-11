@@ -86,13 +86,13 @@
 <meta property="og:url" content="https://blog.cactifans.com/2015/07/24/monitoring-tomcat-with-zabbix/index.html">
 <meta property="og:site_name" content="canghai">
 <meta property="og:description" content="zabbix提供了一个java gateway的应用去监控jmx（Java Management Extensions，即Java管理扩展）是一个为应用程序、设备、系统等植入管理功能的框架。JMX可以跨越一系列异构操作系统平台、系统体系结构和网络传输协议，灵活的开发无缝集成的系统、网络和服务管理应用。 一. Zabbix 的JMX监控架构">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/07/01.jpg">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/07/02-1024x594.jpg">
-<meta property="og:updated_time" content="2018-03-03T09:52:42.389Z">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2015/07/01.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2015/07/02-1024x594.jpg">
+<meta property="og:updated_time" content="2018-05-11T07:37:19.797Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="monitoring tomcat with zabbix">
 <meta name="twitter:description" content="zabbix提供了一个java gateway的应用去监控jmx（Java Management Extensions，即Java管理扩展）是一个为应用程序、设备、系统等植入管理功能的框架。JMX可以跨越一系列异构操作系统平台、系统体系结构和网络传输协议，灵活的开发无缝集成的系统、网络和服务管理应用。 一. Zabbix 的JMX监控架构">
-<meta name="twitter:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/07/01.jpg">
+<meta name="twitter:image" content="https://img.cactifans.com/wp-content/uploads/2015/07/01.jpg">
 
 
 
@@ -334,7 +334,7 @@
 
       
         <p>zabbix提供了一个java gateway的应用去监控jmx（Java Management Extensions，即Java管理扩展）是一个为应用程序、设备、系统等植入管理功能的框架。JMX可以跨越一系列异构操作系统平台、系统体系结构和网络传输协议，灵活的开发无缝集成的系统、网络和服务管理应用。</p>
-<h2 id="一-Zabbix-的JMX监控架构"><a href="#一-Zabbix-的JMX监控架构" class="headerlink" title="一. Zabbix 的JMX监控架构"></a>一. Zabbix 的JMX监控架构</h2><p><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/07/01.jpg" alt="enter image description here"></p>
+<h2 id="一-Zabbix-的JMX监控架构"><a href="#一-Zabbix-的JMX监控架构" class="headerlink" title="一. Zabbix 的JMX监控架构"></a>一. Zabbix 的JMX监控架构</h2><p><img src="https://img.cactifans.com/wp-content/uploads/2015/07/01.jpg" alt="enter image description here"></p>
 <a id="more"></a>
 <h2 id="二-安装Java-gateway［zabbix服务端操作］"><a href="#二-安装Java-gateway［zabbix服务端操作］" class="headerlink" title="二.安装Java gateway［zabbix服务端操作］"></a>二.安装Java gateway［zabbix服务端操作］</h2><h3 id="1-安装jdk"><a href="#1-安装jdk" class="headerlink" title="1.安装jdk"></a>1.安装jdk</h3><p>首先要安装jdk，我的系统位redhat 6.4 x64位，我使用rpm包安装jdk，从<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html下载最新的jdk，rpm包（我使用7u79版本，最新为8）并上传到zabbix" target="_blank" rel="external">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html下载最新的jdk，rpm包（我使用7u79版本，最新为8）并上传到zabbix</a> server<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm －ivh jdk-7u79-linux-x64.rpm</div></pre></td></tr></table></figure></p>
 <p>安装成功之后添加系统环境变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi /etc/profile</div></pre></td></tr></table></figure></p>
@@ -371,7 +371,7 @@
 <p>在zabbix server上用zabbix_get执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">zabbix_get -s 192.168.7.153 -k tomcat.context.discovery</div></pre></td></tr></table></figure></p>
 <p>如果能回显如下数据表示获取成功<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"data"</span>: [</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"&#123;#CONTEXT&#125;"</span>: <span class="string">"context=/manager"</span></div><div class="line">        &#125;, </div><div class="line">        &#123;</div><div class="line">            <span class="attr">"&#123;#CONTEXT&#125;"</span>: <span class="string">"context=/omai"</span></div><div class="line">        &#125;, </div><div class="line">        &#123;</div><div class="line">            <span class="attr">"&#123;#CONTEXT&#125;"</span>: <span class="string">"context=/examples"</span></div><div class="line">        &#125;, </div><div class="line">        &#123;</div><div class="line">            <span class="attr">"&#123;#CONTEXT&#125;"</span>: <span class="string">"context=/docs"</span></div><div class="line">        &#125;, </div><div class="line">        &#123;</div><div class="line">            <span class="attr">"&#123;#CONTEXT&#125;"</span>: <span class="string">"context=/"</span></div><div class="line">        &#125;, </div><div class="line">        &#123;</div><div class="line">            <span class="attr">"&#123;#CONTEXT&#125;"</span>: <span class="string">"context=/host-manager"</span></div><div class="line">        &#125;</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h3 id="2-添加模版"><a href="#2-添加模版" class="headerlink" title="2.添加模版"></a>2.添加模版</h3><p>模版我已经做好了大家可直接倒入使用<br>模版下载：<a href="https://dl.cactifans.com/tools/zabbix_tomcat_templates.tar.gz" target="_blank" rel="external">zabbix_tomcat_templates.xml</a>（2016年10月24日新地址已更新！）<br>导入到zabbix，并关联到主机</p>
-<h2 id="五-最终效果"><a href="#五-最终效果" class="headerlink" title="五.最终效果"></a>五.最终效果</h2><p><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2015/07/02-1024x594.jpg" alt="enter image description here"></p>
+<h2 id="五-最终效果"><a href="#五-最终效果" class="headerlink" title="五.最终效果"></a>五.最终效果</h2><p><img src="https://img.cactifans.com/wp-content/uploads/2015/07/02-1024x594.jpg" alt="enter image description here"></p>
 
       
     </div>

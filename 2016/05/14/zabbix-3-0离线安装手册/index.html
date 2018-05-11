@@ -86,20 +86,20 @@
 <meta property="og:url" content="https://blog.cactifans.com/2016/05/14/zabbix-3-0离线安装手册/index.html">
 <meta property="og:site_name" content="canghai">
 <meta property="og:description" content="一.环境介绍操作系统：CentOS-7-x86_64-Minimal-1511.iso最小化安装，语言选择英文iso下载地址：http://mirrors.163.com/centos/7.2.1511/isos/x86_64/CentOS-7-x86_64-Minimal-1511.isozabbix：zabbix 3.0.2rpm包下载地址：https://dl.cactifans.com/z">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/05/2016-05-14_094913.png">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/05/2016-05-14_095011.png">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/05/2016-05-14_095307.png">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/05/2016-05-14_095510.png">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/05/2016-05-14_095609.png">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/05/2016-05-14_095706.png">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/05/2016-05-14_095813.png">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/05/2016-05-14_100712.png">
-<meta property="og:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2017/12/qrcode_for_gh_5c46969f2957_258-1-1.jpg">
-<meta property="og:updated_time" content="2018-03-03T09:46:24.838Z">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2016/05/2016-05-14_094913.png">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2016/05/2016-05-14_095011.png">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2016/05/2016-05-14_095307.png">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2016/05/2016-05-14_095510.png">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2016/05/2016-05-14_095609.png">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2016/05/2016-05-14_095706.png">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2016/05/2016-05-14_095813.png">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2016/05/2016-05-14_100712.png">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2017/12/qrcode_for_gh_5c46969f2957_258-1-1.jpg">
+<meta property="og:updated_time" content="2018-05-11T07:37:12.730Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="zabbix 3.0离线安装手册">
 <meta name="twitter:description" content="一.环境介绍操作系统：CentOS-7-x86_64-Minimal-1511.iso最小化安装，语言选择英文iso下载地址：http://mirrors.163.com/centos/7.2.1511/isos/x86_64/CentOS-7-x86_64-Minimal-1511.isozabbix：zabbix 3.0.2rpm包下载地址：https://dl.cactifans.com/z">
-<meta name="twitter:image" content="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/05/2016-05-14_094913.png">
+<meta name="twitter:image" content="https://img.cactifans.com/wp-content/uploads/2016/05/2016-05-14_094913.png">
 
 
 
@@ -365,15 +365,15 @@
 <p>修改如下参数，并保存<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">max_execution_time = 300</div><div class="line">max_input_time = 300</div><div class="line">post_max_size = 16M</div><div class="line">date.timezone = Asia/Shanghai</div></pre></td></tr></table></figure></p>
 <p>设置好之后重启httpd服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl restart httpd</div></pre></td></tr></table></figure></p>
 <p>导入数据库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /usr/share/doc/zabbix-server-mysql-3.0.2</div><div class="line">zcat create.sql.gz | mysql -uroot -p123456 zabbix</div></pre></td></tr></table></figure></p>
-<h3 id="2-web页面初始化"><a href="#2-web页面初始化" class="headerlink" title="2.web页面初始化"></a>2.web页面初始化</h3><p>浏览器打开<a href="http://ip/zabbix" target="_blank" rel="external">http://ip/zabbix</a> (推荐使用chrome浏览器)就可以看到zabbix 安装的web页面<br>点击Next step<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/05/2016-05-14_094913.png" alt="1"><br>检查每个选项是不是ok，查看页面都是ok，直接点Next step<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/05/2016-05-14_095011.png" alt="2"><br>输入zabbix数据库密码，别的都不用改（zabbix数据库的密码为zabbixpwd123，前面设置的）<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/05/2016-05-14_095307.png" alt="3"><br>直接点Next step，不用修改默认就成<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/05/2016-05-14_095510.png" alt="4"><br>这里概显示了设置，确认无误，直接点Next step<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/05/2016-05-14_095609.png" alt="5"><br>点击Finish完成web页面初始化<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/05/2016-05-14_095706.png" alt="6"><br>登录zabbix，默认的用户名为<strong>admin</strong>，密码为<strong>zabbix</strong><br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/05/2016-05-14_095813.png" alt="7"></p>
+<h3 id="2-web页面初始化"><a href="#2-web页面初始化" class="headerlink" title="2.web页面初始化"></a>2.web页面初始化</h3><p>浏览器打开<a href="http://ip/zabbix" target="_blank" rel="external">http://ip/zabbix</a> (推荐使用chrome浏览器)就可以看到zabbix 安装的web页面<br>点击Next step<br><img src="https://img.cactifans.com/wp-content/uploads/2016/05/2016-05-14_094913.png" alt="1"><br>检查每个选项是不是ok，查看页面都是ok，直接点Next step<br><img src="https://img.cactifans.com/wp-content/uploads/2016/05/2016-05-14_095011.png" alt="2"><br>输入zabbix数据库密码，别的都不用改（zabbix数据库的密码为zabbixpwd123，前面设置的）<br><img src="https://img.cactifans.com/wp-content/uploads/2016/05/2016-05-14_095307.png" alt="3"><br>直接点Next step，不用修改默认就成<br><img src="https://img.cactifans.com/wp-content/uploads/2016/05/2016-05-14_095510.png" alt="4"><br>这里概显示了设置，确认无误，直接点Next step<br><img src="https://img.cactifans.com/wp-content/uploads/2016/05/2016-05-14_095609.png" alt="5"><br>点击Finish完成web页面初始化<br><img src="https://img.cactifans.com/wp-content/uploads/2016/05/2016-05-14_095706.png" alt="6"><br>登录zabbix，默认的用户名为<strong>admin</strong>，密码为<strong>zabbix</strong><br><img src="https://img.cactifans.com/wp-content/uploads/2016/05/2016-05-14_095813.png" alt="7"></p>
 <h3 id="3-zabbix服务初始化"><a href="#3-zabbix服务初始化" class="headerlink" title="3.zabbix服务初始化"></a>3.zabbix服务初始化</h3><p>修改zabbix server配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi /etc/zabbix/zabbix_server.conf</div></pre></td></tr></table></figure></p>
 <p>修改以下选项<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DBPassword=zabbixpwd123</div></pre></td></tr></table></figure></p>
 <p>启动zabbix server,并设置开机启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">systemctl start zabbix-server</div><div class="line">systemctl enable zabbix-server</div></pre></td></tr></table></figure></p>
 <p>启动zabbix agent,并设置开机启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">systemctl start zabbix-agent</div><div class="line">systemctl enable zabbix-agent</div></pre></td></tr></table></figure></p>
-<p>再次查看zabbix web页面，显示zabbix server 已处于运行状态<br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2016/05/2016-05-14_100712.png" alt="8"><br>在web页面启用zabbix server自己的监控，依次点击Congfiguration——&gt;Hosts,点击zabbix server后面的Disabled，启用zabbix server主机的自身监控</p>
+<p>再次查看zabbix web页面，显示zabbix server 已处于运行状态<br><img src="https://img.cactifans.com/wp-content/uploads/2016/05/2016-05-14_100712.png" alt="8"><br>在web页面启用zabbix server自己的监控，依次点击Congfiguration——&gt;Hosts,点击zabbix server后面的Disabled，启用zabbix server主机的自身监控</p>
 <h3 id="4-问题诊断"><a href="#4-问题诊断" class="headerlink" title="4.问题诊断"></a>4.问题诊断</h3><p>可通过命令查看zabbix server和zabbix agent的日志，查看错误，根据错误解决问题<br>zabbix server日志<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tail -f /var/log/zabbix/zabbix_server.log</div></pre></td></tr></table></figure></p>
 <p>zabbix agent 日志<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tail -f /var/log/zabbix/zabbix_agentd.log</div></pre></td></tr></table></figure></p>
-<p><strong>如果觉得我的文章对您有用，请关注我的公众号，有更多技术干货！</strong><br><img src="http://cactifans.u.qiniudn.com/wp-content/uploads/2017/12/qrcode_for_gh_5c46969f2957_258-1-1.jpg" alt="微信"></p>
+<p><strong>如果觉得我的文章对您有用，请关注我的公众号，有更多技术干货！</strong><br><img src="https://img.cactifans.com/wp-content/uploads/2017/12/qrcode_for_gh_5c46969f2957_258-1-1.jpg" alt="微信"></p>
 
       
     </div>
