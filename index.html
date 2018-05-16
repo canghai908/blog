@@ -248,6 +248,144 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.cactifans.com/2018/05/16/Zabbix监控SSL证书有效期/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="当代张思德">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/1450994?v=3&s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="canghai">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/16/Zabbix监控SSL证书有效期/" itemprop="url">Zabbix监控SSL证书有效期</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-16T14:27:30+08:00">
+                2018-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/05/16/Zabbix监控SSL证书有效期/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::https://blog.cactifans.com/2018/05/16/Zabbix监控SSL证书有效期/" class="cy_cmt_count" data-xid="2018/05/16/Zabbix监控SSL证书有效期/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="设计初衷"><a href="#设计初衷" class="headerlink" title="设计初衷"></a>设计初衷</h2><p>由于业务需要，最近通过Let’s Encrypt申请了一些SSL证书，而证书有效期为3个月，需要在证书到期之前renew。由于域名较多经常忘记renew，导致证书过期，因此想通过Zabbix的方式监控证书的到期时间，提前告警以便即时renew证书</p>
+<h2 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h2><p>脚本下载地址；<br>Linux kernel 3.x  x86_64: <a href="https://dl.cactifans.com/zabbix/zabbix_sslooker.kernel_3.10.0.x86_64.tar.gz" target="_blank" rel="external">https://dl.cactifans.com/zabbix/zabbix_sslooker.kernel_3.10.0.x86_64.tar.gz</a><br>Linux kernel 2.x    x86_64:<a href="https://dl.cactifans.com/zabbix/zabbix_sslooker.kernel_2.6.32.x86_64.tar.gz" target="_blank" rel="external">https://dl.cactifans.com/zabbix/zabbix_sslooker.kernel_2.6.32.x86_64.tar.gz</a><br>Windows AMD 64   x86_64:<a href="https://dl.cactifans.com/zabbix/zabbix_sslooker.windows-amd64.zip" target="_blank" rel="external">https://dl.cactifans.com/zabbix/zabbix_sslooker.windows-amd64.zip</a></p>
+<p>注意事项：<br>1.获取证书有效期为<strong>小时</strong><br>2.<strong>自签发证书</strong>暂不支持检测</p>
+<h3 id="Zabbix-Agent配置"><a href="#Zabbix-Agent配置" class="headerlink" title="Zabbix Agent配置"></a>Zabbix Agent配置</h3><p>下载对应的脚本到安装了Zabbix Agent并可以访问到检测证书网站的机器<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/src/</div><div class="line">wget https://dl.cactifans.com/zabbix/zabbix_sslooker.kernel_3.10.0.x86_64.tar.gz</div><div class="line">tar zxvf zabbix_sslooker.kernel_3.10.0.x86_64.tar.gz</div><div class="line">chmod a+x sslooker</div></pre></td></tr></table></figure></p>
+<p>修改agent的配置文件zabbix_agent，增加如下内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">UserParameter=sslcheck[*],/usr/<span class="built_in">local</span>/src/sslooker <span class="variable">$1</span> <span class="variable">$2</span></div></pre></td></tr></table></figure></p>
+<p>sslcheck为zabbix 的item key，/usr/local/zabbix/share/sslooker为下载解压后的脚本可执行程序<br>添加之后，重启Zabbix Agent<br>在Zabbix Server上通过Zabbix get测试是否正常<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">zabbix_get -s  127.0.0.1 -k sslcheck[baidu.com,443]</div></pre></td></tr></table></figure></p>
+<p>如图<br><img src="https://img.cactifans.com/wp-content/uploads/2018/05/sslooker1.jpg" alt="1"><br>由于我使用zabbix server来检测证书，所以直接get本机的agent地址，sslchek为刚才脚本里定义的key，方括号内为参数，第一个为域名，第二个为端口。返回数值为证书的有效时间，单位为小时</p>
+<h3 id="Zabbix-Server配置"><a href="#Zabbix-Server配置" class="headerlink" title="Zabbix Server配置"></a>Zabbix Server配置</h3><p>进入zabbix server，在对应的机器上建立对应的Item及Trigger即可告警。这里以检测baidu网站证书为例子，并设置过期48小时之前告警。<br>设置Item<br><img src="https://img.cactifans.com/wp-content/uploads/2018/05/sslooker2.jpg" alt="item"><br>设置Trigger<br><img src="https://img.cactifans.com/wp-content/uploads/2018/05/sslooker3.jpg" alt="trigger"><br>最新数据<br><img src="https://img.cactifans.com/wp-content/uploads/2018/05/sslooker4.jpg" alt="last"><br>多个域名可以通过建立多个Item的方式监控，或通过主机宏的方式监控</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://blog.cactifans.com/2018/04/19/Cacti报表系统/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1493,141 +1631,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.cactifans.com/2018/01/20/Cacti95计费配置/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="当代张思德">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/1450994?v=3&s=460">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="canghai">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/20/Cacti95计费配置/" itemprop="url">Cacti95计费配置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-20T16:12:06+08:00">
-                2018-01-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/01/20/Cacti95计费配置/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::https://blog.cactifans.com/2018/01/20/Cacti95计费配置/" class="cy_cmt_count" data-xid="2018/01/20/Cacti95计费配置/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="一-95计费"><a href="#一-95计费" class="headerlink" title="一.95计费"></a>一.95计费</h2><p>　95计费（95th Percentile charging）95计费是把一个结算时间里的流量（通常为一个月），按每5分钟统计一次，取流量最高值做一个点。这样一个月会得到很多流量峰值点。然后把图中高流量的5%的点去掉，按照剩下（100-5）% 来计算费用。<br>如果是每月结一次款。每5分钟取一个流量最高点，1个小时12个点，1天12×24个点，一个月按30天算12×24×30=8640个点，然后把数值最高的5%的点去掉，剩下的最高带宽就是95计费的计费值了。需要计费的点数是8640-432=8208个点。其中有432个点不用计费，就是异常高流量的时间为432点×5分钟/60分钟/小时=36个小时，即每月不超过36小时的异常大带宽（流量），不影响本月的计费。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/01/20/Cacti95计费配置/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1682,7 +1685,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1695,7 +1698,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
