@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="cacti,报表," />
+  <meta name="keywords" content="Json,zabbix,4,Http agent," />
 
 
 
@@ -79,17 +79,25 @@
 
 
 
-<meta name="description" content="本系统是结合Cacti监控，通过读取Cacti监控数据，导出指定设备的详情数据。 设计初衷Cacti是一套基于PHP,MySQL,SNMP及RRDTool开发的开源网络流量监测图形分析工具。主要给予一下原因考虑，开发设计此系统  如果需要导出某一设备一段时间内的详情数据，Cacti默认只能导出2天左右的详情数据（默认为5分钟一采集）。如果需要修改，可参考此文章http://www.cactifan">
-<meta name="keywords" content="cacti,报表">
+<meta name="description" content="ZABBIX 于4月27日推出推出了4.0.0alpha6，在Release Notes里的New Features里看到里不少Features  ZBXNEXT-4417added real time export of events, history and trends in newline delimited JSON formatZBXNEXT-4458improved logging">
+<meta name="keywords" content="Json,zabbix,4,Http agent">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Cacti报表系统">
-<meta property="og:url" content="https://blog.cactifans.com/2018/04/19/Cacti报表系统/index.html">
+<meta property="og:title" content="ZABBIX4.0.0alpha6新特性体验">
+<meta property="og:url" content="https://blog.cactifans.com/2018/05/24/ZABBIX4-0-0alpha6新特性体验/index.html">
 <meta property="og:site_name" content="canghai">
-<meta property="og:description" content="本系统是结合Cacti监控，通过读取Cacti监控数据，导出指定设备的详情数据。 设计初衷Cacti是一套基于PHP,MySQL,SNMP及RRDTool开发的开源网络流量监测图形分析工具。主要给予一下原因考虑，开发设计此系统  如果需要导出某一设备一段时间内的详情数据，Cacti默认只能导出2天左右的详情数据（默认为5分钟一采集）。如果需要修改，可参考此文章http://www.cactifan">
-<meta property="og:updated_time" content="2018-04-19T12:41:16.867Z">
+<meta property="og:description" content="ZABBIX 于4月27日推出推出了4.0.0alpha6，在Release Notes里的New Features里看到里不少Features  ZBXNEXT-4417added real time export of events, history and trends in newline delimited JSON formatZBXNEXT-4458improved logging">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2018/05/D99353CD-480F-4EED-827C-B020034EEF6A.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2018/05/DB9BCFDD-316D-488A-9DD7-18F4A0AEC216.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2018/05/718C1781-374F-4912-94F7-F53F033EDCB7.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2018/05/C8356BEF-5C53-4F1E-96ED-5F4A9ADAF985.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2018/05/25E7C7CE-996B-4844-A4B6-0B731B4C2317.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2018/05/C619B745-4196-42BB-9832-13D92200E10F.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2017/12/qrcode_for_gh_5c46969f2957_258-1-1.jpg">
+<meta property="og:updated_time" content="2018-05-24T06:33:33.507Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Cacti报表系统">
-<meta name="twitter:description" content="本系统是结合Cacti监控，通过读取Cacti监控数据，导出指定设备的详情数据。 设计初衷Cacti是一套基于PHP,MySQL,SNMP及RRDTool开发的开源网络流量监测图形分析工具。主要给予一下原因考虑，开发设计此系统  如果需要导出某一设备一段时间内的详情数据，Cacti默认只能导出2天左右的详情数据（默认为5分钟一采集）。如果需要修改，可参考此文章http://www.cactifan">
+<meta name="twitter:title" content="ZABBIX4.0.0alpha6新特性体验">
+<meta name="twitter:description" content="ZABBIX 于4月27日推出推出了4.0.0alpha6，在Release Notes里的New Features里看到里不少Features  ZBXNEXT-4417added real time export of events, history and trends in newline delimited JSON formatZBXNEXT-4458improved logging">
+<meta name="twitter:image" content="https://img.cactifans.com/wp-content/uploads/2018/05/D99353CD-480F-4EED-827C-B020034EEF6A.jpg">
 
 
 
@@ -119,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="https://blog.cactifans.com/2018/04/19/Cacti报表系统/"/>
+  <link rel="canonical" href="https://blog.cactifans.com/2018/05/24/ZABBIX4-0-0alpha6新特性体验/"/>
 
 
 
 
 
-  <title>Cacti报表系统 | canghai</title>
+  <title>ZABBIX4.0.0alpha6新特性体验 | canghai</title>
   
 
 
@@ -252,7 +260,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.cactifans.com/2018/04/19/Cacti报表系统/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cactifans.com/2018/05/24/ZABBIX4-0-0alpha6新特性体验/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="当代张思德">
@@ -269,7 +277,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Cacti报表系统</h1>
+          <h1 class="post-title" itemprop="name headline">ZABBIX4.0.0alpha6新特性体验</h1>
         
 
         <div class="post-meta">
@@ -281,8 +289,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-19T20:37:01+08:00">
-                2018-04-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-24T14:30:56+08:00">
+                2018-05-24
               </time>
             
 
@@ -301,8 +309,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2018/04/19/Cacti报表系统/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/04/19/Cacti报表系统/" itemprop="commentsCount"></span>
+                <a href="/2018/05/24/ZABBIX4-0-0alpha6新特性体验/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/05/24/ZABBIX4-0-0alpha6新特性体验/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -330,22 +338,22 @@
       
 
       
-        <p>本系统是结合Cacti监控，通过读取Cacti监控数据，导出指定设备的详情数据。</p>
-<h2 id="设计初衷"><a href="#设计初衷" class="headerlink" title="设计初衷"></a>设计初衷</h2><p>Cacti是一套基于PHP,MySQL,SNMP及RRDTool开发的开源网络流量监测图形分析工具。主要给予一下原因考虑，开发设计此系统</p>
-<ol>
-<li>如果需要导出某一设备一段时间内的详情数据，Cacti默认只能导出2天左右的详情数据（默认为5分钟一采集）。如果需要修改，可参考此文章<a href="http://www.cactifans.org/cacti/1564.html" target="_blank" rel="external">http://www.cactifans.org/cacti/1564.html</a> 修改，修改之后需要删除所有RRD文件（Cacti数据存储，所有<strong>历史监控数据将会丢失</strong>）</li>
-<li>如果需要批量导出某些设备的监控数据，在页面操作就会比较麻烦</li>
-</ol>
-<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><a id="more"></a>
-<h4 id="1-添加报表"><a href="#1-添加报表" class="headerlink" title="1. 添加报表"></a>1. 添加报表</h4><p>默认不会读取监控数据。如果采集某一设备的数据并做报表，首先要将该设备需要报表的图形添加到报表<br>点击【报表设置】–选择设备会出现该设备所有的监控图形，选择需要出报表的图形，点击【添加到报表】，添加成功之后，数据就会开始采集，默认为1小时读取一次</p>
-<h4 id="2-报表导出"><a href="#2-报表导出" class="headerlink" title="2. 报表导出"></a>2. 报表导出</h4><p>添加到报表之后，后台程序会自动读取该监控图形的数据，并写入数据库存储。点击【批量报表】选择设备之后，会展示该设备下面添加到报表的所有图形以及已经采集的历史数据时间，以小时为单位。如需要导出数据可选择时间，选择图形之后，点击【导出报表】之后点击【下载报表】就会将所有的图形报表打包成zip下载</p>
-<h4 id="3-日常查询"><a href="#3-日常查询" class="headerlink" title="3. 日常查询"></a>3. 日常查询</h4><p>如需要查询某一图形的数据及信息，可点击【报表查询】，选择对应图形及时间段之后，点击【查询】导出独立的报表</p>
-<h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><ol>
-<li>不添加到报表，系统不会采集数据，自然就无法导出报表数据</li>
-<li>导出文件为xlsx文件，需要用Excel 打开</li>
-<li>如经常导出报表，会在程序的download下生成导出文件，可自行清理，对系统无影响</li>
-<li>默认账号：admin，默认密码：admin，可在后台修改</li>
-</ol>
+        <p>ZABBIX 于4月27日推出推出了4.0.0alpha6，在Release Notes里的New Features里看到里不少Features</p>
+<blockquote>
+<p>ZBXNEXT-4417<br>added real time export of events, history and trends in newline delimited JSON format<br>ZBXNEXT-4458<br>improved logging of Java gateway, added username/password validation for JMX items<br>ZBXNEXT-4411<br>added compression of server-proxy data exchange<br>ZBXNEXT-4488<br>added ability to push data via trapper to HTTP agent item type<br>ZBXNEXT-4358<br>added HTTP agent item type for data gathering via HTTP</p>
+</blockquote>
+<p>基于以上众多的特性，安装一套来体验</p>
+<h3 id="Json数据输出"><a href="#Json数据输出" class="headerlink" title="Json数据输出"></a>Json数据输出</h3><p>可输出zabbix事件/历史数据/趋势数据到json文件。Zabbix Server配置里增加里一个配置数据导出目录和导出文件大小</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">### Option: ExportDir</div><div class="line">#       Directory for real time export of events, history and trends in newline delimited JSON format.</div><div class="line">#       If set, enables real time export.</div><div class="line">#</div><div class="line"># Mandatory: no</div><div class="line"># Default:</div><div class="line">ExportDir=/opt/exp</div><div class="line"></div><div class="line">### Option: ExportFileSize</div><div class="line">#       Maximum size per export file in bytes.</div><div class="line">#       Only used for rotation if ExportDir is set.</div><div class="line">#</div><div class="line"># Mandatory: no</div><div class="line"># Range: 1M-1G</div><div class="line"># Default:</div><div class="line">ExportFileSize=50M</div></pre></td></tr></table></figure>
+<p>ExportDir为导出数据保存的目录，这里填绝对路径，并且需要有zabbix权限<br>ExportFileSize为导出文件大小设置<br>这里配置的输出目录为/opt/exp,配置所有者为zabbix<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chown -R zabbix:zabbix /opt/exp</div></pre></td></tr></table></figure></p>
+<p>配置之后，重启zabbix server 即可在目录看到文件<br><img src="https://img.cactifans.com/wp-content/uploads/2018/05/D99353CD-480F-4EED-827C-B020034EEF6A.jpg" alt="1"><br>文件内容<br><img src="https://img.cactifans.com/wp-content/uploads/2018/05/DB9BCFDD-316D-488A-9DD7-18F4A0AEC216.jpg" alt="2"><br>文件内容为每行一条json数据。</p>
+<h5 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h5><p>可以通过程序读取，输出到Kafka，MQ，Es等，并写入到其他的数据库，也可以做实时的数据处理。与本人去年zabbix 大会上对历史数据的处理有异曲同工之处。哈哈！<br><img src="https://img.cactifans.com/wp-content/uploads/2018/05/718C1781-374F-4912-94F7-F53F033EDCB7.jpg" alt="3"></p>
+<h3 id="Http-Agent"><a href="#Http-Agent" class="headerlink" title="Http Agent"></a>Http Agent</h3><p>在Agent的类型里增加里一种Http Agent，尚不清楚是什么时候添加过来的，和之前的web检测有类似之处，这里主要是通过Agent去请求URL，去采集数据直接写入数据库。<br>点击主机，创建一个item，类型选择http Agent，可以看到选项比较多，<br><img src="https://img.cactifans.com/wp-content/uploads/2018/05/C8356BEF-5C53-4F1E-96ED-5F4A9ADAF985.jpg" alt="4"><br><img src="https://img.cactifans.com/wp-content/uploads/2018/05/25E7C7CE-996B-4844-A4B6-0B731B4C2317.jpg" alt="5"></p>
+<p>主要有以下特性<br>1.支持get/post/put/head等请求方法，支持raw/json/xml为参数<br>2.支持代理访问<br>3.支持Basic/NTLM/SSL等认证<br>这里配置一个获取网站内容的item，配置之后可以获取到内容<br><img src="https://img.cactifans.com/wp-content/uploads/2018/05/C619B745-4196-42BB-9832-13D92200E10F.jpg" alt="6"></p>
+<h5 id="扩展-1"><a href="#扩展-1" class="headerlink" title="扩展"></a>扩展</h5><p>通过此功能，可以对一些接口的数据进行采集，同时可以监控接口状态，比web检测功能丰富</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>以上众多新特性使我们很期待4.0的正式发布！由于为alpha版本，切勿用于生产环境。</p>
+<p><strong>如果觉得我的文章对您有用，请关注我的公众号，有更多技术干货！</strong><br><img src="https://img.cactifans.com/wp-content/uploads/2017/12/qrcode_for_gh_5c46969f2957_258-1-1.jpg" alt="微信"></p>
 
       
     </div>
@@ -363,9 +371,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/cacti/" rel="tag"># cacti</a>
+            <a href="/tags/Json/" rel="tag"># Json</a>
           
-            <a href="/tags/报表/" rel="tag"># 报表</a>
+            <a href="/tags/zabbix/" rel="tag"># zabbix</a>
+          
+            <a href="/tags/4/" rel="tag"># 4</a>
+          
+            <a href="/tags/Http-agent/" rel="tag"># Http agent</a>
           
         </div>
       
@@ -378,8 +390,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/08/zabbix3-4-7版本饼图显示问题/" rel="next" title="zabbix3.4.7版本饼图显示问题">
-                <i class="fa fa-chevron-left"></i> zabbix3.4.7版本饼图显示问题
+              <a href="/2018/05/16/Zabbix监控SSL证书有效期/" rel="next" title="Zabbix监控SSL证书有效期">
+                <i class="fa fa-chevron-left"></i> Zabbix监控SSL证书有效期
               </a>
             
           </div>
@@ -387,10 +399,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/16/Zabbix监控SSL证书有效期/" rel="prev" title="Zabbix监控SSL证书有效期">
-                Zabbix监控SSL证书有效期 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -522,7 +530,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#设计初衷"><span class="nav-number">1.</span> <span class="nav-text">设计初衷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本操作"><span class="nav-number">2.</span> <span class="nav-text">基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-添加报表"><span class="nav-number">2.0.1.</span> <span class="nav-text">1. 添加报表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-报表导出"><span class="nav-number">2.0.2.</span> <span class="nav-text">2. 报表导出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-日常查询"><span class="nav-number">2.0.3.</span> <span class="nav-text">3. 日常查询</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tips"><span class="nav-number">3.</span> <span class="nav-text">Tips</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Json数据输出"><span class="nav-number">1.</span> <span class="nav-text">Json数据输出</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#扩展"><span class="nav-number">1.0.1.</span> <span class="nav-text">扩展</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Http-Agent"><span class="nav-number">2.</span> <span class="nav-text">Http Agent</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#扩展-1"><span class="nav-number">2.0.1.</span> <span class="nav-text">扩展</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number"></span> <span class="nav-text">结语</span></a></div>
             
 
           </div>
