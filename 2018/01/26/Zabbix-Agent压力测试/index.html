@@ -91,7 +91,7 @@
 <meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2018/01/10.jpg">
 <meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2018/01/9.png">
 <meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2017/12/qrcode_for_gh_5c46969f2957_258-1-1.jpg">
-<meta property="og:updated_time" content="2018-05-11T07:37:10.065Z">
+<meta property="og:updated_time" content="2018-05-11T07:37:10.066Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix Agent压力测试">
 <meta name="twitter:description" content="一直以来在zabbix群就经常见有人问到Zabbix Server到底能监控多少主机？如何做压力测试？Zabbx Agent对主机性能有何影响?本文将为你介绍如何对Zabbix Agent进行压力测试。压力测试脚本为py，下载地址https://dl.cactifans.com/zabbix/zabbix-agent-stress-test.py 下载之后最好是放到非压测机器，以免影响测试结果。本">
@@ -336,7 +336,7 @@
       
 
       
-        <p>一直以来在zabbix群就经常见有人问到Zabbix Server到底能监控多少主机？如何做压力测试？Zabbx Agent对主机性能有何影响?本文将为你介绍如何对Zabbix Agent进行压力测试。压力测试脚本为py，下载地址<a href="https://dl.cactifans.com/zabbix/zabbix-agent-stress-test.py" target="_blank" rel="external">https://dl.cactifans.com/zabbix/zabbix-agent-stress-test.py</a> 下载之后最好是放到非压测机器，以免影响测试结果。本次我在zabbix server上测试Agent的压力情况。<br>使用./zabbix-agent-stress-test.py -h可查看使用帮助<br><a id="more"></a></p>
+        <p>一直以来在zabbix群就经常见有人问到Zabbix Server到底能监控多少主机？如何做压力测试？Zabbx Agent对主机性能有何影响?本文将为你介绍如何对Zabbix Agent进行压力测试。压力测试脚本为py，下载地址<a href="https://dl.cactifans.com/zabbix/zabbix-agent-stress-test.py" target="_blank" rel="noopener">https://dl.cactifans.com/zabbix/zabbix-agent-stress-test.py</a> 下载之后最好是放到非压测机器，以免影响测试结果。本次我在zabbix server上测试Agent的压力情况。<br>使用./zabbix-agent-stress-test.py -h可查看使用帮助<br><a id="more"></a></p>
 <p><img src="https://img.cactifans.com/wp-content/uploads/2018/01/8.jpg" alt="1"><br>机器基本配置</p>
 <table>
 <thead>
@@ -365,8 +365,8 @@
 </tbody>
 </table>
 <p>Agent配置文件如下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">PidFile=/var/run/zabbix/zabbix_agentd.pid</div><div class="line">LogFile=/var/<span class="built_in">log</span>/zabbix/zabbix_agentd.log</div><div class="line">LogFileSize=0</div><div class="line">Server=10.110.200.12</div><div class="line">ServerActive=10.110.200.12</div><div class="line">Hostname=mysqldb_16</div></pre></td></tr></table></figure>
-<p>Server为我的zabbix server的ip<br>测试命令如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./zabbix-agent-stress-test.py -s 10.110.200.16 -k <span class="string">"system.run[sleep 1]"</span> -t 4</div></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PidFile=/var/run/zabbix/zabbix_agentd.pid</span><br><span class="line">LogFile=/var/<span class="built_in">log</span>/zabbix/zabbix_agentd.log</span><br><span class="line">LogFileSize=0</span><br><span class="line">Server=10.110.200.12</span><br><span class="line">ServerActive=10.110.200.12</span><br><span class="line">Hostname=mysqldb_16</span><br></pre></td></tr></table></figure>
+<p>Server为我的zabbix server的ip<br>测试命令如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./zabbix-agent-stress-test.py -s 10.110.200.16 -k <span class="string">"system.run[sleep 1]"</span> -t 4</span><br></pre></td></tr></table></figure></p>
 <p>10.110.200.16 为我已安装好的Zabbix  Agent主机。<br>测试结果<br><img src="https://img.cactifans.com/wp-content/uploads/2018/01/10.jpg" alt="2"><br>Agent服务器负载<br><img src="https://img.cactifans.com/wp-content/uploads/2018/01/9.png" alt="3"></p>
 <p>通过以上方法对agent进行测试总体结果如下</p>
 <table>
@@ -405,7 +405,7 @@
 </tr>
 </tbody>
 </table>
-<p>经过以上测试，当StartAgents配置3时，每秒大约2600左右，agent每个进程cpu占用率为9%左右，内存占用很少。修改StartAgents线程时，qps也大概在2600左右，没有明显提升。Agent一般情况下不会对系统造成很大的影响，不过实际系统占用可能与你的自定义脚本有关系。可在<a href="https://github.com/monitoringartist/zabbix-agent-stress-test" target="_blank" rel="external">https://github.com/monitoringartist/zabbix-agent-stress-test</a> 查看更多细节<br>下期为大家介绍对Zabbix Server进行压力测试</p>
+<p>经过以上测试，当StartAgents配置3时，每秒大约2600左右，agent每个进程cpu占用率为9%左右，内存占用很少。修改StartAgents线程时，qps也大概在2600左右，没有明显提升。Agent一般情况下不会对系统造成很大的影响，不过实际系统占用可能与你的自定义脚本有关系。可在<a href="https://github.com/monitoringartist/zabbix-agent-stress-test" target="_blank" rel="noopener">https://github.com/monitoringartist/zabbix-agent-stress-test</a> 查看更多细节<br>下期为大家介绍对Zabbix Server进行压力测试</p>
 <p><strong>如果觉得我的文章对您有用，请关注我的公众号，有更多技术干货！</strong><br><img src="https://img.cactifans.com/wp-content/uploads/2017/12/qrcode_for_gh_5c46969f2957_258-1-1.jpg" alt="微信"></p>
 
       
@@ -530,7 +530,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -543,7 +543,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

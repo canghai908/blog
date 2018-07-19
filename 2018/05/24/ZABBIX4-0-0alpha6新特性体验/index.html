@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Json,zabbix,4,Http agent," />
+  <meta name="keywords" content="zabbix,Json,4,Http agent," />
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="ZABBIX 于4月27日推出了4.0.0alpha6，在Release Notes里的New Features里看到里不少Features  ZBXNEXT-4417added real time export of events, history and trends in newline delimited JSON formatZBXNEXT-4458improved logging of">
-<meta name="keywords" content="Json,zabbix,4,Http agent">
+<meta name="keywords" content="zabbix,Json,4,Http agent">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ZABBIX4.0.0alpha6新特性体验">
 <meta property="og:url" content="https://blog.cactifans.com/2018/05/24/ZABBIX4-0-0alpha6新特性体验/index.html">
@@ -346,8 +346,8 @@
 <p>基于以上众多的特性，安装一套来体验</p>
 <h3 id="Json数据输出"><a href="#Json数据输出" class="headerlink" title="Json数据输出"></a>Json数据输出</h3><p>可输出zabbix事件/历史数据/趋势数据到json文件。Zabbix Server配置里增加里一个配置数据导出目录和导出文件大小</p>
 <a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">### Option: ExportDir</div><div class="line">#       Directory for real time export of events, history and trends in newline delimited JSON format.</div><div class="line">#       If set, enables real time export.</div><div class="line">#</div><div class="line"># Mandatory: no</div><div class="line"># Default:</div><div class="line">ExportDir=/opt/exp</div><div class="line"></div><div class="line">### Option: ExportFileSize</div><div class="line">#       Maximum size per export file in bytes.</div><div class="line">#       Only used for rotation if ExportDir is set.</div><div class="line">#</div><div class="line"># Mandatory: no</div><div class="line"># Range: 1M-1G</div><div class="line"># Default:</div><div class="line">ExportFileSize=50M</div></pre></td></tr></table></figure>
-<p>ExportDir为导出数据保存的目录，这里填绝对路径，并且需要有zabbix权限<br>ExportFileSize为导出文件大小设置<br>这里配置的输出目录为/opt/exp,配置所有者为zabbix<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chown -R zabbix:zabbix /opt/exp</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">### Option: ExportDir</span><br><span class="line">#       Directory for real time export of events, history and trends in newline delimited JSON format.</span><br><span class="line">#       If set, enables real time export.</span><br><span class="line">#</span><br><span class="line"># Mandatory: no</span><br><span class="line"># Default:</span><br><span class="line">ExportDir=/opt/exp</span><br><span class="line"></span><br><span class="line">### Option: ExportFileSize</span><br><span class="line">#       Maximum size per export file in bytes.</span><br><span class="line">#       Only used for rotation if ExportDir is set.</span><br><span class="line">#</span><br><span class="line"># Mandatory: no</span><br><span class="line"># Range: 1M-1G</span><br><span class="line"># Default:</span><br><span class="line">ExportFileSize=50M</span><br></pre></td></tr></table></figure>
+<p>ExportDir为导出数据保存的目录，这里填绝对路径，并且需要有zabbix权限<br>ExportFileSize为导出文件大小设置<br>这里配置的输出目录为/opt/exp,配置所有者为zabbix<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -R zabbix:zabbix /opt/exp</span><br></pre></td></tr></table></figure></p>
 <p>配置之后，重启zabbix server 即可在目录看到文件<br><img src="https://img.cactifans.com/wp-content/uploads/2018/05/D99353CD-480F-4EED-827C-B020034EEF6A.jpg" alt="1"><br>文件内容<br><img src="https://img.cactifans.com/wp-content/uploads/2018/05/DB9BCFDD-316D-488A-9DD7-18F4A0AEC216.jpg" alt="2"><br>文件内容为每行一条json数据。</p>
 <h5 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h5><p>可以通过程序读取，输出到Kafka，MQ，Es等，并写入到其他的数据库，也可以做实时的数据处理。与本人去年zabbix 大会上对历史数据的处理有异曲同工之处。哈哈！<br><img src="https://img.cactifans.com/wp-content/uploads/2018/05/718C1781-374F-4912-94F7-F53F033EDCB7.jpg" alt="3"></p>
 <h3 id="Http-Agent"><a href="#Http-Agent" class="headerlink" title="Http Agent"></a>Http Agent</h3><p>在Agent的类型里增加里一种Http Agent，尚不清楚是什么时候添加过来的，和之前的web检测有类似之处，这里主要是通过Agent去请求URL，去采集数据直接写入数据库。<br>点击主机，创建一个item，类型选择http Agent，可以看到选项比较多，<br><img src="https://img.cactifans.com/wp-content/uploads/2018/05/C8356BEF-5C53-4F1E-96ED-5F4A9ADAF985.jpg" alt="4"><br><img src="https://img.cactifans.com/wp-content/uploads/2018/05/25E7C7CE-996B-4844-A4B6-0B731B4C2317.jpg" alt="5"></p>
@@ -372,9 +372,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Json/" rel="tag"># Json</a>
-          
             <a href="/tags/zabbix/" rel="tag"># zabbix</a>
+          
+            <a href="/tags/Json/" rel="tag"># Json</a>
           
             <a href="/tags/4/" rel="tag"># 4</a>
           
@@ -400,6 +400,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/19/Open-Falcon微信告警组件/" rel="prev" title="Open-Falcon微信告警组件">
+                Open-Falcon微信告警组件 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -485,7 +489,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -498,7 +502,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
