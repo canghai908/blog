@@ -330,16 +330,32 @@
 
       
         
-          <h2 id="Open-Falcon微信告警组件"><a href="#Open-Falcon微信告警组件" class="headerlink" title="Open-Falcon微信告警组件"></a>Open-Falcon微信告警组件</h2><p>在此<br>感谢 @laiwei 的<a href="https://github.com/open-falcon/mail-provider" target="_blank" rel="noopener">https://github.com/open-falcon/mail-provider</a> 项目代码支持<br>感谢 @chanxuehong 老司机的微信SDK支持  </p>
+          
+            <h2 id="Open-Falcon微信告警组件"><a href="#Open-Falcon微信告警组件" class="headerlink" title="Open-Falcon微信告警组件"></a>Open-Falcon微信告警组件</h2><p>在此<br>感谢 @laiwei 的<a href="https://github.com/open-falcon/mail-provider" target="_blank" rel="noopener">https://github.com/open-falcon/mail-provider</a> 项目代码支持<br>感谢 @chanxuehong 老司机的微信SDK支持  </p>
 <h2 id="申请微信企业号"><a href="#申请微信企业号" class="headerlink" title="申请微信企业号"></a>申请微信企业号</h2><p>在<a href="https://work.weixin.qq.com/" target="_blank" rel="noopener">https://work.weixin.qq.com/</a> 注册微信企业号，不需要认证即可</p>
-<h3 id="配置企业号"><a href="#配置企业号" class="headerlink" title="配置企业号"></a>配置企业号</h3><p>在企业号里建立应用,依此点击：企业应用-创建应用。可见范围里添加成员<br>获取企业ID：点击我的企业–获取企业ID<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/19/Open-Falcon微信告警组件/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+<h3 id="配置企业号"><a href="#配置企业号" class="headerlink" title="配置企业号"></a>配置企业号</h3><p>在企业号里建立应用,依此点击：企业应用-创建应用。可见范围里添加成员<br>获取企业ID：点击我的企业–获取企业ID<br><img src="https://img.cactifans.com/wp-content/uploads/2018/07/2.jpg" alt="1"><br>获取应用AgentId及应用Secret<br><img src="https://img.cactifans.com/wp-content/uploads/2018/07/1.jpg" alt="2"></p>
+<h2 id="部署Falcon-wechat"><a href="#部署Falcon-wechat" class="headerlink" title="部署Falcon-wechat"></a>部署Falcon-wechat</h2><p> Falcon-wechat可部署在Falcon-Alarm机器，也可部署在独立机器，使用以下命令部署<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /usr/loca/falcon-wechat</span><br><span class="line"><span class="built_in">cd</span> /usr/loca/falcon-wechat</span><br><span class="line">wget https://dl.cactifans.com/open-falcon/falcon-wechat-0.0.1.tar.gz</span><br><span class="line">tar zxvf falcon-wechat-0.0.1.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>修改配置文件cfg.json配置文件,将corpid修改为你的企业ID，secret修改为你应用的secret，agentid修改为你的AgentId，并保存<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">        <span class="attr">"debug"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"http"</span>: &#123;</span><br><span class="line">                <span class="attr">"listen"</span>: <span class="string">"0.0.0.0:9527"</span>,</span><br><span class="line">                <span class="attr">"token"</span>: <span class="string">""</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"wechat"</span>: &#123;</span><br><span class="line">	        <span class="attr">"corpid"</span>: <span class="string">"wxa7c63522727b6bf0"</span>,</span><br><span class="line">	        <span class="attr">"secret"</span>: <span class="string">"d5S-_XGVd-5HA0o9bkvMMK5Wh1qwCC-YQei4WcL9hSM"</span>,</span><br><span class="line">	        <span class="attr">"agentid"</span>: <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>启动falcon-wechat<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./control start</span><br></pre></td></tr></table></figure></p>
+<p>启动信息</p>
+<blockquote>
+<p>falcon-wechat started…, pid=13875</p>
+</blockquote>
+<p>查看日志</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./control tail</span><br></pre></td></tr></table></figure>
+<p>如看到以下信息表示启动成功</p>
+<blockquote>
+<p>2018/07/19 14:44:28 config.go:64: load configuration file cfg.json successfully<br>2018/07/19 14:44:28 http.go:25: http listening 0.0.0.0:9527</p>
+</blockquote>
+<h2 id="配置Open-Falcon"><a href="#配置Open-Falcon" class="headerlink" title="配置Open-Falcon"></a>配置Open-Falcon</h2><h3 id="配置Alarm组件"><a href="#配置Alarm组件" class="headerlink" title="配置Alarm组件"></a>配置Alarm组件</h3><p>修改Open-Falcon的Alarm组件config目录下的配置文件cfg.json，将IM段修改为以下内容<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"im": "http://127.0.0.1:9527/wechat",</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>如果你修改了falcon-wechat的默认端口，请注意修改。如falcon-wechat和Alarm组件为不同机器，注意修改IP地址。<br>修改之后重启Alarm服务，使其生效</p>
+</blockquote>
+<h3 id="配置IM信息"><a href="#配置IM信息" class="headerlink" title="配置IM信息"></a>配置IM信息</h3><p>在Dashboard里，为用户配置IM账号为户<strong>用户账号</strong>！<strong>用户账号</strong>！<br><strong>用户账号</strong> 不是微信号，重要事情说三遍！<br><img src="https://img.cactifans.com/wp-content/uploads/2018/07/3.jpg" alt="3"><br>用户账号<br><img src="https://img.cactifans.com/wp-content/uploads/2018/07/4.jpg" alt="4"></p>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p>告警<br><img src="https://img.cactifans.com/wp-content/uploads/2018/07/5.jpg" alt="5"><br>微信<br><img src="https://img.cactifans.com/wp-content/uploads/2018/07/6.png" alt="6"></p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>1.由于使用企业微信发送消息接口实现，接口调用速率有限制。注意控制消息发送频率，目前每次发消息都会请求一次Access_token，后续优化。<br>2.由于未认证企业发送消息数量与人员有关，建议控制频率。具体查看官网API文档<a href="https://work.weixin.qq.com/api/doc#10785" target="_blank" rel="noopener">https://work.weixin.qq.com/api/doc#10785</a></p>
+
+          
         
       
     </div>
