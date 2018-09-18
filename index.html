@@ -330,12 +330,14 @@
 
       
         
-          
-            <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>最近在使用Zabbix3.4.13版本中，被监控机器配置好Agent之后，并在Zabbix server中建立如下自动注册规则之后,发现机器没有注册,<br><img src="https://img.cactifans.com/wp-content/uploads/2018/09/5DDA1A2D-1873-457C-8990-56F80889D6E2.jpg" alt="enter image description here"><br>在Zabbix Server日志中会出现如下错误<br><img src="https://img.cactifans.com/wp-content/uploads/2018/09/D1618EA5-6385-4D96-BDC6-7C42353888F0.jpg" alt="enter image description here"></p>
-<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>最后在Zabbix论坛找到确认为bug：<br><a href="https://www.zabbix.com/forum/zabbix-troubleshooting-and-problems/365212-zabbix-autoregistration-cause-an-error-when-linked-to-template" target="_blank" rel="noopener">https://www.zabbix.com/forum/zabbix-troubleshooting-and-problems/365212-zabbix-autoregistration-cause-an-error-when-linked-to-template</a><br>1.官方在3.4.13rc1之后修复，说明<br><a href="https://support.zabbix.com/browse/ZBX-14614" target="_blank" rel="noopener">https://support.zabbix.com/browse/ZBX-14614</a><br>2.取消关联模版，即完成添加主机</p>
-<h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h3><p>自动注册动作里，不需要添加主机，直接添加到组，关联模版即可。官方也有对应的说明。<br>地址：<a href="https://www.zabbix.com/documentation/3.4/manual/discovery/auto_registration" target="_blank" rel="noopener">https://www.zabbix.com/documentation/3.4/manual/discovery/auto_registration</a><br>说明：<br><img src="https://img.cactifans.com/wp-content/uploads/2018/09/5E9DF830-441A-4464-AB3B-C78C9DAF32B4.jpg" alt="enter image description here"></p>
-
-          
+          <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>最近在使用Zabbix3.4.13版本中，被监控机器配置好Agent之后，并在Zabbix server中建立如下自动注册规则之后,发现机器没有注册,<br><img src="https://img.cactifans.com/wp-content/uploads/2018/09/5DDA1A2D-1873-457C-8990-56F80889D6E2.jpg" alt="enter image description here"><br>在Zabbix Server日志中会出现如下错误<br><img src="https://img.cactifans.com/wp-content/uploads/2018/09/D1618EA5-6385-4D96-BDC6-7C42353888F0.jpg" alt="enter image description here"></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/18/Zabbix-3-4-13自动注册bug/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
