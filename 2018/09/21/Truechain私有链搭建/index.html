@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="truechain," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="环境介绍   名称 主机名 操作系统 IP     委员会节点1 node01 Centos7.5 x64 172.16.66.10   委员会节点2 node02 Centos7.5 x64 172.16.66.11   委员会节点3 node03 Centos7.5 x64 172.16.66.16   委员会节点4 node04 Centos7.5 x64 172.16.66.17    初">
+<meta name="keywords" content="truechain">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Truechain私有链搭建">
+<meta property="og:url" content="https://blog.cactifans.com/2018/09/21/Truechain私有链搭建/index.html">
+<meta property="og:site_name" content="canghai">
+<meta property="og:description" content="环境介绍   名称 主机名 操作系统 IP     委员会节点1 node01 Centos7.5 x64 172.16.66.10   委员会节点2 node02 Centos7.5 x64 172.16.66.11   委员会节点3 node03 Centos7.5 x64 172.16.66.16   委员会节点4 node04 Centos7.5 x64 172.16.66.17    初">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-21T08:37:41.698Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Truechain私有链搭建">
+<meta name="twitter:description" content="环境介绍   名称 主机名 操作系统 IP     委员会节点1 node01 Centos7.5 x64 172.16.66.10   委员会节点2 node02 Centos7.5 x64 172.16.66.11   委员会节点3 node03 Centos7.5 x64 172.16.66.16   委员会节点4 node04 Centos7.5 x64 172.16.66.17    初">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://blog.cactifans.com/2018/09/21/Truechain私有链搭建/"/>
+
+
+
+
+
+  <title>Truechain私有链搭建 | canghai</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">canghai</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.cactifans.com/2018/09/21/Truechain私有链搭建/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="当代张思德">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/1450994?v=3&s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="canghai">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Truechain私有链搭建</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-21T16:35:35+08:00">
+                2018-09-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/09/21/Truechain私有链搭建/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/09/21/Truechain私有链搭建/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>主机名</th>
+<th>操作系统</th>
+<th>IP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>委员会节点1</td>
+<td>node01</td>
+<td>Centos7.5 x64</td>
+<td>172.16.66.10</td>
+</tr>
+<tr>
+<td>委员会节点2</td>
+<td>node02</td>
+<td>Centos7.5 x64</td>
+<td>172.16.66.11</td>
+</tr>
+<tr>
+<td>委员会节点3</td>
+<td>node03</td>
+<td>Centos7.5 x64</td>
+<td>172.16.66.16</td>
+</tr>
+<tr>
+<td>委员会节点4</td>
+<td>node04</td>
+<td>Centos7.5 x64</td>
+<td>172.16.66.17</td>
+</tr>
+</tbody>
+</table>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>以下命令在各个节点执行<br>安装docker环境并启动docker<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br><span class="line">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br><span class="line">yum makecache fast</span><br><span class="line">yum -y install docker-ce</span><br><span class="line">systemctl start docker </span><br><span class="line">systemctl enable docker</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>下载镜像</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com/truechain_space/truechain_image:latest</span><br></pre></td></tr></table></figure>
+<p>更改镜像tag为etrue<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker tag registry.cn-hangzhou.aliyuncs.com/truechain_space/truechain_image etrue</span><br></pre></td></tr></table></figure></p>
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p>在node01上建立目录，并建立几个初始化脚本<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mdiir -p /opt/truechain</span><br></pre></td></tr></table></figure></p>
+<p>并建立一个传世快初始化配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /opt/truechain</span><br><span class="line">touch gensis.json</span><br></pre></td></tr></table></figure></p>
+<p>文件内容如下<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="attr">"config"</span>: &#123;</span><br><span class="line">   <span class="attr">"chainId"</span>: <span class="number">10</span>,</span><br><span class="line">   <span class="attr">"homesteadBlock"</span>: <span class="number">0</span>,</span><br><span class="line">   <span class="attr">"eip155Block"</span>: <span class="number">0</span>,</span><br><span class="line">   <span class="attr">"eip158Block"</span>: <span class="number">0</span></span><br><span class="line"> &#125;,</span><br><span class="line"> <span class="attr">"alloc"</span>:&#123;</span><br><span class="line">   <span class="attr">"0x7c357530174275dd30e46319b89f71186256e4f7"</span> : &#123; <span class="attr">"balance"</span> : <span class="number">90000000000000000000000</span>&#125;,</span><br><span class="line">   <span class="attr">"0x4cf807958b9f6d9fd9331397d7a89a079ef43288"</span> : &#123; <span class="attr">"balance"</span> : <span class="number">90000000000000000000000</span>&#125;,</span><br><span class="line">   <span class="attr">"0x04d2252a3e0ca7c2aa81247ca33060855a34a808"</span> : &#123; <span class="attr">"balance"</span> : <span class="number">90000000000000000000000</span>&#125;,</span><br><span class="line">   <span class="attr">"0x05712ff78d08eaf3e0f1797aaf4421d9b24f8679"</span> : &#123; <span class="attr">"balance"</span> : <span class="number">90000000000000000000000</span>&#125;,</span><br><span class="line">   <span class="attr">"0x764727f61dd0717a48236842435e9aefab6723c3"</span> : &#123; <span class="attr">"balance"</span> : <span class="number">90000000000000000000000</span>&#125;,</span><br><span class="line">   <span class="attr">"0x764986534dba541d5061e04b9c561abe3f671178"</span> : &#123; <span class="attr">"balance"</span> : <span class="number">90000000000000000000000</span>&#125;,</span><br><span class="line">   <span class="attr">"0x0fd0bbff2e5b3ddb4f030ff35eb0fe06658646cf"</span> : &#123; <span class="attr">"balance"</span> : <span class="number">90000000000000000000000</span>&#125;,</span><br><span class="line">   <span class="attr">"0x40b3a743ba285a20eaeee770d37c093276166568"</span> : &#123; <span class="attr">"balance"</span> : <span class="number">90000000000000000000000</span>&#125;,</span><br><span class="line">   <span class="attr">"0x9d3c4a33d3bcbd2245a1bebd8e989b696e561eae"</span> : &#123; <span class="attr">"balance"</span> : <span class="number">90000000000000000000000</span>&#125;,</span><br><span class="line">   <span class="attr">"0x35c9d83c3de709bbd2cb4a8a42b89e0317abe6d4"</span> : &#123; <span class="attr">"balance"</span> : <span class="number">90000000000000000000000</span>&#125;</span><br><span class="line"> &#125;,</span><br><span class="line"></span><br><span class="line"> <span class="attr">"committee"</span>:[</span><br><span class="line">   &#123;</span><br><span class="line">     <span class="attr">"address"</span>: <span class="string">"0x76ea2f3a002431fede1141b660dbb75c26ba6d97"</span>,</span><br><span class="line">     <span class="attr">"publickey"</span>: <span class="string">"0x04044308742b61976de7344edb8662d6d10be1c477dd46e8e4c433c1288442a79183480894107299ff7b0706490f1fb9c9b7c9e62ae62d57bd84a1e469460d8ac1"</span></span><br><span class="line">   &#125;</span><br><span class="line"> ]</span><br><span class="line">,</span><br><span class="line"> <span class="attr">"coinbase"</span>   : <span class="string">"0x0000000000000000000000000000000000000000"</span>,</span><br><span class="line"> <span class="attr">"difficulty"</span> : <span class="string">"0x100"</span>,</span><br><span class="line"><span class="attr">"extraData"</span>  : <span class="string">""</span>,</span><br><span class="line"> <span class="attr">"gasLimit"</span>   : <span class="string">"0x5400000"</span>,</span><br><span class="line"> <span class="attr">"nonce"</span>      : <span class="string">"0x0000000000000042"</span>,</span><br><span class="line"> <span class="attr">"mixhash"</span>    : <span class="string">"0x0000000000000000000000000000000000000000000000000000000000000000"</span>,</span><br><span class="line"> <span class="attr">"parentHash"</span> : <span class="string">"0x0000000000000000000000000000000000000000000000000000000000000000"</span>,</span><br><span class="line"> <span class="attr">"timestamp"</span>  : <span class="string">"0x00"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>为了方便操作，我们把初始化做成一个脚本名为init_gensis.sh内容如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -v <span class="variable">$PWD</span>:/truechain-engineering-code -v <span class="variable">$PWD</span>/data:/truechain-engineering-code/data -it etrue --datadir /truechain-engineering-code/data init /truechain-engineering-code/genesis.json</span><br></pre></td></tr></table></figure></p>
+<p>赋予可执行权限<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod a+x /opt/truechain/init_gensis.sh</span><br></pre></td></tr></table></figure></p>
+<p>在/opt/truechain执行初始化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./init_gensis.sh</span><br></pre></td></tr></table></figure></p>
+<p>执行之后会生成出现如下日志<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@www truechain]# ./init_gensis.sh </span><br><span class="line">INFO [09-21|07:15:04.974] Maximum peer count                       ETRUE=25 LES=0 total=25</span><br><span class="line">INFO [09-21|07:15:04.975] Committee Node info:                     publickey=0473f661ec8e634594216daf828d9fe728ea1660db13916a656aa348974518772e2c21b25ee9611156fcccaf64db79cfab32eaf2b326049741b91c8144290b92c3 ip= port=10080 election=false singlenode=false</span><br><span class="line">INFO [09-21|07:15:04.975] Allocated cache and file handles         database=/truechain-engineering-code/data/getrue/chaindata cache=16 handles=16</span><br><span class="line">INFO [09-21|07:15:04.987] Persisted trie from memory database      nodes=15 size=2.17kB time=94.532µs gcnodes=0 gcsize=0.00B gctime=0s livenodes=1 livesize=0.00B</span><br><span class="line">INFO [09-21|07:15:04.992] Successfully wrote genesis state         database=chaindata                                         hash=285dec…336666 snail=84ecbf…86347f</span><br><span class="line">INFO [09-21|07:15:04.992] Allocated cache and file handles         database=/truechain-engineering-code/data/getrue/lightchaindata cache=16 handles=16</span><br><span class="line">INFO [09-21|07:15:05.007] Persisted trie from memory database      nodes=15 size=2.17kB time=67.855µs gcnodes=0 gcsize=0.00B gctime=0s livenodes=1 livesize=0.00B</span><br><span class="line">INFO [09-21|07:15:05.010] Successfully wrote genesis state         database=lightchaindata                                         hash=285dec…336666 snail=84ecbf…86347f</span><br></pre></td></tr></table></figure></p>
+<p>记录下publickey，并用以下命令查看privatekey<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat data/getrue/bftkey</span><br></pre></td></tr></table></figure></p>
+<p>并记录下privatekey，删除目录下的data文件，再次执行初始化init_gensis.sh脚本，生成一对publickey和privatekey ，按照方法生成4对key，并填入gensis.json文件，最终的gensis.json文件格式如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="string">"config"</span>: &#123;</span><br><span class="line">   <span class="string">"chainId"</span>: 10,</span><br><span class="line">   <span class="string">"homesteadBlock"</span>: 0,</span><br><span class="line">   <span class="string">"eip155Block"</span>: 0,</span><br><span class="line">   <span class="string">"eip158Block"</span>: 0</span><br><span class="line"> &#125;,</span><br><span class="line"> <span class="string">"alloc"</span>:&#123;</span><br><span class="line">   <span class="string">"0x7c357530174275dd30e46319b89f71186256e4f7"</span> : &#123; <span class="string">"balance"</span> : 90000000000000000000000&#125;,</span><br><span class="line">   <span class="string">"0x4cf807958b9f6d9fd9331397d7a89a079ef43288"</span> : &#123; <span class="string">"balance"</span> : 90000000000000000000000&#125;,</span><br><span class="line">   <span class="string">"0x04d2252a3e0ca7c2aa81247ca33060855a34a808"</span> : &#123; <span class="string">"balance"</span> : 90000000000000000000000&#125;,</span><br><span class="line">   <span class="string">"0x05712ff78d08eaf3e0f1797aaf4421d9b24f8679"</span> : &#123; <span class="string">"balance"</span> : 90000000000000000000000&#125;,</span><br><span class="line">   <span class="string">"0x764727f61dd0717a48236842435e9aefab6723c3"</span> : &#123; <span class="string">"balance"</span> : 90000000000000000000000&#125;,</span><br><span class="line">   <span class="string">"0x764986534dba541d5061e04b9c561abe3f671178"</span> : &#123; <span class="string">"balance"</span> : 90000000000000000000000&#125;,</span><br><span class="line">   <span class="string">"0x0fd0bbff2e5b3ddb4f030ff35eb0fe06658646cf"</span> : &#123; <span class="string">"balance"</span> : 90000000000000000000000&#125;,</span><br><span class="line">   <span class="string">"0x40b3a743ba285a20eaeee770d37c093276166568"</span> : &#123; <span class="string">"balance"</span> : 90000000000000000000000&#125;,</span><br><span class="line">   <span class="string">"0x9d3c4a33d3bcbd2245a1bebd8e989b696e561eae"</span> : &#123; <span class="string">"balance"</span> : 90000000000000000000000&#125;,</span><br><span class="line">   <span class="string">"0x35c9d83c3de709bbd2cb4a8a42b89e0317abe6d4"</span> : &#123; <span class="string">"balance"</span> : 90000000000000000000000&#125;</span><br><span class="line"> &#125;,</span><br><span class="line"></span><br><span class="line"> <span class="string">"committee"</span>:[</span><br><span class="line">   &#123;</span><br><span class="line">     <span class="string">"address"</span>: <span class="string">"0xd565db0d65894038ecfbe587e9bc836a1da7a97d"</span>,</span><br><span class="line">     <span class="string">"publickey"</span>: <span class="string">"0x04d16938b4333da470f7c47674a3b2e728e49f97cc76bd7cc51f6ae29bafaf0fb4167222aea6dab04fab5828a127ec83700287856e305f01ec5f02918e2f5e622b"</span>,</span><br><span class="line">     <span class="string">"privatekey"</span>: <span class="string">"4eed8ce61acc1c55e7f8fb608bc2bfef7f6cdbd40313c6ccd16de04362195e43"</span></span><br><span class="line">   &#125;,</span><br><span class="line">   &#123;</span><br><span class="line">     <span class="string">"address"</span>: <span class="string">"0x3f5b510beaa9b25b79ec9bfe08bd2b5e9fed033d"</span>,</span><br><span class="line">     <span class="string">"publickey"</span>: <span class="string">"0x04d31f1a2bf1db8139f0bf4045a7be96872bb9ed2d187094d04473feda50f4f74a85a227fd943fe31986de04f44420f19c0c3d7197d7d196e9720eafa223597840"</span>,</span><br><span class="line">     <span class="string">"privatekey"</span>: <span class="string">"57078f59c8c86e80a1cce28067d2dde54b8d8eb3352d29d50bb6364ad0ed192f"</span></span><br><span class="line">   &#125;,</span><br><span class="line">   &#123;</span><br><span class="line">     <span class="string">"address"</span>: <span class="string">"0x84e6f94d78759295dac2bf3d7f9d809f60992a62"</span>,</span><br><span class="line">     <span class="string">"publickey"</span>: <span class="string">"0x04fc474235c9554614d308cf0ad93104710953901057d9d728879865e3ba8b49b88d1977294f7878596bf9f03af7c841100239a4f57c1bc45a177a35d00de5faac"</span>,</span><br><span class="line">     <span class="string">"privatekey"</span>: <span class="string">"3df7b465478b5154ee986957198fddeee02206de3c78763875fc55bfcf11b389"</span></span><br><span class="line">   &#125;,</span><br><span class="line">   &#123;</span><br><span class="line">     <span class="string">"address"</span>: <span class="string">"0xf88fb95e9debdfcd2180b552e88fd0cde5c0c322"</span>,</span><br><span class="line">     <span class="string">"publickey"</span>: <span class="string">"0x0405e965348dfe9a7b29d89d0b15b75f5b1caf7129bef5159a79fd2c62701553387eb130e377bd57ee3a2b25a4a7ae0768a9d2c77f197bda4badc5cb70a1ae943a"</span>,</span><br><span class="line">     <span class="string">"privatekey"</span>: <span class="string">"cb4b9f582f98b1ab00ceacfc85d0d3a66127b9918ff84baff9e4a210643378e1"</span></span><br><span class="line">   &#125;</span><br><span class="line"> ]</span><br><span class="line">,</span><br><span class="line"> <span class="string">"coinbase"</span>   : <span class="string">"0x0000000000000000000000000000000000000000"</span>,</span><br><span class="line"> <span class="string">"difficulty"</span> : <span class="string">"0x100"</span>,</span><br><span class="line"><span class="string">"extraData"</span>  : <span class="string">""</span>,</span><br><span class="line"> <span class="string">"gasLimit"</span>   : <span class="string">"0x5400000"</span>,</span><br><span class="line"> <span class="string">"nonce"</span>      : <span class="string">"0x0000000000000042"</span>,</span><br><span class="line"> <span class="string">"mixhash"</span>    : <span class="string">"0x0000000000000000000000000000000000000000000000000000000000000000"</span>,</span><br><span class="line"> <span class="string">"parentHash"</span> : <span class="string">"0x0000000000000000000000000000000000000000000000000000000000000000"</span>,</span><br><span class="line"> <span class="string">"timestamp"</span>  : <span class="string">"0x00"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>之后再创建启动委员会的脚本start_work.sh，内容如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -v <span class="variable">$PWD</span>:/truechain-engineering-code -p 30303:30303 -p 10080:10080 -p 8545:8545 -it  etrue  --datadir /truechain-engineering-code/data  --bftkeyhex <span class="string">"4eed8ce61acc1c55e7f8fb608bc2bfef7f6cdbd40313c6ccd16de04362195e43"</span> --election --bftip <span class="string">"0.0.0.0"</span> --bftport 10080 --port 30303 --networkid 10 --rpc --rpcaddr 127.0.0.1 --rpcport 8545 --rpcapi <span class="string">"db,etrue,net,web3,personal,admin,miner"</span>  --verbosity 1 console</span><br></pre></td></tr></table></figure></p>
+<p>清理掉data目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf /opt/truechain/data</span><br></pre></td></tr></table></figure></p>
+<p>至此，配置文件及脚本已修改完毕，把整个truechain文件夹传到其他3个机器</p>
+<p>###配置节点配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scp -r /opt/truechain/ root@172.16.66.11:/opt</span><br><span class="line">scp -r /opt/truechain/ root@172.16.66.16:/opt</span><br><span class="line">scp -r /opt/truechain/ root@172.16.66.17:/opt</span><br></pre></td></tr></table></figure></p>
+<p>复制之后，修改node02.node03,node04节点的start_work.sh文件，修改bftkeyhex为对应的privatekey.。<br>node02为第2对key的privatekey<br>node03为第3对key的privatekey<br>node04为第4对key的privatekey<br>再各个节点先执行初始化脚，再执行委员会脚本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd  /opt/truechain</span><br><span class="line">./init_gensis.sh </span><br><span class="line">./start_work.sh</span><br></pre></td></tr></table></figure></p>
+<p>启动之后，可以看到如下提示，表示启动成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@monitor truechain]# ./start_work.sh </span><br><span class="line">fastQueue&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; 0xc4202408e8</span><br><span class="line">Welcome to the Getrue JavaScript console!</span><br><span class="line"></span><br><span class="line">instance: Getrue/v0.7.2-unstable/linux-amd64/go1.10.4</span><br><span class="line"> modules: admin:1.0 debug:1.0 etrue:1.0 miner:1.0 net:1.0 personal:1.0 rpc:1.0 txpool:1.0 web3:1.0</span><br><span class="line"></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></p>
+<p>在各个节点使用admin.nodeInfo.enode查看节点信息，如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; admin.nodeInfo.enode</span><br><span class="line">&quot;enode://6ff04de8fbb85dc80f1604062057da6e90390e4f256691e79541eee57a8e3d004917c45bb3b1476258a28c9215c5c43feff8dc67ee3f5f91cbc2b3ec738715ac@[::]:30303&quot;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></p>
+<p>记录下节点信息，修改后面的[::]为节点的实际ip,并编辑成以下形式的命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">admin.addPeer(&quot;enode://9eec6aa38162cb94c87f62ebc5492c43ce6e8dd039e6dfc55be7521c9033c7bfb14be7889efaa22697ae2917ebb4ad0f65dc9033956606d23959e742c5c39295@172.16.66.10:30303&quot;)</span><br><span class="line"></span><br><span class="line">admin.addPeer(&quot;enode://1c14e786fd1876f112464cb9ba5a30256cce039e79f802a4c24a649b9cfac54f6f4d0889c36804a1efba01ac5e9ef062511ed4c22580a1fc15fbbabc98f59082@172.16.66.11:30303&quot;)</span><br><span class="line"></span><br><span class="line">admin.addPeer(&quot;enode://8f06c0080e8d3944d1f356ddc5d401d14afe159ec16f251d1ec39236703638b23c40e9a1397e2e5a95cf8f2bf62fbeef514f43664f4c33f45d2552b620780471@172.16.66.16:30303&quot;)</span><br><span class="line"></span><br><span class="line">admin.addPeer(&quot;enode://560831be3d76f2526e56680e4e573d4e1c4e02a2c6edf866e71857a67e03131b59dee8e724978162982b522468609b9dd6ddffa1b7693c459148f3a3265100c3@172.16.66.17:30303&quot;)</span><br></pre></td></tr></table></figure></p>
+<p>以上节点信息根据自己的实际情况修改，后面为节点的实际ip，端口为30303,复制修改好的信息，张贴到各个节点的终端，即可完成添加节点工作。效果如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt; admin.addPeer(&quot;enode://6ff04de8fbb85dc80f1604062057da6e90390e4f256691e79541eee57a8e3d004917c45bb3b1476258a28c9215c5c43feff8dc67ee3f5f91cbc2b3ec738715ac@172.16.66.10:30303&quot;)</span><br><span class="line">true</span><br><span class="line">&gt; </span><br><span class="line">&gt; admin.addPeer(&quot;enode://c1fcfe59f9224171b66d944687a69f2b0ac69386b5d131c03fddf743727976c3a43bea9dcd04d443c25f2043c8470198bac80357789641c215da0b5219e4d3f3@172.16.66.11:30303&quot;)</span><br><span class="line"></span><br><span class="line">true</span><br><span class="line">&gt; </span><br><span class="line">&gt; admin.addPeer(&quot;enode://d4e47c320694aaf14f58889752db148447a15511cf8d85514415ea84c7e07b13f1cf0ac81b17ca322fef676777dcb1bd523781ab1811e81f7ed8c23f786b5998@172.16.66.16:30303&quot;)</span><br><span class="line">admin.addPeer(&quot;enode://aaa33e05c3d100ad479f1b412341f7c66677673424774ff47c6b9e24e2ef607a6817c4ff186e901b6a008aftrue712b5a7477</span><br><span class="line">cc69dd72342900b91c&gt; </span><br><span class="line">&gt; admin.addPeer(&quot;enode://aaa33e05c3d100ad479f1b412341f7c66677673424774ff47c6b9e24e2ef607a6817c4ff186e901b6a008af712b5a7477cc69dd72342900b91c26d2e4ce72932@172.16.66.17:30303&quot;)</span><br><span class="line">true</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></p>
+<p>完成之后，在各个节点执行admin.peers即可看到都有3个节点<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">&gt; admin.peers</span><br><span class="line">[&#123;</span><br><span class="line">    caps: [<span class="string">"etrue/63"</span>],</span><br><span class="line">    id: <span class="string">"6ff04de8fbb85dc80f1604062057da6e90390e4f256691e79541eee57a8e3d004917c45bb3b1476258a28c9215c5c43feff8dc67ee3f5f91cbc2b3ec738715ac"</span>,</span><br><span class="line">    name: <span class="string">"Getrue/v0.7.2-unstable/linux-amd64/go1.10.4"</span>,</span><br><span class="line">    network: &#123;</span><br><span class="line">      inbound: <span class="literal">true</span>,</span><br><span class="line">      localAddress: <span class="string">"172.17.0.2:30303"</span>,</span><br><span class="line">      remoteAddress: <span class="string">"172.16.66.10:59248"</span>,</span><br><span class="line">      static: <span class="literal">false</span>,</span><br><span class="line">      trusted: <span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">    protocols: &#123;</span><br><span class="line">      etrue: &#123;</span><br><span class="line">        difficulty: 256,</span><br><span class="line">        head: <span class="string">"0x84ecbf38ddba4f544bd9f047db056bdae871dd16dce1f6ae9295c1c9ef86347f"</span>,</span><br><span class="line">        version: 63</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;, &#123;</span><br><span class="line">    caps: [<span class="string">"etrue/63"</span>],</span><br><span class="line">    id: <span class="string">"aaa33e05c3d100ad479f1b412341f7c66677673424774ff47c6b9e24e2ef607a6817c4ff186e901b6a008af712b5a7477cc69dd72342900b91c26d2e4ce72932"</span>,</span><br><span class="line">    name: <span class="string">"Getrue/v0.7.2-unstable/linux-amd64/go1.10.4"</span>,</span><br><span class="line">    network: &#123;</span><br><span class="line">      inbound: <span class="literal">true</span>,</span><br><span class="line">      localAddress: <span class="string">"172.17.0.2:30303"</span>,</span><br><span class="line">      remoteAddress: <span class="string">"172.16.66.16:39450"</span>,</span><br><span class="line">      static: <span class="literal">false</span>,</span><br><span class="line">      trusted: <span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">    protocols: &#123;</span><br><span class="line">      etrue: &#123;</span><br><span class="line">        difficulty: 256,</span><br><span class="line">        head: <span class="string">"0x84ecbf38ddba4f544bd9f047db056bdae871dd16dce1f6ae9295c1c9ef86347f"</span>,</span><br><span class="line">        version: 63</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;, &#123;</span><br><span class="line">    caps: [<span class="string">"etrue/63"</span>],</span><br><span class="line">    id: <span class="string">"d4e47c320694aaf14f58889752db148447a15511cf8d85514415ea84c7e07b13f1cf0ac81b17ca322fef676777dcb1bd523781ab1811e81f7ed8c23f786b5998"</span>,</span><br><span class="line">    name: <span class="string">"Getrue/v0.7.2-unstable/linux-amd64/go1.10.4"</span>,</span><br><span class="line">    network: &#123;</span><br><span class="line">      inbound: <span class="literal">true</span>,</span><br><span class="line">      localAddress: <span class="string">"172.17.0.2:30303"</span>,</span><br><span class="line">      remoteAddress: <span class="string">"172.16.66.17:49654"</span>,</span><br><span class="line">      static: <span class="literal">false</span>,</span><br><span class="line">      trusted: <span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">    protocols: &#123;</span><br><span class="line">      etrue: &#123;</span><br><span class="line">        difficulty: 256,</span><br><span class="line">        head: <span class="string">"0x84ecbf38ddba4f544bd9f047db056bdae871dd16dce1f6ae9295c1c9ef86347f"</span>,</span><br><span class="line">        version: 63</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;]</span><br></pre></td></tr></table></figure></p>
+<h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h3><p>1.退出Docker进程<br>使用Ctrl+q或Ctrl+p<br>2.退出docker如何进入<br>使用docker attach c37e91c50935 进入docker，c37e91c50935为容器id，可使用docker ps -a命令查看<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost truechain]<span class="comment"># docker ps -a</span></span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                                                                                   NAMES</span><br><span class="line">c37e91c50935        etrue               <span class="string">"getrue --datadir /t…"</span>   8 minutes ago       Up 2 seconds        0.0.0.0:8545-&gt;8545/tcp, 0.0.0.0:10080-&gt;10080/tcp, 0.0.0.0:30303-&gt;30303/tcp, 30303/udp   elegant_franklin</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/truechain/" rel="tag"># truechain</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/18/Zabbix-3-4-13自动注册bug/" rel="next" title="Zabbix 3.4.13自动注册Bug">
+                <i class="fa fa-chevron-left"></i> Zabbix 3.4.13自动注册Bug
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://avatars1.githubusercontent.com/u/1450994?v=3&s=460"
+                alt="当代张思德" />
+            
+              <p class="site-author-name" itemprop="name">当代张思德</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境介绍"><span class="nav-number">1.</span> <span class="nav-text">环境介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化"><span class="nav-number">2.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件"><span class="nav-number">3.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tips"><span class="nav-number">4.</span> <span class="nav-text">Tips</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">当代张思德</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1272964277&web_id=1272964277" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytujrCr6';
+      var conf = '5fa740476973d289aeb0643ff27054ff';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
