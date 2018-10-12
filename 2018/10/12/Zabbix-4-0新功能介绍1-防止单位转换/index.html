@@ -92,7 +92,7 @@
 <meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2018/10/EB0B3A75-C94B-4370-8B69-0BFE10884A70.jpg">
 <meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2018/10/8CF264BD-CD17-4917-9232-0324BF26734F.jpg">
 <meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2017/12/qrcode_for_gh_5c46969f2957_258-1-1.jpg">
-<meta property="og:updated_time" content="2018-10-12T01:07:30.496Z">
+<meta property="og:updated_time" content="2018-10-12T01:11:26.002Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix 4.0新功能介绍1-防止单位转换">
 <meta name="twitter:description" content="zabbix4.0 LTS版本已经在国庆期间发布，带来众多新特性及功能，最近会陆续推出4.0的一些功能介绍文章，今天为第一篇——防止单位转换 原有方式在4.0之前，如某个ITEM的数据大于1000，在Graph里就会展示成1k，zabbix会自动对数据进行单位转换，诸如此类。此方式可避免过大的数据展示在页面同时方便查看，但同时也带来一个问题：如果需要具体查看某个数据的小的变化，就不能了，因此有很多">
@@ -302,17 +302,6 @@
 
           
             
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/10/12/Zabbix-4-0新功能介绍1-防止单位转换/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/10/12/Zabbix-4-0新功能介绍1-防止单位转换/" itemprop="commentsCount"></span>
-                </a>
-              
-            
           
 
           
@@ -341,7 +330,7 @@
 <h3 id="原有方式"><a href="#原有方式" class="headerlink" title="原有方式"></a>原有方式</h3><p>在4.0之前，如某个ITEM的数据大于1000，在Graph里就会展示成1k，zabbix会自动对数据进行单位转换，诸如此类。此方式可避免过大的数据展示在页面同时方便查看，但同时也带来一个问题：如果需要具体查看某个数据的小的变化，就不能了，因此有很多同学就提出能不能大于1000不自动转换单位？在4.0之前版本是没有解决方式的。</p>
 <h3 id="现有方式"><a href="#现有方式" class="headerlink" title="现有方式"></a>现有方式</h3><a id="more"></a>
 <p>在4.0里，解决了大家的这个需求，可以对ITEM的单位进行配置，配置为不自动转换单位，既可显示具体的数据。具体配置方式为在ITEM的配置里在Units里添加！号即可。下面以内存为例子：<br>配置：<br><img src="https://img.cactifans.com/wp-content/uploads/2018/10/8170E580-047F-4B6D-A5D9-012C6E3732AB.jpg" alt="1"><br>最新数据<br><img src="https://img.cactifans.com/wp-content/uploads/2018/10/73754AC4-272A-4F04-B8E6-D0372293FA7E.jpg" alt="2"><br>图形<br><img src="https://img.cactifans.com/wp-content/uploads/2018/10/EB0B3A75-C94B-4370-8B69-0BFE10884A70.jpg" alt="3"></p>
-<p>也可以在原有单位前面加！号也不会自动转换单位，举例如下：</p>
+<p>可以看到已经显示具体的数值了。也可以在原有单位前面加！号也不会自动转换单位，举例如下：</p>
 <blockquote>
 <p>1024 !B -&gt; 1024 B<br>1024 B -&gt; 1 KB<br>61 !s -&gt; 61 s<br>61 s -&gt; 1m 1s<br>0 !uptime -&gt; 0 uptime<br>0 uptime -&gt; 00:00:00<br>0 !! -&gt; 0 !<br>0 ! -&gt; 0</p>
 </blockquote>
@@ -702,21 +691,6 @@
 
 
 
-
-  
-    <script type="text/javascript">
-    (function(){
-      var appid = 'cytujrCr6';
-      var conf = '5fa740476973d289aeb0643ff27054ff';
-      var width = window.innerWidth || document.documentElement.clientWidth;
-      if (width < 960) {
-      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
-        window.changyan.api.config({appid:appid,conf:conf})});
-      }
-    })();
-    </script>
-    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
-  
 
 
 
