@@ -319,10 +319,29 @@
 
       
         
-          
-            <p>最近以来很多人在群里问，zabbix能不能跑在Docker里？如何使用zabbix来监控Docker等一系列问题。回答是肯定的：能！本次为大家介绍如何使用，同时本内容也是本人在 Zabbix Conference China 2018 WorkShop里的内容。</p>
-
-          
+          <p>最近以来很多人在群里问，zabbix能不能跑在Docker里？如何使用zabbix来监控Docker等一系列问题。回答是肯定的：能！本次为大家介绍如何使用，同时本内容也是本人在 Zabbix Conference China 2018 WorkShop里的内容。</p>
+<h2 id="一-如何使Zabbix跑在Docker里"><a href="#一-如何使Zabbix跑在Docker里" class="headerlink" title="一.如何使Zabbix跑在Docker里"></a>一.如何使Zabbix跑在Docker里</h2><p>Zabbix官方很早之前就提供里Zabbix的Docker镜像，而且提供里具体的配置及文件。具体地址：<a href="https://github.com/zabbix/zabbix-docker" target="_blank" rel="noopener">https://github.com/zabbix/zabbix-docker</a> 官方提供三种Docker基础镜像的版本，分别为：</p>
+<ul>
+<li>alpine</li>
+<li>centos</li>
+<li>ubuntu</li>
+</ul>
+<p>基础镜像在使用上没有太大区别，这里推荐大家使用alpine，这是一个简化的linux版本，最小体积只有30MB多，建议大家使用。官方提供提供了docker-compose的编排文件，可以使用docker-compose编排工具，”一键”启动一套Zabbix系统。其中包括以下组件：</p>
+<ul>
+<li>zabbix-server</li>
+<li>zabbix-agent</li>
+<li>zabbix-proxy</li>
+<li>zabbix-web</li>
+<li>zabbix-java-gateway</li>
+<li>zabbix-snmptraps</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/28/Zabbix在Docker中的应用和监控/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
