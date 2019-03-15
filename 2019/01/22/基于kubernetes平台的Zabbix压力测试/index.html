@@ -116,7 +116,7 @@
 <meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/01/2019-01-22_004850.png">
 <meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/01/2019-01-22_004911.png">
 <meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/01/2019-01-22_012501.png">
-<meta property="og:updated_time" content="2019-01-22T07:16:41.652Z">
+<meta property="og:updated_time" content="2019-01-24T09:09:31.856Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于kubernetes平台的Zabbix压力测试">
 <meta name="twitter:description" content="本文以2019年1月16日Webinars课程内容编写内容目录视频下载地址:">
@@ -354,7 +354,7 @@
 <h3 id="k8s介绍"><a href="#k8s介绍" class="headerlink" title="k8s介绍"></a>k8s介绍</h3><p><img src="https://img.cactifans.com/wp-content/uploads/2019/01/%E5%B9%BB%E7%81%AF%E7%89%8704.png" alt="2"><br>kubernetes，简称K8s，是用8代替8个字符“ubernete”而成的缩写。Kubernetes是Google开源的一个容器编排引擎，它支持自动化部署、大规模可伸缩、应用容器化管理。<br>k8架构<br><img src="https://img.cactifans.com/wp-content/uploads/2019/01/%E5%B9%BB%E7%81%AF%E7%89%8705.png" alt="3"><br>本次环境及配置<br><img src="https://img.cactifans.com/wp-content/uploads/2019/01/%E5%B9%BB%E7%81%AF%E7%89%8706.png" alt="4"><br>机器为虚拟机，磁盘为普通的SAS硬盘做RAID1，性能不是太好。<br>zabbix docker官方仓库，目前包括以下镜像<br><img src="https://img.cactifans.com/wp-content/uploads/2019/01/%E5%B9%BB%E7%81%AF%E7%89%8708.png" alt="5"><br>根据不同需要，选择使用，具体使用方法请查看我之前一篇的文章：<a href="https://blog.cactifans.com/2018/12/28/Zabbix%E5%9C%A8Docker%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E5%92%8C%E7%9B%91%E6%8E%A7/">Zabbix在Docker中的应用和监控</a></p>
 <h3 id="Zabbix部署"><a href="#Zabbix部署" class="headerlink" title="Zabbix部署"></a>Zabbix部署</h3><p>部署在k8s平台的zabbix架构<br><img src="https://img.cactifans.com/wp-content/uploads/2019/01/%E5%B9%BB%E7%81%AF%E7%89%8712.png" alt="6"><br>zabbix server和zabbix web以k8s service形式提供。同时部署二个zabbix web pod进行负载均衡，zabbix server只运行一个Pod。<br>所使用的yaml文件<br><img src="https://img.cactifans.com/wp-content/uploads/2019/01/%E5%B9%BB%E7%81%AF%E7%89%8711.png" alt="8"></p>
 <blockquote>
-<p>zabbix-agent-stress 为添加了压测模块的agent<br>zabbix-server-mysql 在zabbix4.0.3版本的zabbix server<br>zabbix-secret为zabbix数据的的连接账号及密码，采用k8s secret保存，默认账号:zabbix 默认密码:zabbixpwd123<br>zabbix-svc文件为zabbix server及zabbix web创建k8s service，提供给外部访问<br>zabbix-web-nginx-mysql 为zabbix前端部署文件</p>
+<p>zabbix-agent-stress 为添加了压测模块的agent<br>zabbix-server-mysql 在zabbix4.0.3版本的zabbix server<br>zabbix-secret为zabbix连接数据的账号及密码，采用k8s secret保存，默认账号:zabbix 默认密码:zabbixpwd123<br>zabbix-svc文件为zabbix server及zabbix web创建k8s service，提供给外部访问<br>zabbix-web-nginx-mysql 为zabbix前端部署文件</p>
 </blockquote>
 <p>使用的镜像：<br>hub.c.163.com/canghai809/zabbix-server-mysql:v4.0.3<br>hub.c.163.com/canghai809/zabbix-web-nginx-mysql:v4.0.3<br>hub.c.163.com/canghai809/zabbix-agent-stress:v4.0.3<br>使用的yaml文件:<a href="https://dl.cactifans.com/zabbix/zabbix-kubernetes-yaml.tar.gz" target="_blank" rel="noopener">https://dl.cactifans.com/zabbix/zabbix-kubernetes-yaml.tar.gz</a></p>
 <h4 id="数据库导入"><a href="#数据库导入" class="headerlink" title="数据库导入"></a>数据库导入</h4><p>下载对应版本的zabbix源码，本文以4.0.3为例子，并创建zabbix数据库文件create.sql<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cat database/mysql/schema.sql &gt; create.sql</span><br><span class="line">cat database/mysql/images.sql &gt;&gt; create.sql</span><br><span class="line">cat database/mysql/data.sql &gt;&gt; create.sql</span><br></pre></td></tr></table></figure></p>
@@ -447,6 +447,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/03/15/Zabbix报表系统/" rel="prev" title="Zabbix报表系统">
+                Zabbix报表系统 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -531,7 +535,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

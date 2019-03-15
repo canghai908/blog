@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="zabbix,mysql,">
+  <meta name="keywords" content="zabbix,报表,">
 
 
 
@@ -79,22 +79,27 @@
 
 
 
-<meta name="description" content="使用go语言写了一个采集mysql性能的小程序，通过SDK连接mysql数据库，采集数据库性能指标，同时采集远程数据库的性能，大家可试用一下，欢迎提出修改意见和建议 被监控端设置监控下载：Linux：mymon_x86.tar.gzmymon_x64.tar.gz">
-<meta name="keywords" content="zabbix,mysql">
+<meta name="description" content="Zabbix监控资源之后，常需要对资源的的监控数据进行导出，制作成为报表，如周报，日报等形式，目前zabbix还未自带报表功能。近期学习go语言，开发了一个简单的Zabbix报表工具。 在线试用https://zbx.cactifans.com直接点登录即可 系统截图主机列表">
+<meta name="keywords" content="zabbix,报表">
 <meta property="og:type" content="article">
-<meta property="og:title" content="monitoring mysql with zabbix">
-<meta property="og:url" content="https://blog.cactifans.com/2015/07/29/monitoring-mysql-with-zabbix/index.html">
+<meta property="og:title" content="Zabbix报表系统">
+<meta property="og:url" content="https://blog.cactifans.com/2019/03/15/Zabbix报表系统/index.html">
 <meta property="og:site_name" content="canghai">
-<meta property="og:description" content="使用go语言写了一个采集mysql性能的小程序，通过SDK连接mysql数据库，采集数据库性能指标，同时采集远程数据库的性能，大家可试用一下，欢迎提出修改意见和建议 被监控端设置监控下载：Linux：mymon_x86.tar.gzmymon_x64.tar.gz">
+<meta property="og:description" content="Zabbix监控资源之后，常需要对资源的的监控数据进行导出，制作成为报表，如周报，日报等形式，目前zabbix还未自带报表功能。近期学习go语言，开发了一个简单的Zabbix报表工具。 在线试用https://zbx.cactifans.com直接点登录即可 系统截图主机列表">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2015/07/1.png">
-<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2015/07/2.png">
-<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2015/07/3.png">
-<meta property="og:updated_time" content="2018-05-11T07:37:21.677Z">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/03/929EB4EF-EB39-4134-B176-6D0E6AA7DA56.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/03/9FCF005B-912D-4FC6-BE68-FD8FDE5EED19.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/03/B8289CAF-591C-4A10-BF19-AA1530D3D2E0.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/03/73605ABA-A3D2-490D-9BFA-DDADC5214749.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/03/260BA508-966C-4395-8311-2FCF38BD9B95.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/03/BE28FC69-4B39-4468-A991-985DC1B487F8.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/03/3EF918DE-1BF2-40E5-9459-0C56882513F2.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/03/WechatIMG21834.jpeg">
+<meta property="og:updated_time" content="2019-03-15T08:38:49.765Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="monitoring mysql with zabbix">
-<meta name="twitter:description" content="使用go语言写了一个采集mysql性能的小程序，通过SDK连接mysql数据库，采集数据库性能指标，同时采集远程数据库的性能，大家可试用一下，欢迎提出修改意见和建议 被监控端设置监控下载：Linux：mymon_x86.tar.gzmymon_x64.tar.gz">
-<meta name="twitter:image" content="https://img.cactifans.com/wp-content/uploads/2015/07/1.png">
+<meta name="twitter:title" content="Zabbix报表系统">
+<meta name="twitter:description" content="Zabbix监控资源之后，常需要对资源的的监控数据进行导出，制作成为报表，如周报，日报等形式，目前zabbix还未自带报表功能。近期学习go语言，开发了一个简单的Zabbix报表工具。 在线试用https://zbx.cactifans.com直接点登录即可 系统截图主机列表">
+<meta name="twitter:image" content="https://img.cactifans.com/wp-content/uploads/2019/03/929EB4EF-EB39-4134-B176-6D0E6AA7DA56.jpg">
 
 
 
@@ -124,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="https://blog.cactifans.com/2015/07/29/monitoring-mysql-with-zabbix/">
+  <link rel="canonical" href="https://blog.cactifans.com/2019/03/15/Zabbix报表系统/">
 
 
 
 
 
-  <title>monitoring mysql with zabbix | canghai</title>
+  <title>Zabbix报表系统 | canghai</title>
   
 
 
@@ -257,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.cactifans.com/2015/07/29/monitoring-mysql-with-zabbix/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cactifans.com/2019/03/15/Zabbix报表系统/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="当代张思德">
@@ -274,7 +279,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">monitoring mysql with zabbix</h1>
+          <h1 class="post-title" itemprop="name headline">Zabbix报表系统</h1>
         
 
         <div class="post-meta">
@@ -286,8 +291,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-29T23:38:22+08:00">
-                2015-07-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-15T16:34:03+08:00">
+                2019-03-15
               </time>
             
 
@@ -324,19 +329,20 @@
       
 
       
-        <p>使用go语言写了一个采集mysql性能的小程序，通过SDK连接mysql数据库，采集数据库性能指标，同时采集远程数据库的性能，大家可试用一下，欢迎提出修改意见和建议</p>
-<h2 id="被监控端设置"><a href="#被监控端设置" class="headerlink" title="被监控端设置"></a>被监控端设置</h2><p>监控下载：<br>Linux：<br><a href="https://dl.cactifans.com/tools/mymon_x86.tar.gz" target="_blank" rel="noopener">mymon_x86.tar.gz</a><br><a href="https://dl.cactifans.com/tools/mymon_x64.tar.gz" target="_blank" rel="noopener">mymon_x64.tar.gz</a></p>
+        <p>Zabbix监控资源之后，常需要对资源的的监控数据进行导出，制作成为报表，如周报，日报等形式，目前zabbix还未自带报表功能。近期学习go语言，开发了一个简单的Zabbix报表工具。</p>
+<h2 id="在线试用"><a href="#在线试用" class="headerlink" title="在线试用"></a>在线试用</h2><p><a href="https://zbx.cactifans.com" target="_blank" rel="noopener">https://zbx.cactifans.com</a><br>直接点登录即可</p>
+<h2 id="系统截图"><a href="#系统截图" class="headerlink" title="系统截图"></a>系统截图</h2><p>主机列表<br><img src="https://img.cactifans.com/wp-content/uploads/2019/03/929EB4EF-EB39-4134-B176-6D0E6AA7DA56.jpg" alt="1"></p>
 <a id="more"></a>
-<p>Linux:<br>修改zabbix agentd配置文件(具体位置根据自身情况设置)，添加key<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /usr/local/zabbix/etc/zabbix_agentd.conf</span><br></pre></td></tr></table></figure></p>
-<p>添加如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#mysql</span><br><span class="line">UserParameter=mysql.status[*],/usr/local/zabbix/bin/mysql/mymon $1 $2</span><br></pre></td></tr></table></figure></p>
-<p>添加好之后执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /usr/local/zabbix/bin/mysql/</span><br><span class="line">cd /usr/local/zabbix/bin/mysql/</span><br><span class="line">wget https://dl.cactifans.com/tools/mymon_x64.tar.gz</span><br><span class="line">tar zxvf mymon_x64.tar.gz</span><br><span class="line">chmod a+x mymon</span><br></pre></td></tr></table></figure></p>
-<p>同时编辑cfg.json配置文件，设置要监控数据库的连接参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /usr/local/zabbix/bin/mysql/cfg.json</span><br></pre></td></tr></table></figure></p>
-<p>文件内容如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">&quot;mysql&quot;: &#123;</span><br><span class="line">        &quot;username&quot;: &quot;root&quot;,</span><br><span class="line">        &quot;password&quot;: &quot;123456&quot;,</span><br><span class="line">        &quot;host&quot;: &quot;localhost&quot;,</span><br><span class="line">        &quot;port&quot;: 3306</span><br><span class="line">    &#125;,</span><br><span class="line">&quot;sever&quot;: &#123;</span><br><span class="line">                &quot;log&quot;: &quot;/tmp/mon.log&quot;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>登录数据库的账号，密码等信息，log项目不用设置，默认即可<br>设置好之后重启zabixx agent<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service zabbix-agent restart</span><br></pre></td></tr></table></figure></p>
-<h2 id="zabbix服务端设置"><a href="#zabbix服务端设置" class="headerlink" title="zabbix服务端设置"></a>zabbix服务端设置</h2><p>测试agent是否工作正常<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/bin/zabbix_get -s 192.168.7.186 -k mysql.status[GlobalStatus,Uptime]</span><br></pre></td></tr></table></figure></p>
-<p>如果有一下回显，表示工作正常<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@vm153 ~]#  /usr/local/bin/zabbix_get -s 192.168.7.186 -k mysql.status[GlobalStatus,Uptime]</span><br><span class="line">12364726</span><br><span class="line">[root@vm153 ~]#</span><br></pre></td></tr></table></figure></p>
-<p>导入模版：<a href="https://dl.cactifans.com/tools/zabbix_mysql_templates.tar.gz" target="_blank" rel="noopener">zabbix_mysql_templates.xml</a><br>并关联到主机<br>效果<br><img src="https://img.cactifans.com/wp-content/uploads/2015/07/1.png" alt="screen1"><br>参数<br><img src="https://img.cactifans.com/wp-content/uploads/2015/07/2.png" alt="screen2"></p>
-<p>PS：可自行添加对应key可监控项目，模版自带了几种，脚本包括800多项目，<br><img src="https://img.cactifans.com/wp-content/uploads/2015/07/3.png" alt="screen3"><br>具体更具key定义，括号内第一项为key类型，分GlobalStatus和GlobalVariables二种，后面的数值为在mysql里执行“SHOW /<em>!50001 GLOBAL </em>/ STATUS”和“SHOW /<em>!50001 GLOBAL </em>/ VARIABLES”，对应的key，注意有些数值为固定数值，有些key的类型为每秒速差，自行添加.</p>
+<p>数据导出<br><img src="https://img.cactifans.com/wp-content/uploads/2019/03/9FCF005B-912D-4FC6-BE68-FD8FDE5EED19.jpg" alt="2"><br>报表展示<br><img src="https://img.cactifans.com/wp-content/uploads/2019/03/B8289CAF-591C-4A10-BF19-AA1530D3D2E0.jpg" alt="3"><br>导出到Excel<br><img src="https://img.cactifans.com/wp-content/uploads/2019/03/73605ABA-A3D2-490D-9BFA-DDADC5214749.jpg" alt="4"><br>告警列表<br><img src="https://img.cactifans.com/wp-content/uploads/2019/03/260BA508-966C-4395-8311-2FCF38BD9B95.jpg" alt="5"><br>告警统计<br><img src="https://img.cactifans.com/wp-content/uploads/2019/03/BE28FC69-4B39-4468-A991-985DC1B487F8.jpg" alt="6"><br>告警导出到Excel<br><img src="https://img.cactifans.com/wp-content/uploads/2019/03/3EF918DE-1BF2-40E5-9459-0C56882513F2.jpg" alt="7"></p>
+<h2 id="基本情况"><a href="#基本情况" class="headerlink" title="基本情况"></a>基本情况</h2><p>后端：go   （beego web框架 <a href="https://github.com/astaxie/beego" target="_blank" rel="noopener">https://github.com/astaxie/beego</a>  ）<br>前端：vue （elment ui  <a href="https://github.com/PanJiaChen/vue-admin-template）" target="_blank" rel="noopener">https://github.com/PanJiaChen/vue-admin-template）</a><br>绘图：Echart  <a href="https://echarts.baidu.com/" target="_blank" rel="noopener">https://echarts.baidu.com/</a><br>Zabbix API： <a href="https://github.com/AlekSi/zabbix" target="_blank" rel="noopener">https://github.com/AlekSi/zabbix</a><br>数据库：MySQL 5.6</p>
+<h2 id="基本功能"><a href="#基本功能" class="headerlink" title="基本功能"></a>基本功能</h2><p>1.可导入Zabbix监控的服务器(目前是Linux&amp;Windows)的CPU空闲率/内存Free空间/磁盘可用空间/网络流量，导出到Excel<br>2.根据历史告警信息生成Top10 告警主机，生成不同等级告警分类<br>3.根据主机名查询历史告警</p>
+<h2 id="开发思路"><a href="#开发思路" class="headerlink" title="开发思路"></a>开发思路</h2><h3 id="历史数据获取"><a href="#历史数据获取" class="headerlink" title="历史数据获取"></a>历史数据获取</h3><p>1.基于Zabbix API,通过调用Zabbix API的 hitory.get/item.get获取指定指标的itemid。<br>根据hostid和item key获取items具体信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">par := make(map[string]string)</span><br><span class="line">par[&quot;key_&quot;] = key</span><br><span class="line">rep, err := API.Call(&quot;item.get&quot;, Params&#123;&quot;output&quot;: &quot;extend&quot;, &quot;sortfield&quot;: &quot;name&quot;, &quot;limit&quot;: &quot;1&quot;, &quot;hostids&quot;: hostid, &quot;search&quot;: par&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>2.根据itemid信息通过trend.get接口获具体指标的历史详情数据及趋势数据<br>根据.<br>根据itemid获取item的趋势数据，limit为输出条数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">par := []string&#123;&quot;itemid&quot;, &quot;clock&quot;, &quot;num&quot;, &quot;value_min&quot;, &quot;value_avg&quot;, &quot;value_max&quot;&#125;</span><br><span class="line">par1 := []string&#123;itemid&#125;</span><br><span class="line">rep, err := API.Call(&quot;trend.get&quot;, Params&#123;&quot;output&quot;: par,</span><br><span class="line">		&quot;itemids&quot;: par1, &quot;limit&quot;: limit&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>3.通过Echart绘图并导出到Excel报表</p>
+<h3 id="历史告警获取"><a href="#历史告警获取" class="headerlink" title="历史告警获取"></a>历史告警获取</h3><p>历史告警通过zabbix的告警脚本功能发送到平台，解析之后存入数据库，进行分析</p>
+<h2 id="后续计划"><a href="#后续计划" class="headerlink" title="后续计划"></a>后续计划</h2><p>目前还有平台功能较弱，后期打算新增以下功能：<br>1.支持导出任意监控指标的报表信息<br>2.支持导出历史详情信息,以监控指标采集周期为间隔<br>3.定制导出某Linux或windows机器的基本指标到一个Excel，包括机器CPU/内存/磁盘/网卡流量<br>4.Top支持导出到Excel<br>5.其他暂时没想到….</p>
+<h2 id="关于源码及使用"><a href="#关于源码及使用" class="headerlink" title="关于源码及使用"></a>关于源码及使用</h2><p>由于本人正在学习go语言及vue，其代码质量太差，基本可以用下图来形容我的代码(真实合理)<br><img src="https://img.cactifans.com/wp-content/uploads/2019/03/WechatIMG21834.jpeg" alt="8"><br>因此源码就不公开了。二进制软件后期会在公众号及blog公开下载地址，免费供大家使用(有可能是License授权码方式)。</p>
+<p>欢迎在下方留言，提出合理建议及需求。</p>
 
       
     </div>
@@ -356,7 +362,7 @@
           
             <a href="/tags/zabbix/" rel="tag"># zabbix</a>
           
-            <a href="/tags/mysql/" rel="tag"># mysql</a>
+            <a href="/tags/报表/" rel="tag"># 报表</a>
           
         </div>
       
@@ -369,8 +375,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/07/24/monitoring-tomcat-with-zabbix/" rel="next" title="monitoring tomcat with zabbix">
-                <i class="fa fa-chevron-left"></i> monitoring tomcat with zabbix
+              <a href="/2019/01/22/基于kubernetes平台的Zabbix压力测试/" rel="next" title="基于kubernetes平台的Zabbix压力测试">
+                <i class="fa fa-chevron-left"></i> 基于kubernetes平台的Zabbix压力测试
               </a>
             
           </div>
@@ -378,10 +384,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/01/21/send-mail-via-smtp/" rel="prev" title="zabbix邮件告警">
-                zabbix邮件告警 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -513,7 +515,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#被监控端设置"><span class="nav-number">1.</span> <span class="nav-text">被监控端设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zabbix服务端设置"><span class="nav-number">2.</span> <span class="nav-text">zabbix服务端设置</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#在线试用"><span class="nav-number">1.</span> <span class="nav-text">在线试用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统截图"><span class="nav-number">2.</span> <span class="nav-text">系统截图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本情况"><span class="nav-number">3.</span> <span class="nav-text">基本情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本功能"><span class="nav-number">4.</span> <span class="nav-text">基本功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发思路"><span class="nav-number">5.</span> <span class="nav-text">开发思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#历史数据获取"><span class="nav-number">5.1.</span> <span class="nav-text">历史数据获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#历史告警获取"><span class="nav-number">5.2.</span> <span class="nav-text">历史告警获取</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后续计划"><span class="nav-number">6.</span> <span class="nav-text">后续计划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于源码及使用"><span class="nav-number">7.</span> <span class="nav-text">关于源码及使用</span></a></li></ol></div>
             
 
           </div>
