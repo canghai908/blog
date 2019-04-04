@@ -321,15 +321,6 @@
         
           <p>4月2号万众期待的Zabbix4.2终于发布了！新版本提供了很多特性，接下来几期主要介绍Zabbix4.2的一些新特性的使用。本次主要介绍TimescaleDB。</p>
 <h2 id="TimescaleDB介绍"><a href="#TimescaleDB介绍" class="headerlink" title="TimescaleDB介绍"></a>TimescaleDB介绍</h2><p>TimescaleDB是基于PostgreSQL的时序数据库插件，完全继承了PostgreSQL的功能，对于复杂查询，各种类型(GIS,json,k-v,图像特征值,range,数组,复合类型,自定义类型…..)的支持非常丰富，非常适合工业化的时序数据库场景需求。具有以下特点：</p>
-<ol>
-<li>基于时序优化</li>
-<li>自动分片（按时间、空间自动分片(chunk)）</li>
-<li>全SQL接口</li>
-<li>支持垂直于横向扩展</li>
-<li>支持时间维度、空间维度自动分区。空间维度指属性字段（例如传感器ID，用户ID等）</li>
-<li>支持多个SERVER，多个CHUNK的并行查询。分区在TimescaleDB中被称为chunk。</li>
-<li>自动调整CHUNK的大小</li>
-<li>内部写优化（批量提交、内存索引、事务支持、数据倒灌）。
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/04/04/Zabbix4-2新功能实践1-时间序列数据库TimescaleDB/#more" rel="contents">
@@ -339,7 +330,7 @@
           <!--/noindex-->
         
       
-    </li></ol></div>
+    </div>
     
     
     
