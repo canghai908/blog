@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="zabbix,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="4月2号万众期待的Zabbix4.2终于发布了！新版本提供了很多特性，接下来几期主要介绍Zabbix4.2的一些新特性的使用。本次主要介绍TimescaleDB。 TimescaleDB介绍TimescaleDB是基于PostgreSQL的时序数据库插件，完全继承了PostgreSQL的功能，对于复杂查询，各种类型(GIS,json,k-v,图像特征值,range,数组,复合类型,自定义类型…..">
+<meta name="keywords" content="zabbix">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Zabbix4.2新功能实践1-时间序列数据库TimescaleDB">
+<meta property="og:url" content="https://blog.cactifans.com/2019/04/04/Zabbix4-2新功能实践1-时间序列数据库TimescaleDB/index.html">
+<meta property="og:site_name" content="canghai">
+<meta property="og:description" content="4月2号万众期待的Zabbix4.2终于发布了！新版本提供了很多特性，接下来几期主要介绍Zabbix4.2的一些新特性的使用。本次主要介绍TimescaleDB。 TimescaleDB介绍TimescaleDB是基于PostgreSQL的时序数据库插件，完全继承了PostgreSQL的功能，对于复杂查询，各种类型(GIS,json,k-v,图像特征值,range,数组,复合类型,自定义类型…..">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/04/70FC7FC8-2EC1-413D-A72F-D8BBD1D4C015-1024x379.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/04/4B570A96-4559-44FA-BBB3-A9BD7C378EBF.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/04/607BC706-F1BD-402F-98C4-C167A5DA9774-1024x350.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/04/1C4D37CC-F84A-47CB-B2FC-C669169C971B-1024x336.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/04/1CA9EB8B-5130-493F-B459-316500438801-1024x500.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/04/04B68CCB-DC92-4867-BEDD-E291EA66D1E7-1024x795.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/04/25AE4313-12E7-40EC-A30E-99F96C5A8DA2-1024x514.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2017/12/qrcode_for_gh_5c46969f2957_258-1-1.jpg">
+<meta property="og:updated_time" content="2019-04-04T08:54:54.774Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Zabbix4.2新功能实践1-时间序列数据库TimescaleDB">
+<meta name="twitter:description" content="4月2号万众期待的Zabbix4.2终于发布了！新版本提供了很多特性，接下来几期主要介绍Zabbix4.2的一些新特性的使用。本次主要介绍TimescaleDB。 TimescaleDB介绍TimescaleDB是基于PostgreSQL的时序数据库插件，完全继承了PostgreSQL的功能，对于复杂查询，各种类型(GIS,json,k-v,图像特征值,range,数组,复合类型,自定义类型…..">
+<meta name="twitter:image" content="https://img.cactifans.com/wp-content/uploads/2019/04/70FC7FC8-2EC1-413D-A72F-D8BBD1D4C015-1024x379.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://blog.cactifans.com/2019/04/04/Zabbix4-2新功能实践1-时间序列数据库TimescaleDB/">
+
+
+
+
+
+  <title>Zabbix4.2新功能实践1-时间序列数据库TimescaleDB | canghai</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">canghai</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.cactifans.com/2019/04/04/Zabbix4-2新功能实践1-时间序列数据库TimescaleDB/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="当代张思德">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/1450994?v=3&s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="canghai">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Zabbix4.2新功能实践1-时间序列数据库TimescaleDB</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-04T16:45:08+08:00">
+                2019-04-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>4月2号万众期待的Zabbix4.2终于发布了！新版本提供了很多特性，接下来几期主要介绍Zabbix4.2的一些新特性的使用。本次主要介绍TimescaleDB。</p>
+<h2 id="TimescaleDB介绍"><a href="#TimescaleDB介绍" class="headerlink" title="TimescaleDB介绍"></a>TimescaleDB介绍</h2><p>TimescaleDB是基于PostgreSQL的时序数据库插件，完全继承了PostgreSQL的功能，对于复杂查询，各种类型(GIS,json,k-v,图像特征值,range,数组,复合类型,自定义类型…..)的支持非常丰富，非常适合工业化的时序数据库场景需求。具有以下特点：</p>
+<ol>
+<li>基于时序优化</li>
+<li>自动分片（按时间、空间自动分片(chunk)）</li>
+<li>全SQL接口</li>
+<li>支持垂直于横向扩展</li>
+<li>支持时间维度、空间维度自动分区。空间维度指属性字段（例如传感器ID，用户ID等）</li>
+<li>支持多个SERVER，多个CHUNK的并行查询。分区在TimescaleDB中被称为chunk。</li>
+<li>自动调整CHUNK的大小</li>
+<li>内部写优化（批量提交、内存索引、事务支持、数据倒灌）。<br>内存索引，因为chunk size比较适中，所以索引基本上都不会被交换出去，写性能比较好。<br>数据倒灌，因为有些传感器的数据可能写入延迟，导致需要写以前的chunk，timescaleDB允许这样的事情发生(可配置)。</li>
+<li>复杂查询优化（根据查询条件自动选择chunk，最近值获取优化(最小化的扫描,类似递归收敛)，limit子句pushdown到不同的server,chunks，并行的聚合操作）</li>
+<li>利用已有的PostgreSQL特性（支持GIS，JOIN等），方便的管理（流复制、PITR）</li>
+<li>支持自动的按时间保留策略（自动删除过旧数据）</li>
+</ol>
+<p>看介绍是很适合监控数据的存储。之前对于监控数据的存储，建议进行分区表操作，进行管理。Zabbix4.2支持TimescaleDB应该说是一个好消息，至于具体性能提升，还有待测试.</p>
+<h2 id="TimescaleDB安装"><a href="#TimescaleDB安装" class="headerlink" title="TimescaleDB安装"></a>TimescaleDB安装</h2><p>TimescaleDB基于PostgreSQL，因此我们需要先安装PostgreSQL，由于之前很少用，因此这里简单描述以下安装过程<br>基本环境：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">操作系统</th>
+<th style="text-align:left">Centos7.6.1810 x86_64</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">PostgreSQL版本</td>
+<td style="text-align:left">11.2</td>
+</tr>
+<tr>
+<td style="text-align:left">安装方式</td>
+<td style="text-align:left">yum</td>
+</tr>
+</tbody>
+</table>
+<p>由于为测试环境，避免麻烦关闭防火墙，禁用seLinux，并启动chrony时间同步服务。<br>添加PostgreSQL的yum源<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-7-x86_64/pgdg-centos11-11-2.noarch.rpm</span><br></pre></td></tr></table></figure></p>
+<p>添加TimescaleDB的yum源<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">cat &gt; /etc/yum.repos.d/timescale_timescaledb.repo &lt;&lt;EOL</span><br><span class="line">[timescale_timescaledb]</span><br><span class="line">name=timescale_timescaledb</span><br><span class="line">baseurl=https://packagecloud.io/timescale/timescaledb/el/7/\<span class="variable">$basearch</span></span><br><span class="line">repo_gpgcheck=1</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br><span class="line">gpgkey=https://packagecloud.io/timescale/timescaledb/gpgkey</span><br><span class="line">sslverify=1</span><br><span class="line">sslcacert=/etc/pki/tls/certs/ca-bundle.crt</span><br><span class="line">metadata_expire=300</span><br><span class="line">EOL</span><br></pre></td></tr></table></figure></p>
+<p>安装包<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum update -y</span><br><span class="line">yum install -y timescaledb-postgresql-11</span><br></pre></td></tr></table></figure></p>
+<p>初始化数据库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">postgresql-11-setup initdb</span><br></pre></td></tr></table></figure></p>
+<p>启动PostgreSQL<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start postgresql-11</span><br><span class="line">systemctl <span class="built_in">enable</span> postgresql-11</span><br></pre></td></tr></table></figure></p>
+<p>启动之后，使用以下命令初始化postgresql配置文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timescaledb-tune</span><br></pre></td></tr></table></figure></p>
+<p>初学者建议一切按照推荐数值，全部按Y同意即可完成配置。由于我的Zabbix Server和PostgreSQL为不同机器，因此需要开启PostgreSQL远程连接（默认关闭）<br>修改PostgreSQL默认配置文件/var/lib/pgsql/11/data/postgresql.conf<br>修改listen地址为所有地址(即*)，默认监听127.0.0.1<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">listen_addresses = <span class="string">'*'</span></span><br></pre></td></tr></table></figure></p>
+<p>修改客户端认证配置文件:/var/lib/pgsql/11/data/pg_hba.conf 添加如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">host    all   all    0.0.0.0/0    md5</span><br></pre></td></tr></table></figure></p>
+<p>配置好之后，重启PostgreSQL使配置生效<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart postgresql-11</span><br></pre></td></tr></table></figure></p>
+<p>至此TimescaleDB配置安装完成</p>
+<h2 id="Zabbix使用TimescaleDB"><a href="#Zabbix使用TimescaleDB" class="headerlink" title="Zabbix使用TimescaleDB"></a>Zabbix使用TimescaleDB</h2><p>目前只有Zabbix Server支持TimescaleDB，Zabbix Proxy不支持TimescaleDB。<br>配置成功TimescaleDB之后，建立Zabbix相关用户，并导入Zabbix数据库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo -u postgres psql</span><br><span class="line">create user zabbix with password &apos;zabbixpwd123&apos;;</span><br><span class="line">create database zabbix owner zabbix;</span><br><span class="line">grant all privileges on database zabbix to zabbix;</span><br></pre></td></tr></table></figure></p>
+<p>以上命令建立名为zabbix的用户，密码为zabbixpwd123，并建立了zabbix数据库，并授权于所有权限给zabbix用户。<br>下载zabbix4.2源码，并解压,进入postgresql目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf zabbix-4.2.0.tar.gz</span><br><span class="line"><span class="built_in">cd</span> zabbix-4.2.0/database/postgresql/</span><br></pre></td></tr></table></figure></p>
+<p>以此按照顺序，导入数据库<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"CREATE EXTENSION IF NOT EXISTS timescaledb CASCADE;"</span> | sudo -u postgres psql zabbix</span><br><span class="line">cat schema.sql | sudo -u zabbix psql zabbix</span><br><span class="line">cat images.sql | sudo -u zabbix psql zabbix</span><br><span class="line">cat data.sql | sudo -u zabbix psql zabbix</span><br><span class="line">cat timescaledb.sql | sudo -u zabbix psql zabbix</span><br></pre></td></tr></table></figure></p>
+<p>开启成功TimescaleDb<br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/70FC7FC8-2EC1-413D-A72F-D8BBD1D4C015-1024x379.jpg" alt="1"><br>与平常不同，这里开启了TimescaleDB插件支持，并使用timescaledb.sql为历史和趋势数据创建了hypertable表.hypertable表是timescaledb抽象的 一张表,让用户操作 hypertable 就像 操作 postgres的普通表一样，在内部,timescaledb自动将hypertable 分割成块, timescaledb 会自动操作和管理 hypertable 的分区表，对于用户来说是透明的.create_hypertable有两个参数,第一个参数是表名，第二个参数 是分区列,一般为 TIMESTAMPTZ类型.这里看到为历史数据的clock列。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">SELECT create_hypertable(<span class="string">'history'</span>, <span class="string">'clock'</span>, chunk_time_interval =&gt; 86400, migrate_data =&gt; <span class="literal">true</span>);</span><br><span class="line">SELECT create_hypertable(<span class="string">'history_uint'</span>, <span class="string">'clock'</span>, chunk_time_interval =&gt; 86400, migrate_data =&gt; <span class="literal">true</span>);</span><br><span class="line">SELECT create_hypertable(<span class="string">'history_log'</span>, <span class="string">'clock'</span>, chunk_time_interval =&gt; 86400, migrate_data =&gt; <span class="literal">true</span>);</span><br><span class="line">SELECT create_hypertable(<span class="string">'history_text'</span>, <span class="string">'clock'</span>, chunk_time_interval =&gt; 86400, migrate_data =&gt; <span class="literal">true</span>);</span><br><span class="line">SELECT create_hypertable(<span class="string">'history_str'</span>, <span class="string">'clock'</span>, chunk_time_interval =&gt; 86400, migrate_data =&gt; <span class="literal">true</span>);</span><br><span class="line">SELECT create_hypertable(<span class="string">'trends'</span>, <span class="string">'clock'</span>, chunk_time_interval =&gt; 86400, migrate_data =&gt; <span class="literal">true</span>);</span><br><span class="line">SELECT create_hypertable(<span class="string">'trends_uint'</span>, <span class="string">'clock'</span>, chunk_time_interval =&gt; 86400, migrate_data =&gt; <span class="literal">true</span>);</span><br><span class="line">UPDATE config SET db_extension=<span class="string">'timescaledb'</span>,hk_history_global=1,hk_trends_global=1;</span><br></pre></td></tr></table></figure></p>
+<p>完成之后，在Zabbix Server里配置相关数据库连接参数即可，与支持postgresql的配置一致。</p>
+<h2 id="基本测试"><a href="#基本测试" class="headerlink" title="基本测试"></a>基本测试</h2><p>使用TimescaleDB之后，使用我之前一篇blog<a href="https://blog.cactifans.com/2019/01/22/%E5%9F%BA%E4%BA%8Ekubernetes%E5%B9%B3%E5%8F%B0%E7%9A%84Zabbix%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/">基于kubernetes平台的Zabbix压力测试</a>   的方法增加到5k Nvps<br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/4B570A96-4559-44FA-BBB3-A9BD7C378EBF.jpg" alt="2"><br>并关联Template App Zabbix Server Stress 1k active模版，观察机器情况<br>Zabbix Server<br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/607BC706-F1BD-402F-98C4-C167A5DA9774-1024x350.jpg" alt="3"><br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/1C4D37CC-F84A-47CB-B2FC-C669169C971B-1024x336.jpg" alt="4"><br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/1CA9EB8B-5130-493F-B459-316500438801-1024x500.jpg" alt="5"><br>TimescaleDB<br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/04B68CCB-DC92-4867-BEDD-E291EA66D1E7-1024x795.jpg" alt="6"><br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/25AE4313-12E7-40EC-A30E-99F96C5A8DA2-1024x514.jpg" alt="7"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本次主要介绍了Zabbix使用TimescaleDB，安装配置比较简单，至于性能是否有大的提升，还需要后续进行测试和验证。<br><strong>如果觉得我的文章对您有用，请关注我的公众号，有更多技术干货！</strong><br><img src="https://img.cactifans.com/wp-content/uploads/2017/12/qrcode_for_gh_5c46969f2957_258-1-1.jpg" alt="微信"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/zabbix/" rel="tag"># zabbix</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/29/使用Golang实现一个简单的Zabbix-Agent/" rel="next" title="使用Golang实现一个简单的Zabbix Agent">
+                <i class="fa fa-chevron-left"></i> 使用Golang实现一个简单的Zabbix Agent
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+  <script src="https://utteranc.es/client.js" repo="canghai908/comment" issue-term="pathname" theme="github-light" crossorigin="anonymous" async>
+  </script>
+
+    </div>
+  
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://avatars1.githubusercontent.com/u/1450994?v=3&s=460" alt="当代张思德">
+            
+              <p class="site-author-name" itemprop="name">当代张思德</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#TimescaleDB介绍"><span class="nav-number">1.</span> <span class="nav-text">TimescaleDB介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TimescaleDB安装"><span class="nav-number">2.</span> <span class="nav-text">TimescaleDB安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Zabbix使用TimescaleDB"><span class="nav-number">3.</span> <span class="nav-text">Zabbix使用TimescaleDB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本测试"><span class="nav-number">4.</span> <span class="nav-text">基本测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">当代张思德</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1272964277&web_id=1272964277" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
