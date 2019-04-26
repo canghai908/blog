@@ -111,7 +111,7 @@
 <meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/04/377F6423-01C4-41BD-B700-A12C9EC0F39A-1024x331.jpg">
 <meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/04/45C5A85A-8E0E-4061-9771-29BAAAE2C72A-1024x417.jpg">
 <meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2017/12/qrcode_for_gh_5c46969f2957_258-1-1.jpg">
-<meta property="og:updated_time" content="2019-04-26T06:25:12.045Z">
+<meta property="og:updated_time" content="2019-04-26T06:38:51.670Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix4.2新功能实践3-集成Prometheus">
 <meta name="twitter:description" content="zabbix能够以多种不同的方式（推/拉）从各种数据源收集数据，包括JMX，SNMP，WMI，HTTP / HTTPS，RestAPI，XML Soap，SSH，Telnet，代理，脚本和其他数据源，4.2版本支持了Prometheus数据源。使用单个HTTP agnet调用获取所有数据，通过依赖指标高效的收集大量的Prometheus指标，然后仅将其用于相关指标监控，还可以将Prometheus">
@@ -347,6 +347,7 @@
       
         <p>zabbix能够以多种不同的方式（推/拉）从各种数据源收集数据，包括JMX，SNMP，WMI，HTTP / HTTPS，RestAPI，XML Soap，SSH，Telnet，代理，脚本和其他数据源，4.2版本支持了Prometheus数据源。使用单个HTTP agnet调用获取所有数据，通过依赖指标高效的收集大量的Prometheus指标，然后仅将其用于相关指标监控，还可以将Prometheus数据转换为JSON格式，直接用于低级别发现。</p>
 <h3 id="Prometheus-Exporter"><a href="#Prometheus-Exporter" class="headerlink" title="Prometheus Exporter"></a>Prometheus Exporter</h3><p> Prometheus提供了基本的采集客户端称为: Exporter,下载对应的Exporter运行，采集指标通过http暴露。以采集主机信息的node_exporter为例</p>
+<a id="more"></a>
 <h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p> 以Linux node_exporter为例<br> 下载并运行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/prometheus/node_exporter/releases/download/v0.17.0/node_exporter-0.17.0.linux-amd64.tar.gz</span><br><span class="line">tar zxvf node_exporter-0.17.0.linux-amd64.tar.gz</span><br><span class="line"><span class="built_in">cd</span> node_exporter-0.17.0.linux-amd64</span><br><span class="line">./node_exporter</span><br></pre></td></tr></table></figure></p>
 <p><img src="https://img.cactifans.com/wp-content/uploads/2019/04/724A2C74-BA09-4C51-A880-321A426431EE-1024x618.jpg" alt="1"><br>表示启动成功，访问<a href="http://Ip:9100/metrics" target="_blank" rel="noopener">http://Ip:9100/metrics</a> 可以看到所有采集的Metrics，安装成功。<br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/19E4316E-7F3D-44F3-A023-91BD880A84F4.jpg" alt="11"></p>
 <h4 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h4><p>通过http可以看到所有的metric，metric有固定的数据结构<br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/AB9652F8-5FDF-4933-8807-E31C76876D55.jpg" alt="2"><br>主要分为以下几个部分</p>

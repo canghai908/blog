@@ -319,60 +319,15 @@
 
       
         
-          
-            <p>zabbix能够以多种不同的方式（推/拉）从各种数据源收集数据，包括JMX，SNMP，WMI，HTTP / HTTPS，RestAPI，XML Soap，SSH，Telnet，代理，脚本和其他数据源，4.2版本支持了Prometheus数据源。使用单个HTTP agnet调用获取所有数据，通过依赖指标高效的收集大量的Prometheus指标，然后仅将其用于相关指标监控，还可以将Prometheus数据转换为JSON格式，直接用于低级别发现。</p>
+          <p>zabbix能够以多种不同的方式（推/拉）从各种数据源收集数据，包括JMX，SNMP，WMI，HTTP / HTTPS，RestAPI，XML Soap，SSH，Telnet，代理，脚本和其他数据源，4.2版本支持了Prometheus数据源。使用单个HTTP agnet调用获取所有数据，通过依赖指标高效的收集大量的Prometheus指标，然后仅将其用于相关指标监控，还可以将Prometheus数据转换为JSON格式，直接用于低级别发现。</p>
 <h3 id="Prometheus-Exporter"><a href="#Prometheus-Exporter" class="headerlink" title="Prometheus Exporter"></a>Prometheus Exporter</h3><p> Prometheus提供了基本的采集客户端称为: Exporter,下载对应的Exporter运行，采集指标通过http暴露。以采集主机信息的node_exporter为例</p>
-<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p> 以Linux node_exporter为例<br> 下载并运行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/prometheus/node_exporter/releases/download/v0.17.0/node_exporter-0.17.0.linux-amd64.tar.gz</span><br><span class="line">tar zxvf node_exporter-0.17.0.linux-amd64.tar.gz</span><br><span class="line"><span class="built_in">cd</span> node_exporter-0.17.0.linux-amd64</span><br><span class="line">./node_exporter</span><br></pre></td></tr></table></figure></p>
-<p><img src="https://img.cactifans.com/wp-content/uploads/2019/04/724A2C74-BA09-4C51-A880-321A426431EE-1024x618.jpg" alt="1"><br>表示启动成功，访问<a href="http://Ip:9100/metrics" target="_blank" rel="noopener">http://Ip:9100/metrics</a> 可以看到所有采集的Metrics，安装成功。<br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/19E4316E-7F3D-44F3-A023-91BD880A84F4.jpg" alt="11"></p>
-<h4 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h4><p>通过http可以看到所有的metric，metric有固定的数据结构<br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/AB9652F8-5FDF-4933-8807-E31C76876D55.jpg" alt="2"><br>主要分为以下几个部分</p>
-<h5 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h5><p>以#号开头HELP  metric的说明，前面为metric名称,空格后为说明</p>
-<h5 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h5><p>以#号开头TYPE  metric的类型，前面为metric名称,空格后为类型<br>Metrics类型有四种</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">指标类型</th>
-<th style="text-align:left">描述</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Counter</td>
-<td style="text-align:left">只增不减的计数器，其值只能增加或在重启时重置为零</td>
-<td style="text-align:left">例如，您可以使用计数器来表示服务的总请求数，已完成的任务或错误总数</td>
-</tr>
-<tr>
-<td style="text-align:left">Gauge</td>
-<td style="text-align:left">用来存放一个可以任意变大变小的数值</td>
-<td style="text-align:left">例如温度或当前内存使用情况，或者运行的goroutine数量</td>
-</tr>
-<tr>
-<td style="text-align:left">Histogram</td>
-<td style="text-align:left">一段时间范围内对数据进行采样</td>
-<td style="text-align:left">通常用它计算分位数的直方图</td>
-</tr>
-<tr>
-<td style="text-align:left">Summary</td>
-<td style="text-align:left">客户端定义的数据分布统计图</td>
-<td style="text-align:left">统计事件发生的次数或者大小，以及其分布情况</td>
-</tr>
-</tbody>
-</table>
-<p>其中Counter和Gauge最为常用</p>
-<h5 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h5><p>数据结构<br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/5266AFB9-63CB-4E92-A2C1-0C4F677FEBA2.jpg" alt="3"></p>
-<h3 id="集成Prometheus"><a href="#集成Prometheus" class="headerlink" title="集成Prometheus"></a>集成Prometheus</h3><p>Prometheus的Exporter为http方式，因此需要使用Zabbix的http agent，配合使用Zabbix的Dependent items做到一次采集所有指标。由于Prometheus metric较为通用，建议配置独立的模版。<br>建立一个名为Templage Prometheus的模版，添加一个Master Item<br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/843B2CC6-5EA4-49FA-B267-CAF945753E37.jpg" alt="4"><br>关键配置<br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/7372D0AD-B2C5-4331-87CA-FD4A74FFA6F1.png" alt="5"><br>配置node_exporter的地址为宏变量<br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/A6E9FD9C-9E5B-4D3A-AF22-2728CDE80B13-1024x373.jpg" alt="6"></p>
-<h4 id="一般采集"><a href="#一般采集" class="headerlink" title="一般采集"></a>一般采集</h4><p>配置好之后，配置一个监控操作系统Load5的Item<br>新建Item<br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/73DEF247-3CEE-4C22-87C6-6E2EEF920D75.jpg" alt="7"><br>配置之后要配置数据预处理策略<br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/B007D56B-11B9-4C9F-AA0C-40EC95071217-1024x384.jpg" alt="8"><br>配置之后关联到主机，之后查看数据，已经采集<br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/2E3B7526-278F-4D05-99FF-D8870DDD67DC-1024x275.jpg" alt="9"></p>
-<h4 id="LLD（低级别发现）"><a href="#LLD（低级别发现）" class="headerlink" title="LLD（低级别发现）"></a>LLD（低级别发现）</h4><p>使用zabbix agent，用LLD可实现自动发现磁盘空间，网卡等不定项的指标，利用LLD也可以Prometheus指标的发现。本次以配置自动发现网卡流量为例。<br>在模版里配置发现规则<br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/DE357DB6-1822-4997-A837-627CD8EF6AD8-1024x535.jpg" alt="10"><br>配置数据预处理<br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/CFB1A21A-44B3-4E6D-B9D9-25BA412B5DFC-1024x270.jpg" alt="11"><br>这里使用如下metrics，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># HELP node_network_device_id device_id value of /sys/class/net/&lt;iface&gt;.</span><br><span class="line"># TYPE node_network_device_id gauge</span><br><span class="line">node_network_device_id&#123;interface=&quot;enp0s3&quot;&#125; 0</span><br><span class="line">node_network_device_id&#123;interface=&quot;enp0s8&quot;&#125; 0</span><br><span class="line">node_network_device_id&#123;interface=&quot;lo&quot;&#125; 0</span><br></pre></td></tr></table></figure></p>
-<p>使用通配符获取所有网卡。通配符及语法使用方法查看<a href="https://www.zabbix.com/documentation/4.2/manual/config/items/itemtypes/prometheus" target="_blank" rel="noopener">https://www.zabbix.com/documentation/4.2/manual/config/items/itemtypes/prometheus</a><br>parameters配置为<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node_network_device_id&#123;interface=~<span class="string">".*"</span>&#125;</span><br></pre></td></tr></table></figure></p>
-<p>配置之后，复制一个metric（完整的metric，包括value），点击test all steps，粘贴metric，点击test<br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/C953EC55-E275-41E4-ABC9-AD906076D46E-1024x307.jpg" alt="12"><br>如提示错误，表示规则配置有问题，需要修改。如没有错误，下方会出现处理后的json，复制json文本，格式化<br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/9D082B32-B383-405B-84FF-434A9649770B.jpg" alt="13"><br>根据json格式配置如下宏<br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/068D1DEA-136C-4F03-A8B4-8679E91DE54E.jpg" alt="14"><br>提取lables里的interface即网卡名称作为宏<br>配置如下过滤规则，过滤lo网卡<br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/AD878175-DED0-4F07-9737-948CAEA9B4DE-1024x320.jpg" alt="15"><br>网卡分为发送和接收2个方向，因此需要创建2个基本的Item发现原型<br>配置网卡接收item<br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/0A6E7AF0-4A0E-4349-96F1-187881E056AB-1024x580.jpg" alt="16"><br>Prometheus 的网卡接收Metrics如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># HELP node_network_receive_bytes_total Network device statistic receive_bytes.</span></span><br><span class="line"><span class="comment"># TYPE node_network_receive_bytes_total counter</span></span><br><span class="line">node_network_receive_bytes_total&#123;device=<span class="string">"enp0s3"</span>&#125; 5.703155e+06</span><br><span class="line">node_network_receive_bytes_total&#123;device=<span class="string">"enp0s8"</span>&#125; 6.303864e+06</span><br><span class="line">node_network_receive_bytes_total&#123;device=<span class="string">"lo"</span>&#125; 3.00503e+07</span><br></pre></td></tr></table></figure></p>
-<p>Prometheus pattern参数配置为<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node_network_receive_bytes_total&#123;device=<span class="string">"&#123;#INTERFACE&#125;&#125;</span></span><br></pre></td></tr></table></figure></p>
-<p>由于网卡流量为bytes，Metric类型counter，配置数据预处理，如图<br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/58F8AFC3-429A-4158-BAF5-D9F564FAC9D3.jpg" alt="17"><br>同样配置配置，网卡发送<br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/66F811A8-DD65-4EEB-A09B-9387013B18A8-1024x614.jpg" alt="18"><br>metrics<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># HELP node_network_transmit_bytes_total Network device statistic transmit_bytes.</span><br><span class="line"># TYPE node_network_transmit_bytes_total counter</span><br><span class="line">node_network_transmit_bytes_total&#123;device=&quot;enp0s3&quot;&#125; 1.4358114e+07</span><br><span class="line">node_network_transmit_bytes_total&#123;device=&quot;enp0s8&quot;&#125; 9510</span><br><span class="line">node_network_transmit_bytes_total&#123;device=&quot;lo&quot;&#125; 3.00503e+07</span><br></pre></td></tr></table></figure></p>
-<p>Prometheus pattern参数配置为<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node_network_transmit_bytes_total&#123;device=<span class="string">"&#123;#INTERFACE&#125;&#125;</span></span><br></pre></td></tr></table></figure></p>
-<p>配置同样的预处理规则<br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/C6459A79-2A19-422D-AA4B-5C52E16A77D6-1024x437.jpg" alt="19"><br>注意配置2个Item的key不能重复<br>最后创建一个图形原型<br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/50E8BE32-1E08-42A3-BE66-7A124F32253D-1024x663.jpg" alt="20"><br>配置完成之后，可以看到数据已采集<br>最新数据<br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/377F6423-01C4-41BD-B700-A12C9EC0F39A-1024x331.jpg" alt="21"><br>图形<br><img src="https://img.cactifans.com/wp-content/uploads/2019/04/45C5A85A-8E0E-4061-9771-29BAAAE2C72A-1024x417.jpg" alt="22"></p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Zabbix4.2提供了很多新的功能及特性，对Prometheus的支持可以整合现有的Prometheus监控资源，利用Throttling等功能可以做到高效的资源监控。</p>
-<p><strong>如果觉得我的文章对您有用，请关注我的公众号，有更多技术干货！</strong><br><img src="https://img.cactifans.com/wp-content/uploads/2017/12/qrcode_for_gh_5c46969f2957_258-1-1.jpg" alt="微信"></p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/04/26/Zabbix4-2新功能实践3-集成Prometheus/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
