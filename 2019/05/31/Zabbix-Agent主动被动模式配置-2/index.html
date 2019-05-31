@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="被动模式,远程命令,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="接上期，长久以来对于安装Zabbix Agent,文章介绍基本都是需要修改一下几个地方123Server=172.16.66.20ServerActive=172.16.66.20Hostname=node201 启动Zabbix Agent即可监控。对于具体为什么是这样配置，这样配置是主动模式还是被动模式？很少提起。本文主要介绍Zabbxi Agent的几个关键配置。 主动模式VS被动模式">
+<meta name="keywords" content="被动模式,远程命令">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Zabbix Agent主动被动模式配置-2">
+<meta property="og:url" content="https://blog.cactifans.com/2019/05/31/Zabbix-Agent主动被动模式配置-2/index.html">
+<meta property="og:site_name" content="canghai">
+<meta property="og:description" content="接上期，长久以来对于安装Zabbix Agent,文章介绍基本都是需要修改一下几个地方123Server=172.16.66.20ServerActive=172.16.66.20Hostname=node201 启动Zabbix Agent即可监控。对于具体为什么是这样配置，这样配置是主动模式还是被动模式？很少提起。本文主要介绍Zabbxi Agent的几个关键配置。 主动模式VS被动模式">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/03/7EBBC8A6-B2C2-40AE-B86F-55EEF378A02B.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/03/F8C8B1D3-C40E-478E-BC90-188FD7BA2488.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/05/E9C45B5A-7E2A-4866-A7B5-F504E050CF8C-1024x97.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/05/3FB560C8-1E77-4CC9-8A87-B9CAB34EF7A5-1024x493.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/05/1C0C9A26-98D2-4FF6-8011-5ADC357B5628-1024x191.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/05/BBDF18EA-20B1-44F7-940B-4318AF72CA9D-1024x29.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/05/2A6B87ED-2966-4DBF-A918-35C99F362C3B-1024x547.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/05/2CA520FA-732F-49C3-A0D2-8EA03F1CEB48-1024x619.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/05/1EE3DC72-D559-466F-8003-F1DEAFC7D010-1024x712.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/05/D2E6EBA3-3884-44A4-8C5F-0193A761C7EC-1024x266.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/05/54C76362-9D72-447B-8ED1-754A974C2934-1024x68.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/05/0A9F2AFB-E039-432C-9684-B4565DDBDC58.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/05/EC2B3B1D-B542-4688-8B3B-9E5A6F799C84-1024x273.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/05/AC709984-AC0C-4436-8064-E9945F065D81.jpg">
+<meta property="og:updated_time" content="2019-05-31T06:23:50.360Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Zabbix Agent主动被动模式配置-2">
+<meta name="twitter:description" content="接上期，长久以来对于安装Zabbix Agent,文章介绍基本都是需要修改一下几个地方123Server=172.16.66.20ServerActive=172.16.66.20Hostname=node201 启动Zabbix Agent即可监控。对于具体为什么是这样配置，这样配置是主动模式还是被动模式？很少提起。本文主要介绍Zabbxi Agent的几个关键配置。 主动模式VS被动模式">
+<meta name="twitter:image" content="https://img.cactifans.com/wp-content/uploads/2019/03/7EBBC8A6-B2C2-40AE-B86F-55EEF378A02B.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://blog.cactifans.com/2019/05/31/Zabbix-Agent主动被动模式配置-2/">
+
+
+
+
+
+  <title>Zabbix Agent主动被动模式配置-2 | canghai</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">canghai</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.cactifans.com/2019/05/31/Zabbix-Agent主动被动模式配置-2/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="当代张思德">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/1450994?v=3&s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="canghai">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Zabbix Agent主动被动模式配置-2</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-31T14:18:32+08:00">
+                2019-05-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>接上期，长久以来对于安装Zabbix Agent,文章介绍基本都是需要修改一下几个地方<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Server=172.16.66.20</span><br><span class="line">ServerActive=172.16.66.20</span><br><span class="line">Hostname=node201</span><br></pre></td></tr></table></figure></p>
+<p>启动Zabbix Agent即可监控。对于具体为什么是这样配置，这样配置是主动模式还是被动模式？很少提起。本文主要介绍Zabbxi Agent的几个关键配置。</p>
+<h2 id="主动模式VS被动模式"><a href="#主动模式VS被动模式" class="headerlink" title="主动模式VS被动模式"></a>主动模式VS被动模式</h2><p><img src="https://img.cactifans.com/wp-content/uploads/2019/03/7EBBC8A6-B2C2-40AE-B86F-55EEF378A02B.jpg" alt="1"></p>
+<a id="more"></a>
+<p>Zabbix Agent这二种模式，用通俗易懂的讲:<br>主动模式：Zabbix Agent启动之后，把采集的数据主动发给Zabbix Server或者Zabbix Porxy。<br>被动模式：Zabbix Server或者Zabbix Proxy被动找Zabbix Agent拿监控数据。<br><img src="https://img.cactifans.com/wp-content/uploads/2019/03/F8C8B1D3-C40E-478E-BC90-188FD7BA2488.jpg" alt="2"><br>这二种模式在使用过程中有所不同，各有优势，主要有以下区别<br>| 模式      |    Server压力 | 远程命令  |日志监控|<br>| ——– | :——–:| :——: |:——:|<br>| 主动  | 低 |  不支持   |支持|<br>| 被动  | 高 |  支持  |不支持|<br>鉴于以上不同，根据实际需求，选择对应模式。</p>
+<h2 id="被动模式配置"><a href="#被动模式配置" class="headerlink" title="被动模式配置"></a>被动模式配置</h2><p>要配置被动模式，只需要配置以下几个参数即可<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Server=172.16.66.20</span><br></pre></td></tr></table></figure></p>
+<p><strong>Server</strong>  配置为Zabbix Server或Zabbix proxy的地址，这里可以配置域名/ip，如需配置多个地址，多地址之间用英文逗号隔开即可，如：192.168.1.100,10.10.1.100。这里可以理解为ACL功能，即允许那些Zabbix Server及Zabbix Proxy访问Zabbix Agent，因此可以配置网段和配置成所有IP，如：192.168.1.0/24 或0.0.0.0/0，纯被动模式下只需要配置Server即可Hostname不配置。<br>配置好之后重启Zabbix Agent查看进程如下<br><img src="https://img.cactifans.com/wp-content/uploads/2019/05/E9C45B5A-7E2A-4866-A7B5-F504E050CF8C-1024x97.jpg" alt="3"></p>
+<h2 id="主机配置"><a href="#主机配置" class="headerlink" title="主机配置"></a>主机配置</h2><p>被动模式配置之后，启动zabbix agent，需要在Zabbix Server添加主机<br><img src="https://img.cactifans.com/wp-content/uploads/2019/05/3FB560C8-1E77-4CC9-8A87-B9CAB34EF7A5-1024x493.jpg" alt="4"><br><strong>Host name</strong> 可随意配置，建议按照一定规则，不与其他机器重复即可<br><strong>Visible name</strong> 配置为可见名称，这里可配置为中文，主机列表会显示此名称<br><strong>Agent interfaces</strong>  agent所在机器的IP和端口，这里一定要配置成agent真实的IP，默认zabbix agent端口为10050，可以通过配置文件进行修改</p>
+<h2 id="模版配置"><a href="#模版配置" class="headerlink" title="模版配置"></a>模版配置</h2><p>zabbix 自带模版大多数为被动模式，因此直接关联模版即可进行监控。</p>
+<h2 id="远程命令"><a href="#远程命令" class="headerlink" title="远程命令"></a>远程命令</h2><p>与主动模式不同，被动模式支持zabbix agent执行远程命令。在出现告警后，发送邮件的同时，可以配置远程命令实现故障“自愈”，如重启服务等</p>
+<h3 id="Zabbix-Agent-配置"><a href="#Zabbix-Agent-配置" class="headerlink" title="Zabbix Agent 配置"></a>Zabbix Agent 配置</h3><p>在Zabbix Agent配置文件中开启<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">EnableRemoteCommands=1</span><br><span class="line">LogRemoteCommands=1</span><br></pre></td></tr></table></figure></p>
+<p><strong>EnableRemoteCommands</strong>  配置开启远程命令<br><strong>LogRemoteCommands</strong>     在日志中记录远程命令<br>配置之后重启Zabbix Agent</p>
+<h3 id="系统配置"><a href="#系统配置" class="headerlink" title="系统配置"></a>系统配置</h3><p>由于zabbix执行命令默认是以<strong>zabbix</strong> 系统用户执行，因此需要在操作系统上为zabbix用户配置sudo。<br>输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">visudo</span><br></pre></td></tr></table></figure></p>
+<p>添加<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zabbix ALL=NOPASSWD: ALL</span><br></pre></td></tr></table></figure></p>
+<p>配置为ALL，这里也可以配置成具体的命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zabbix ALL=NOPASSWD: /etc/init.d/nginx restart</span><br></pre></td></tr></table></figure></p>
+<h3 id="Zabbix-Server配置"><a href="#Zabbix-Server配置" class="headerlink" title="Zabbix  Server配置"></a>Zabbix  Server配置</h3><p>以下举例配置一个Nginx自动恢复，使用zabbix agent远程命令实现nginx停止自动启动。<br>配置如下Item，监控Nginx的80端口<br><img src="https://img.cactifans.com/wp-content/uploads/2019/05/1C0C9A26-98D2-4FF6-8011-5ADC357B5628-1024x191.jpg" alt="5"><br>并配置一个Trigger 端口不存在时告警<br><img src="https://img.cactifans.com/wp-content/uploads/2019/05/BBDF18EA-20B1-44F7-940B-4318AF72CA9D-1024x29.jpg" alt="6"><br>配置一个Action，条件为Trigger名称，端口down之后，执行脚本重启Nginx<br><img src="https://img.cactifans.com/wp-content/uploads/2019/05/2A6B87ED-2966-4DBF-A918-35C99F362C3B-1024x547.jpg" alt="7"><br>为Action配置Operations，添加一个远程执行命令<br><img src="https://img.cactifans.com/wp-content/uploads/2019/05/2CA520FA-732F-49C3-A0D2-8EA03F1CEB48-1024x619.jpg" alt="8"><br>配置命令和执行主机<br><img src="https://img.cactifans.com/wp-content/uploads/2019/05/1EE3DC72-D559-466F-8003-F1DEAFC7D010-1024x712.jpg" alt="9"><br>配置好之后，查看下目前Nginx的状态为启动状态<br><img src="https://img.cactifans.com/wp-content/uploads/2019/05/D2E6EBA3-3884-44A4-8C5F-0193A761C7EC-1024x266.jpg" alt="10"><br>启动时间为14:27<br>手动停止Nginx服务，一分钟之后在Zabbix Problems查看<br><img src="https://img.cactifans.com/wp-content/uploads/2019/05/54C76362-9D72-447B-8ED1-754A974C2934-1024x68.jpg" alt="10"><br>看到44分故障45分已经恢复<br>查看历史数据<br><img src="https://img.cactifans.com/wp-content/uploads/2019/05/0A9F2AFB-E039-432C-9684-B4565DDBDC58.jpg" alt="11"><br>可以看到44分Nginx端口为down，45分恢复正常<br>查看Nginx状态<br><img src="https://img.cactifans.com/wp-content/uploads/2019/05/EC2B3B1D-B542-4688-8B3B-9E5A6F799C84-1024x273.jpg" alt="12"><br>Nginx运行正常，启动时间为44分<br>查看Zabbix Agent日志<br><img src="https://img.cactifans.com/wp-content/uploads/2019/05/AC709984-AC0C-4436-8064-E9945F065D81.jpg" alt="13"><br>可以看到44分执行了脚本,初步实现了简单故障的“自愈”。</p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>被动模式远程命令，是以zabbix用户执行，注意配置sudo及权限，命令后可跟参数，参数可以使用zabbix的内置宏。</p>
+<p>点击下方【查看原文】到Blog阅读原文</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    当代张思德
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://blog.cactifans.com/2019/05/31/Zabbix-Agent主动被动模式配置-2/" title="Zabbix Agent主动被动模式配置-2">https://blog.cactifans.com/2019/05/31/Zabbix-Agent主动被动模式配置-2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-SA 4.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/被动模式/" rel="tag"># 被动模式</a>
+          
+            <a href="/tags/远程命令/" rel="tag"># 远程命令</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/26/Zabbix4-2新功能实践3-集成Prometheus/" rel="next" title="Zabbix4.2新功能实践3-集成Prometheus">
+                <i class="fa fa-chevron-left"></i> Zabbix4.2新功能实践3-集成Prometheus
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+  <script src="https://utteranc.es/client.js" repo="canghai908/comment" issue-term="pathname" theme="github-light" crossorigin="anonymous" async>
+  </script>
+
+    </div>
+  
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://avatars1.githubusercontent.com/u/1450994?v=3&s=460" alt="当代张思德">
+            
+              <p class="site-author-name" itemprop="name">当代张思德</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#主动模式VS被动模式"><span class="nav-number">1.</span> <span class="nav-text">主动模式VS被动模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#被动模式配置"><span class="nav-number">2.</span> <span class="nav-text">被动模式配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主机配置"><span class="nav-number">3.</span> <span class="nav-text">主机配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模版配置"><span class="nav-number">4.</span> <span class="nav-text">模版配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程命令"><span class="nav-number">5.</span> <span class="nav-text">远程命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Zabbix-Agent-配置"><span class="nav-number">5.1.</span> <span class="nav-text">Zabbix Agent 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统配置"><span class="nav-number">5.2.</span> <span class="nav-text">系统配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Zabbix-Server配置"><span class="nav-number">5.3.</span> <span class="nav-text">Zabbix  Server配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意事项"><span class="nav-number">6.</span> <span class="nav-text">注意事项</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">当代张思德</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1272964277&web_id=1272964277" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
