@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="zabbix,snmptrap,snmptt,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一.SNMP协议1.协议介绍snmp协议是日常使用的较多的一种协议，绝大多数网络设备/存储等都支持snmp协议，通过此协议可以实现设备状态的监控及管理。 2.主要组成SNMP协议包括以下三个部分 SNMP Agent：负责处理snmp请求，主要包括get，set等操作。可通过此接口查询设备的运行状态（使用较多），或者变更配置（使用较少），默认使用UDP 161端口SNMP Trap： snmp通知">
+<meta name="keywords" content="zabbix,snmptrap,snmptt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Zabbix监控设备SNMP Trap消息">
+<meta property="og:url" content="https://blog.cactifans.com/2019/09/27/Zabbix监控设备SNMP-Trap消息/index.html">
+<meta property="og:site_name" content="canghai">
+<meta property="og:description" content="一.SNMP协议1.协议介绍snmp协议是日常使用的较多的一种协议，绝大多数网络设备/存储等都支持snmp协议，通过此协议可以实现设备状态的监控及管理。 2.主要组成SNMP协议包括以下三个部分 SNMP Agent：负责处理snmp请求，主要包括get，set等操作。可通过此接口查询设备的运行状态（使用较多），或者变更配置（使用较少），默认使用UDP 161端口SNMP Trap： snmp通知">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/09/SNMP-7.png">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/09/snmptt-flow.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/09/61243AC3-F984-4288-9749-1D98D0AD6BA8.jpg?imageView2/1/w/695/h/537#">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/09/D283777A-9467-446F-84A0-96D969F38B71.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/09/42B6BB7E-74F6-4DDC-8545-58702BD680E3.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/09/2A71642A-B1B7-4343-BBB5-200CED67B565.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/09/6AD29BE7-D0D9-4ACF-8129-8B57FA6D53FA.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/09/405CDF74-6931-46FD-8D06-0DB8F4BAE297.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/09/000E463B-F0C4-48EE-9F92-2D44AA04DB58.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/09/9A98EEEA-4C1B-4214-8DA6-36DF8C4B5A64.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/09/WechatIMG99.png?imageView2/1/w/577/h/1024#">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/09/095EAD87-D08C-4FC1-ADBB-F9442EA026C6.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/09/D87546C7-05C7-43E6-877D-C79E11807537.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2019/09/B51753F4-F986-4949-8A19-07D39B327484.jpg">
+<meta property="og:image" content="https://img.cactifans.com/wp-content/uploads/2017/12/qrcode_for_gh_5c46969f2957_258-1-1.jpg">
+<meta property="og:updated_time" content="2019-09-27T09:39:49.233Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Zabbix监控设备SNMP Trap消息">
+<meta name="twitter:description" content="一.SNMP协议1.协议介绍snmp协议是日常使用的较多的一种协议，绝大多数网络设备/存储等都支持snmp协议，通过此协议可以实现设备状态的监控及管理。 2.主要组成SNMP协议包括以下三个部分 SNMP Agent：负责处理snmp请求，主要包括get，set等操作。可通过此接口查询设备的运行状态（使用较多），或者变更配置（使用较少），默认使用UDP 161端口SNMP Trap： snmp通知">
+<meta name="twitter:image" content="https://img.cactifans.com/wp-content/uploads/2019/09/SNMP-7.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://blog.cactifans.com/2019/09/27/Zabbix监控设备SNMP-Trap消息/">
+
+
+
+
+
+  <title>Zabbix监控设备SNMP Trap消息 | canghai</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">canghai</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.cactifans.com/2019/09/27/Zabbix监控设备SNMP-Trap消息/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="当代张思德">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/1450994?v=3&s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="canghai">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Zabbix监控设备SNMP Trap消息</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-27T17:33:13+08:00">
+                2019-09-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一-SNMP协议"><a href="#一-SNMP协议" class="headerlink" title="一.SNMP协议"></a>一.SNMP协议</h2><h3 id="1-协议介绍"><a href="#1-协议介绍" class="headerlink" title="1.协议介绍"></a>1.协议介绍</h3><p>snmp协议是日常使用的较多的一种协议，绝大多数网络设备/存储等都支持snmp协议，通过此协议可以实现设备状态的监控及管理。</p>
+<h3 id="2-主要组成"><a href="#2-主要组成" class="headerlink" title="2.主要组成"></a>2.主要组成</h3><p>SNMP协议包括以下三个部分<br><img src="https://img.cactifans.com/wp-content/uploads/2019/09/SNMP-7.png" alt="1"></p>
+<p><strong>SNMP Agent</strong>：负责处理snmp请求，主要包括get，set等操作。可通过此接口查询设备的运行状态（使用较多），或者变更配置（使用较少），默认使用UDP 161端口<br><strong>SNMP Trap</strong>： snmp通知消息，主动发送消息到管理端。如设备故障，端口down等都会实时发送消息到接收端。默认使用UDP 162端口<br><strong>SNMP MIB</strong>：MIB代表管理信息库，是按层次结构组织的信息的集合,定义了设备内被管理对象的属性。</p>
+<a id="more"></a>
+<h2 id="3-基本操作"><a href="#3-基本操作" class="headerlink" title="3.基本操作"></a>3.基本操作</h2><p>经常使用的终端命令有以下几个:<br><strong>snmpwalk</strong>：遍历整个snmp mib树，通常用来检测snmp是否配置成功，一般完整walk到一个MIB，在MIB末尾，都会输出“End Of Mib”的字样。否则可能为Response timeout等错误，以此来判断snmp agent是否配置成功。<br><strong>snmpget</strong>：获取某个oid的具体数值，通常用来检测oid是否正确。<br><strong>遇到很多使用snmpwalk来获取oid数据的，这是错误的用法，这样是不能测试oid的正确性。只有通过snmpget+oid能获取的数据的oid，才能配置成独立的监控项，作为监控指标采集数据。</strong><br>使用zabbix监控snmp设备状态，一般按照以下步骤进行操作：</p>
+<ol>
+<li>通过snmpwalk确定snmp agent配置是否正确</li>
+<li>通过snmpget获取具体的某个oid的数据，记录oid</li>
+<li>在zabbix上建立对应的item，interface选择设备snmp接口，Key<br>可随意，SNMP OID输入oid，SNMP community输入snmp community<br>Type of information选择对应类型即可。</li>
+</ol>
+<h2 id="二-SNMPTrap监控"><a href="#二-SNMPTrap监控" class="headerlink" title="二.SNMPTrap监控"></a>二.SNMPTrap监控</h2><h3 id="1-SNMPTT介绍"><a href="#1-SNMPTT介绍" class="headerlink" title="1.SNMPTT介绍"></a>1.SNMPTT介绍</h3><p>SNMPTT (SNMP Trap Translator) 是一个perl语言编写的用来处理snmptrap消息的程序，可与Net-SNMP / UCD-SNMP snmptrapd程序（<a href="http://www.net-snmp.org）一起使用，基本流程如下" target="_blank" rel="noopener">www.net-snmp.org）一起使用，基本流程如下</a><br><img src="https://img.cactifans.com/wp-content/uploads/2019/09/snmptt-flow.jpg" alt="2"><br>snmptt负责处理net-snmp接收到的trap消息，通过snmptt命令或snmptthandler进行处理，解析消息之后可将消息写入文件或数据库。</p>
+<h3 id="2-安装SNMPTT"><a href="#2-安装SNMPTT" class="headerlink" title="2.安装SNMPTT"></a>2.安装SNMPTT</h3><p>操作系统为centos  7.7 1908 x64，使用yum方式安装snmptt，snmptt不在默认的官方源，属于epel源，因此需要首先安装epel源。<br>添加epel源<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install epel-release -y</span><br></pre></td></tr></table></figure></p>
+<p>安装snmptt及相关组件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install snmptt perl-Sys-Syslog perl-DBD-MySQL -y</span><br></pre></td></tr></table></figure></p>
+<p>即可完成安装。</p>
+<h3 id="3-转换MIB文件"><a href="#3-转换MIB文件" class="headerlink" title="3.转换MIB文件"></a>3.转换MIB文件</h3><p>snmp trap消息如果不翻译,原始内容可能是这样的<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"Version"</span>: <span class="number">2</span>,</span><br><span class="line">	<span class="attr">"TrapType"</span>: <span class="number">0</span>,</span><br><span class="line">	<span class="attr">"OID"</span>: <span class="literal">null</span>,</span><br><span class="line">	<span class="attr">"Other"</span>: <span class="literal">null</span>,</span><br><span class="line">	<span class="attr">"Community"</span>: <span class="string">"public"</span>,</span><br><span class="line">	<span class="attr">"Username"</span>: <span class="string">""</span>,</span><br><span class="line">	<span class="attr">"Address"</span>: <span class="string">"172.16.1.64:49692"</span>,</span><br><span class="line">	<span class="attr">"VarBinds"</span>: &#123;</span><br><span class="line">		<span class="attr">".1.3.6.1.2.1.1.3.0"</span>: <span class="number">7908527690000000</span>,</span><br><span class="line">		<span class="attr">".1.3.6.1.2.1.2.2.1.1.18"</span>: <span class="number">18</span>,</span><br><span class="line">		<span class="attr">".1.3.6.1.2.1.2.2.1.2.18"</span>: <span class="string">"Vlanif103"</span>,</span><br><span class="line">		<span class="attr">".1.3.6.1.2.1.2.2.1.7.18"</span>: <span class="number">2</span>,</span><br><span class="line">		<span class="attr">".1.3.6.1.2.1.2.2.1.8.18"</span>: <span class="number">2</span>,</span><br><span class="line">		<span class="attr">".1.3.6.1.6.3.1.1.4.1.0"</span>: [<span class="number">1</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">3</span>]</span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="attr">"VarBindOIDs"</span>: [</span><br><span class="line">	<span class="string">".1.3.6.1.2.1.1.3.0"</span>, </span><br><span class="line">	<span class="string">".1.3.6.1.6.3.1.1.4.1.0"</span>, </span><br><span class="line">	<span class="string">".1.3.6.1.2.1.2.2.1.1.18"</span>,</span><br><span class="line">	<span class="string">".1.3.6.1.2.1.2.2.1.7.18"</span>,</span><br><span class="line">	<span class="string">".1.3.6.1.2.1.2.2.1.8.18"</span>, </span><br><span class="line">	<span class="string">".1.3.6.1.2.1.2.2.1.2.18"</span></span><br><span class="line">	]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果需要知道上述oid的具体内容及数值意义就需要对照MIB文件对消息进行“翻译”。snmptt需要加载对应配置文件，对trap消息进行翻译。<br>snmptt提供了snmpttconvertmib工具，snmpttconvertmib是一个Perl脚本，它将读取MIB文件并将TRAP-TYPE（v1）或NOTIFICATIONATION-TYPE（v2）定义转换为SNMPTT可读的配置文件，从而实现对trap消息的翻译，基本命令如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/snmpttconvertmib --<span class="keyword">in</span>=/usr/share/snmp/mibs/CPQHOST.mib --out=/etc/snmp/snmptt.conf.compaq --net_snmp_perl</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>/usr/share/snmp/mibs/ 为centos7 默认的 mibs文件路径，上传设备mib文件到此目录。</li>
+<li>/etc/snmp/snmptt.cong.compaq 转换完输出的配置文件</li>
+</ul>
+<p>由于一般情况设备mib可能有多个，建议转换为一个配置文件中，便于管理，可使用以下命令进行批量转换。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> HUAWEI*</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">/usr/bin/snmpttconvertmib --<span class="keyword">in</span>=<span class="variable">$i</span> --out=/etc/snmp/snmptt.conf.huawei --net_snmp_perl</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure></p>
+<p>以HUAWEI开头的mib文件都转换为snmptt.conf.huawei，基本都是一些私有的MIB。snmptt自带的snmptt.conf配置文件里已经包括了一些常用的配置如端口up/down。实际过程中，只转换需要关注的MIB文件即可。<br>这里以配置华为USG 6320登录trap告警为例，从华为官网下载MIB文件，并上传到系统/usr/share/snmp/mibs目录下，从MIB说明文件得知，用户登录MIB文件属于HUAWEI-SECURITY-LOGIN-MIB.mib文件，对mib文件进行转换<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/snmpttconvertmib --<span class="keyword">in</span>=/usr/share/snmp/mibs/HUAWEI-SECURITY-LOGIN-MIB.mib --out=/etc/snmp/snmptt.conf.HUAWEI-SECURITY-LOGIN --net_snmp_perl</span><br></pre></td></tr></table></figure></p>
+<p>输入如下<br><img src="https://img.cactifans.com/wp-content/uploads/2019/09/61243AC3-F984-4288-9749-1D98D0AD6BA8.jpg?imageView2/1/w/695/h/537#" alt="3"><br>表示转换成功，已经生成snmptt.conf.HUAWEI-SECURITY-LOGIN，<strong>这里转换出来的为标准的文件，不符合zabbix snmptrap 文件格式，因此还需要执行以下命令对配置文件进行稍加修改。</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">'s/FORMAT/FORMAT ZBXTRAP $aA/g'</span> /etc/snmp/snmptt.conf.HUAWEI-SECURITY-LOGIN</span><br></pre></td></tr></table></figure></p>
+<p>其实就是添加一个ZBXTRAP字符。很多文档遗漏此项，导致后续配置后zabbix server日志出现以下错误：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">28391:20190923:150150.572 invalid <span class="built_in">trap</span> data found <span class="string">"2019/09/23 15:01:49 .1.3.6.1.6.3.1.1.5.4 Normal "</span>Status Events<span class="string">" 172.16.1.64 - Link up on interface 18.  Admin state: up.  Operational state: up</span></span><br><span class="line"><span class="string">2019/09/23 15:01:49 .1.3.6.1.6.3.1.1.5.4 Normal "</span>Status Events<span class="string">" 172.16.1.64 - A linkUp trap signifies that the SNMPv2 entity, 18 up up Vlanif103</span></span><br></pre></td></tr></table></figure></p>
+<p>无法识别trap文件格式。</p>
+<h3 id="4-配置snmptt"><a href="#4-配置snmptt" class="headerlink" title="4.配置snmptt"></a>4.配置snmptt</h3><p>snmptt配置文件有2个</p>
+<ul>
+<li>/etc/snmp/snmptt.ini snmptt主要配置文件</li>
+<li>/etc/snmp/snmptt.conf 系统默认的策略文件，包括一些基本的端口up/down的配置<br>修改默认的snmptt.ini 配置文件，主要修改一下几个地方<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mode = standalone</span><br><span class="line">multiple_event = 0</span><br><span class="line">net_snmp_perl_enable = 1</span><br><span class="line">translate_log_trap_oid = 1</span><br><span class="line">date_time_format = %Y/%m/%d %H:%M:%S</span><br><span class="line">syslog_enable = 0</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在这里需要加载刚才转换完成的snmptt.conf.HUAWEI-SECURITY-LOGIN配置文件<br>在snmptt.ini文件末尾如下添加snmptt.conf.HUAWEI-SECURITY-LOGIN<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[TrapFiles]</span><br><span class="line"># A list of snmptt.conf files (this is NOT the snmptrapd.conf file).  The COMPLETE path</span><br><span class="line"># and filename.  Ex: &apos;/etc/snmp/snmptt.conf&apos;</span><br><span class="line">snmptt_conf_files = &lt;&lt;END</span><br><span class="line">/etc/snmp/snmptt.conf</span><br><span class="line">/etc/snmp/snmptt.conf.HUAWEI-SECURITY-LOGIN</span><br><span class="line">END</span><br></pre></td></tr></table></figure></p>
+<p>snmptt有二种模式，分别为</p>
+<ul>
+<li>standalone 每次收到trap消息时读取snmptt.ini配置文件调用snmptthandler来处理trap消息</li>
+<li>daemon 顾名思义守护进程方式，启动snmptrap时，初始化时一次性读取snmptt.ini<br>二种方式各有区别，选择使用即可，具体区别可查看官方说明<a href="http://snmptt.sourceforge.net/docs/snmptt.shtml#Installation-Unix" target="_blank" rel="noopener">snmptt mode</a></li>
+</ul>
+<p>由于这里测试使用，经常修改snmptt.ini配置文件，如果使用daemon模式，那么每次修改snmptt.ini配置文件就需要重启snmptt，因此这里我使用standalone模式。</p>
+<h3 id="5-配置snmptrap"><a href="#5-配置snmptrap" class="headerlink" title="5.配置snmptrap"></a>5.配置snmptrap</h3><p>snmp trap消息为主动通知，因此需要配置服务器来接收设备发送过来的 snmp trap消息。net snmp接收trap消息后，通过traphandle调用snmptt来对trap消息进行处理。<br>安装net snmp，建议安装net-snmp的所有关联包<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install net-snmp* -y</span><br></pre></td></tr></table></figure></p>
+<p>即可完成snmp安装。<br>修改/etc/sysconfig/snmptrapd  为以下内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OPTIONS=<span class="string">"-m +ALL -On"</span></span><br></pre></td></tr></table></figure></p>
+<p>修改/etc/snmp/snmptrapd.conf 配置文件,添加如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">authCommunity execute public</span><br><span class="line">traphandle default /usr/sbin/snmptt</span><br></pre></td></tr></table></figure></p>
+<p>authCommunity可以配置多个<br>启动snmptrap服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start snmptrapd</span><br><span class="line">systemctl <span class="built_in">enable</span> snmptrapd</span><br></pre></td></tr></table></figure></p>
+<p>在usg 6320上配置trap消息，并指向snmp trap server，配置Community为public<br><img src="https://img.cactifans.com/wp-content/uploads/2019/09/D283777A-9467-446F-84A0-96D969F38B71.jpg" alt="4"><br>配置之后，通过web登录USG和退出USG，都会收到trap消息。snmptt日志文件为/var/log/snmptt/snmptt.log 即可看到<br><img src="https://img.cactifans.com/wp-content/uploads/2019/09/42B6BB7E-74F6-4DDC-8545-58702BD680E3.jpg" alt="6"><br>表示配置处理trap成功，原始内容都为变量内容，不太友好，<br>可以通过调整snmptt.conf.HUAWEI-SECURITY-LOGIN，配置trap消息输出格式。<br>snmptt.conf.HUAWEI-SECURITY-LOGIN配置文件内容大致如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">EVENT hwSecLOGINSucced .1.3.6.1.4.1.2011.6.122.62.2.1 &quot;Status Events&quot; Normal</span><br><span class="line">FORMAT ZBXTRAP $aA $*</span><br><span class="line">SDESC</span><br><span class="line"></span><br><span class="line">The user login succeeded.</span><br><span class="line">Variables:</span><br><span class="line">  1: hwSecLOGINUser</span><br><span class="line">     Syntax=&quot;OCTETSTR&quot;</span><br><span class="line">     Descr=&quot;The user name.&quot;</span><br><span class="line">  2: hwSecLOGINIP</span><br><span class="line">     Syntax=&quot;OCTETSTR&quot;</span><br><span class="line">     Descr=&quot;The User IP address.&quot;</span><br><span class="line">  3: hwSecLOGINTime</span><br><span class="line">     Syntax=&quot;OCTETSTR&quot;</span><br><span class="line">     Descr=&quot;The User login time.&quot;</span><br><span class="line">  4: hwSecLOGINType</span><br><span class="line">     Syntax=&quot;OCTETSTR&quot;</span><br><span class="line">     Descr=&quot;The User access type.&quot;</span><br><span class="line">  5: hwSecLOGINLevel</span><br><span class="line">     Syntax=&quot;INTEGER32&quot;</span><br><span class="line">     Descr=&quot;The User login level.&quot;</span><br><span class="line">EDESC</span><br><span class="line">......</span><br></pre></td></tr></table></figure></p>
+<p>其中 FROMAT就是需要修改定义的，其中包括很多变量，具体可在<a href="http://snmptt.sourceforge.net/docs/snmptt.shtml#SNMPTT.CONF-FORMAT" target="_blank" rel="noopener">SNMPTT.CONF-FORMAT</a> 常用的几个如下：</p>
+<ul>
+<li>$aA  snmp trap的代理IP，即源IP</li>
+<li>$* 所有变量</li>
+<li>$n  n为数字，表示变量次序<br>Variables 为trap变量，基本可以看懂</li>
+<li>hwSecLOGINUser 登录用户名</li>
+<li>hwSecLOGINIP 登录IP</li>
+<li>hwSecLOGINTime 登录时间</li>
+<li>hwSecLOGINType 登录类型</li>
+<li>hwSecLOGINLevel 登录级别<br>按照变量，可以对trap消息进行定制化，还支持中文！将FORMAT一行修改为<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FORMAT ZBXTRAP $aA User login succeed！userName = $1, loginIP = $2, loginTime = $3, accessType = $4, userLevel = $5</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>修改后，登录USG，查看snmptt.log日志,日志已经被格式成需要的格式，已经可以看懂了！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2019/09/27 15:08:49 hwSecLOGINSucced Normal &quot;Status Events&quot; 172.16.1.64 - ZBXTRAP 172.16.1.64 User login succeed!userName = admin, loginIP = 10.128.23.19, loginTime = 2019/09/27 16:54:08, accessType = web, userLevel = 15</span><br></pre></td></tr></table></figure></p>
+<p>至此完成了snmp trap消息的接收及翻译工作。</p>
+<h2 id="三-配置Zabbix"><a href="#三-配置Zabbix" class="headerlink" title="三.配置Zabbix"></a>三.配置Zabbix</h2><h3 id="1-zabbix安装注意事项"><a href="#1-zabbix安装注意事项" class="headerlink" title="1.zabbix安装注意事项"></a>1.zabbix安装注意事项</h3><p>zabbix 可以配置读取接收到的trap文件，从而实现对对trap消息的告警，如过zabbix是编译安装，系统需要安装net-snmp-devel包，编译时需要添加以下参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">–with-net-snmp</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-修改zabbix-server配置文件"><a href="#2-修改zabbix-server配置文件" class="headerlink" title="2.修改zabbix server配置文件"></a>2.修改zabbix server配置文件</h3><p>修改zabbix server配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SNMPTrapperFile=/var/log/snmptt/snmptt.log</span><br><span class="line">StartSNMPTrapper=1</span><br></pre></td></tr></table></figure></p>
+<p>制定trap文件为snmptt日志文件，并开启strap 处理的poller，修改之后重启zabbix server。</p>
+<h3 id="3-配置snmptrap-item"><a href="#3-配置snmptrap-item" class="headerlink" title="3.配置snmptrap item"></a>3.配置snmptrap item</h3><p>添加一个主机<br><img src="https://img.cactifans.com/wp-content/uploads/2019/09/2A71642A-B1B7-4343-BBB5-200CED67B565.jpg" alt="11"><br>SNMP interfaces添加机器Ip，添加之后创建item<br><img src="https://img.cactifans.com/wp-content/uploads/2019/09/6AD29BE7-D0D9-4ACF-8129-8B57FA6D53FA.jpg" alt="12"></p>
+<ul>
+<li>Type 为SNMP trap</li>
+<li>snmptrap为zabbix内置的key，用来获取trap文件内容</li>
+<li>Type of information 选择log</li>
+<li>Log time format 和snmptt配置一致，配置为yyyy/MM/dd hh:mm:ss<br>直接配置Key为snmptrap，表示获取snmptt日志里的所有消息。配置之后登录设备，退出设备，可在Last data看到数据已经采集。（此截图为为进行翻译之前截取，翻译之后可显示中文，英文）<br><img src="https://img.cactifans.com/wp-content/uploads/2019/09/405CDF74-6931-46FD-8D06-0DB8F4BAE297.jpg" alt="13"></li>
+</ul>
+<h3 id="4-配置Trigger"><a href="#4-配置Trigger" class="headerlink" title="4.配置Trigger"></a>4.配置Trigger</h3><p>目前已经采集了trap日志，需要配置对应的trigger对trap消息进行告警。以usg设备登录错误为例，登录错误时间类型为:hwSecLOGINFailed,因此配置如下trigger<br><img src="https://img.cactifans.com/wp-content/uploads/2019/09/000E463B-F0C4-48EE-9F92-2D44AA04DB58.jpg" alt="14"><br>配置之后，用错误的用户登录USG，发现已经告警了。<br><img src="https://img.cactifans.com/wp-content/uploads/2019/09/9A98EEEA-4C1B-4214-8DA6-36DF8C4B5A64.jpg" alt="15"><br>由于zabbix配置了微信告警，微信上可以看到如下消息：<br><img src="https://img.cactifans.com/wp-content/uploads/2019/09/WechatIMG99.png?imageView2/1/w/577/h/1024#" alt="16"><br>告警内容有点模糊，同样修改下snmptt.conf.HUAWEI-SECURITY-LOGIN,将登录失败的内容修改为容易理解的中文，即修改FORMAT为中文<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">EVENT hwSecLOGINFailed .1.3.6.1.4.1.2011.6.122.62.2.2 <span class="string">"Status Events"</span> Normal</span><br><span class="line">FORMAT ZBXTRAP <span class="variable">$aA</span> 用户登录设备失败!用户名 = <span class="variable">$1</span>,登录ip = <span class="variable">$2</span>, 登录时间 = <span class="variable">$3</span>, 接入类型 = <span class="variable">$4</span>, 用户级别 = <span class="variable">$5</span></span><br><span class="line">SDESC</span><br><span class="line"></span><br><span class="line">The user login failed.</span><br><span class="line">Variables:</span><br><span class="line">  1: hwSecLOGINUser</span><br><span class="line">     Syntax=<span class="string">"OCTETSTR"</span></span><br><span class="line">     Descr=<span class="string">"The user name."</span></span><br><span class="line">  2: hwSecLOGINIP</span><br><span class="line">     Syntax=<span class="string">"OCTETSTR"</span></span><br><span class="line">     Descr=<span class="string">"The User IP address."</span></span><br><span class="line">  3: hwSecLOGINTime</span><br><span class="line">     Syntax=<span class="string">"OCTETSTR"</span></span><br><span class="line">     Descr=<span class="string">"The User login time."</span></span><br><span class="line">  4: hwSecLOGINType</span><br><span class="line">     Syntax=<span class="string">"OCTETSTR"</span></span><br><span class="line">     Descr=<span class="string">"The User access type."</span></span><br><span class="line">EDESC</span><br></pre></td></tr></table></figure></p>
+<p>配置后告警内容<br><img src="https://img.cactifans.com/wp-content/uploads/2019/09/095EAD87-D08C-4FC1-ADBB-F9442EA026C6.jpg" alt="12"><br>5分钟后故障自动恢复，至此配置完成。</p>
+<h3 id="5-一般用法"><a href="#5-一般用法" class="headerlink" title="5.一般用法"></a>5.一般用法</h3><p>以上只是简单测试，生产环境中应该注意以下事项</p>
+<ul>
+<li>分析需要告警的trap event 类型<br>如:hwSecLOGINFailed/warmStart/linkDown/coldStart/authenticationFailure 根据类型，配置对应的triger即可</li>
+<li>可直接配置对应的key来采集对应的指标,只要收到消息就告警。如下图配置只采集hwSecLOGINSucced的指标。<br><img src="https://img.cactifans.com/wp-content/uploads/2019/09/D87546C7-05C7-43E6-877D-C79E11807537.jpg" alt="23"><br>配置对应的trigger，进行告警<br><img src="https://img.cactifans.com/wp-content/uploads/2019/09/B51753F4-F986-4949-8A19-07D39B327484.jpg" alt="25"></li>
+<li>如只配置了采集对应的item，而没有配置snmptrapkey，建议配置一个snmptrap.fallback的item，配有匹配的item消息，都会保存到此item里</li>
+<li>更多配置及用法参考zabbix 官网配置<a href="https://zabbix.org/wiki/Start_with_SNMP_traps_in_Zabbix" target="_blank" rel="noopener">zabbix trap</a></li>
+</ul>
+<h2 id="四-注意事项"><a href="#四-注意事项" class="headerlink" title="四.注意事项"></a>四.注意事项</h2><h3 id="1-MIB文件"><a href="#1-MIB文件" class="headerlink" title="1.MIB文件"></a>1.MIB文件</h3><p>一定要确保MIb文件的准确性，设备版本与MIB文件版本必须一致，包括大小版本。如不一致会看到解析文件出现以类似错误<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2019/09/27 08:34:23 .1.3.6.1.4.1.2011.6.122.62.2.2 Normal <span class="string">"Status Events"</span> 172.16.1.64 - the user 123 login with web on 10.128.23.19 <span class="keyword">in</span> 2019/09/27 08:34:22 by time on 2019/09/27 08:34:22 ,status is Wrong Type (should be OCTET STRING): 0</span><br></pre></td></tr></table></figure></p>
+<p>说明mib文件里定义的trap变量类型和实际收到的trap消息变量类型不一致，解析错误。</p>
+<h3 id="2-zabbix配置"><a href="#2-zabbix配置" class="headerlink" title="2.zabbix配置"></a>2.zabbix配置</h3><p>建议对同一类型设备配置统一的snmp trap模版，相同型号直接关联模版即可使用。</p>
+<h3 id="3-snmptt日志"><a href="#3-snmptt日志" class="headerlink" title="3.snmptt日志"></a>3.snmptt日志</h3><p>随之snmp trap消息的增多，snmptt会逐渐变大，建议配置logrotate对日志进行切分,使用yum安装的snmptt已经自动配置了，使用编译安装的，可以参考<br>/etc/logrotate.d/snmptt<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/var/log/snmptt/snmptt*.log /var/log/snmptt/snm ptthandler.debug &#123;</span><br><span class="line">    weekly</span><br><span class="line">    notifempty</span><br><span class="line">    missingok</span><br><span class="line">&#125;</span><br><span class="line">/var/log/snmptt/snmptt.debug &#123;</span><br><span class="line">    weekly</span><br><span class="line">    notifempty</span><br><span class="line">    missingok</span><br><span class="line">    postrotate</span><br><span class="line">        /etc/init.d/snmptt reload &gt;/dev/null 2&gt;/dev/null || true</span><br><span class="line">    endscript</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>snmptt可开启debug日志，建议在测试阶段开启debug日志，以便进行排错。</p>
+<p>以上为snmp trap告警的全面解读，下期预告:《基于Web方式的snmp trap管理》敬请关注！</p>
+<p><strong>参考文档</strong><br>1.<a href="http://snmptt.sourceforge.net/docs/snmptt.shtml" target="_blank" rel="noopener">http://snmptt.sourceforge.net/docs/snmptt.shtml</a><br>2.<a href="https://www.miraclelinux.com/product-service/zabbix/tech-lounge/zbx-tl-001" target="_blank" rel="noopener">https://www.miraclelinux.com/product-service/zabbix/tech-lounge/zbx-tl-001</a></p>
+<p><strong>如果觉得我的文章对您有用，请关注我的公众号，有更多技术干货！</strong><br><img src="https://img.cactifans.com/wp-content/uploads/2017/12/qrcode_for_gh_5c46969f2957_258-1-1.jpg" alt="微信"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    当代张思德
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://blog.cactifans.com/2019/09/27/Zabbix监控设备SNMP-Trap消息/" title="Zabbix监控设备SNMP Trap消息">https://blog.cactifans.com/2019/09/27/Zabbix监控设备SNMP-Trap消息/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-SA 4.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/zabbix/" rel="tag"># zabbix</a>
+          
+            <a href="/tags/snmptrap/" rel="tag"># snmptrap</a>
+          
+            <a href="/tags/snmptt/" rel="tag"># snmptt</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/31/Zabbix-Agent主动被动模式配置-2/" rel="next" title="Zabbix Agent主动被动模式配置-2">
+                <i class="fa fa-chevron-left"></i> Zabbix Agent主动被动模式配置-2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+  <script src="https://utteranc.es/client.js" repo="canghai908/comment" issue-term="pathname" theme="github-light" crossorigin="anonymous" async>
+  </script>
+
+    </div>
+  
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://avatars1.githubusercontent.com/u/1450994?v=3&s=460" alt="当代张思德">
+            
+              <p class="site-author-name" itemprop="name">当代张思德</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-SNMP协议"><span class="nav-number">1.</span> <span class="nav-text">一.SNMP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-协议介绍"><span class="nav-number">1.1.</span> <span class="nav-text">1.协议介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-主要组成"><span class="nav-number">1.2.</span> <span class="nav-text">2.主要组成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-基本操作"><span class="nav-number">2.</span> <span class="nav-text">3.基本操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-SNMPTrap监控"><span class="nav-number">3.</span> <span class="nav-text">二.SNMPTrap监控</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-SNMPTT介绍"><span class="nav-number">3.1.</span> <span class="nav-text">1.SNMPTT介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安装SNMPTT"><span class="nav-number">3.2.</span> <span class="nav-text">2.安装SNMPTT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-转换MIB文件"><span class="nav-number">3.3.</span> <span class="nav-text">3.转换MIB文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-配置snmptt"><span class="nav-number">3.4.</span> <span class="nav-text">4.配置snmptt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-配置snmptrap"><span class="nav-number">3.5.</span> <span class="nav-text">5.配置snmptrap</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-配置Zabbix"><span class="nav-number">4.</span> <span class="nav-text">三.配置Zabbix</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-zabbix安装注意事项"><span class="nav-number">4.1.</span> <span class="nav-text">1.zabbix安装注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-修改zabbix-server配置文件"><span class="nav-number">4.2.</span> <span class="nav-text">2.修改zabbix server配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-配置snmptrap-item"><span class="nav-number">4.3.</span> <span class="nav-text">3.配置snmptrap item</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-配置Trigger"><span class="nav-number">4.4.</span> <span class="nav-text">4.配置Trigger</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-一般用法"><span class="nav-number">4.5.</span> <span class="nav-text">5.一般用法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-注意事项"><span class="nav-number">5.</span> <span class="nav-text">四.注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-MIB文件"><span class="nav-number">5.1.</span> <span class="nav-text">1.MIB文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-zabbix配置"><span class="nav-number">5.2.</span> <span class="nav-text">2.zabbix配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-snmptt日志"><span class="nav-number">5.3.</span> <span class="nav-text">3.snmptt日志</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">当代张思德</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1272964277&web_id=1272964277" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

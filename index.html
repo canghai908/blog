@@ -249,6 +249,132 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.cactifans.com/2019/09/27/Zabbix监控设备SNMP-Trap消息/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="当代张思德">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/1450994?v=3&s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="canghai">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/27/Zabbix监控设备SNMP-Trap消息/" itemprop="url">Zabbix监控设备SNMP Trap消息</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-27T17:33:13+08:00">
+                2019-09-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="一-SNMP协议"><a href="#一-SNMP协议" class="headerlink" title="一.SNMP协议"></a>一.SNMP协议</h2><h3 id="1-协议介绍"><a href="#1-协议介绍" class="headerlink" title="1.协议介绍"></a>1.协议介绍</h3><p>snmp协议是日常使用的较多的一种协议，绝大多数网络设备/存储等都支持snmp协议，通过此协议可以实现设备状态的监控及管理。</p>
+<h3 id="2-主要组成"><a href="#2-主要组成" class="headerlink" title="2.主要组成"></a>2.主要组成</h3><p>SNMP协议包括以下三个部分<br><img src="https://img.cactifans.com/wp-content/uploads/2019/09/SNMP-7.png" alt="1"></p>
+<p><strong>SNMP Agent</strong>：负责处理snmp请求，主要包括get，set等操作。可通过此接口查询设备的运行状态（使用较多），或者变更配置（使用较少），默认使用UDP 161端口<br><strong>SNMP Trap</strong>： snmp通知消息，主动发送消息到管理端。如设备故障，端口down等都会实时发送消息到接收端。默认使用UDP 162端口<br><strong>SNMP MIB</strong>：MIB代表管理信息库，是按层次结构组织的信息的集合,定义了设备内被管理对象的属性。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/09/27/Zabbix监控设备SNMP-Trap消息/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://blog.cactifans.com/2019/05/31/Zabbix-Agent主动被动模式配置-2/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1366,145 +1492,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.cactifans.com/2018/12/28/Zabbix在Docker中的应用和监控/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="当代张思德">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/1450994?v=3&s=460">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="canghai">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/28/Zabbix在Docker中的应用和监控/" itemprop="url">Zabbix在Docker中的应用和监控</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-28T17:38:00+08:00">
-                2018-12-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>最近以来很多人在群里问，zabbix能不能跑在Docker里？如何使用zabbix来监控Docker等一系列问题。回答是肯定的：能！本次为大家介绍如何使用，同时本内容也是本人在 Zabbix Conference China 2018 WorkShop里的内容。</p>
-<h2 id="一-如何使Zabbix跑在Docker里"><a href="#一-如何使Zabbix跑在Docker里" class="headerlink" title="一.如何使Zabbix跑在Docker里"></a>一.如何使Zabbix跑在Docker里</h2><p>Zabbix官方很早之前就提供里Zabbix的Docker镜像，而且提供里具体的配置及文件。具体地址：<a href="https://github.com/zabbix/zabbix-docker" target="_blank" rel="noopener">https://github.com/zabbix/zabbix-docker</a> 官方提供三种Docker基础镜像的版本，分别为：</p>
-<ul>
-<li>alpine</li>
-<li>centos</li>
-<li>ubuntu</li>
-</ul>
-<p>基础镜像在使用上没有太大区别，这里推荐大家使用alpine，这是一个简化的linux版本，最小体积只有30MB多，建议大家使用。官方提供提供了docker-compose的编排文件，可以使用docker-compose编排工具，”一键”启动一套Zabbix系统。其中包括以下组件：</p>
-<ul>
-<li>zabbix-server</li>
-<li>zabbix-agent</li>
-<li>zabbix-proxy</li>
-<li>zabbix-web</li>
-<li>zabbix-java-gateway</li>
-<li>zabbix-snmptraps</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/28/Zabbix在Docker中的应用和监控/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1557,7 +1544,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1570,7 +1557,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
