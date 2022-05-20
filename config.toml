@@ -1,0 +1,63 @@
+baseURL = "https://blog.cactifans.com"
+languageCode = "zh-CN"
+title = "canghai"
+theme = "maupassant"
+## googleAnalytics = "UA-163143670-1"  # UA-XXXXXXXX-X
+
+## 保持分类的原始名字（false会做转小写处理）
+preserveTaxonomyNames = true
+## 是否禁止URL Path转小写
+disablePathToLower = true
+
+hasCJKLanguage = true
+summaryLength = 140
+
+[author]
+  name = "当代张思德"
+
+[params]
+  author = "当代张思德"
+  subtitle = "专注于Zabbix、Go语言(golang)、监控系统"
+  keywords = "golang,go语言,zabbix,cacti,cactifans"
+  description = "专注于IT互联网，包括但不限于Go语言(golang)、Zabbix,Cactid监控技术"
+  busuanzi = true #启用不算子网页统计
+  localSearch = true # 启用本地搜索
+
+  # 全局开关，你也可以在每一篇内容的 front matter 中针对单篇内容关闭或开启某些功能
+  toc = true  # 是否开启目录
+
+[permalinks]
+  post = "/:year/:month/:day/:title"
+
+## 配置 utteranc评论,教程参考 https://utteranc.es/
+[params.utteranc]
+  enable = true
+  repo = "canghai908/comment" ##换成自己得
+  issueTerm = "pathname"
+  theme = "github-light"
+
+## 开启版权声明，协议名字和链接都可以换
+[params.cc]
+    name = "知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议"
+    link = "https://creativecommons.org/licenses/by-nc-nd/4.0/"
+
+## 配置代码高亮
+[markup]
+  [markup.highlight]
+    lineNos = true
+    style = "github"
+
+## 配置网站菜单
+[menu]
+
+  [[menu.main]]
+    identifier = "archives"
+    name = "归档"
+    url = "/archives/"
+    weight = 3
+
+  [[menu.main]]
+    identifier = "about"
+    name = "关于"
+    url = "/about/"
+    weight = 4
