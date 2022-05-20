@@ -3,7 +3,7 @@ name: Auto publish to static website
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   hugo-publish:
